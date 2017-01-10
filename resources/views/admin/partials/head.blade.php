@@ -237,10 +237,10 @@
                                         @if(Auth::user()->nameIsEmpty())
                                           {{ $userName }}
                                         @else
-                                            @if(empty($companyName = Auth::user()->company->getName()))
+                                            @if(Auth::user()->company->nameIsEmpty())
                                                 {{ $userName }}
                                             @else
-                                                {{ $userName }} - {{ $companyName }}
+                                                {{ $userName }} - {{ Auth::user()->company->getName() }}
                                             @endif
                                         @endif
                                         <small>Зарегистрирован  {{ Auth::user()->created_at->diffForHumans() }}</small>
