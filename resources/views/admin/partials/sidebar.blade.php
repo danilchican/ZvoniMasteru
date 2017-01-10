@@ -3,21 +3,11 @@
     <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
-            {{--
             <div class="pull-left image">
-                @if(empty($image = Auth::user()->company->logo_url))
-                    <img src="/backend/themes/adminpanel/images/no_avatar.png" class="img-circle" alt="User Image">
-                @else
-                    <img src="/uploads/images/{{$image}}" class="img-circle" alt="User Image">
-                @endif
+                <img src="{{ Auth::user()->company->getLogo() }}" class="img-circle" alt="User Image">
             </div>
-            --}}
             <div class="pull-left info">
-                @if(is_null($name = Auth::user()->name))
-                    <p>No Name</p>
-                @else
-                    <p>{{ $name }}</p>
-                @endif
+                <p>{{ Auth::user()->getName() }}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
