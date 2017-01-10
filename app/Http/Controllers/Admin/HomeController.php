@@ -7,7 +7,7 @@ class HomeController extends AdminController
     /**
      * Show the application admin dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return $this
      */
     public function index()
     {

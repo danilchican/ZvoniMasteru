@@ -63,4 +63,14 @@ class User extends Authenticatable
     {
         return $this->role->id == 1;
     }
+
+    /**
+     * User has one company
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
 }
