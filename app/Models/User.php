@@ -36,4 +36,31 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Policy::class, 'policy_id');
     }
+
+    /**
+     * Check if user has a role.
+     *
+     * @param string $role
+     *
+     * @return bool
+     */
+    public function hasRole($role = 'admin')
+    {
+        switch ($role) {
+            case 'admin':
+                return $this->isAdministrator();
+            default:
+                return false;
+        }
+    }
+    /**
+     * Check if user is administrator.
+     *
+     * @return bool
+     */
+    public function isAdministrator()
+    {
+        return $this->role->id == 1;
+    }
+
 }

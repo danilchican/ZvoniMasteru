@@ -64,6 +64,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'policy_id' => env('DEFAULT_POLICY_ID'),
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
