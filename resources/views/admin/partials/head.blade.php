@@ -31,7 +31,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="{{ url('/adminpanel') }}" class="logo">
+            <a href="{{ route('admin.index') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>Z</b>M</span>
                 <!-- logo for regular state and mobile devices -->
@@ -238,11 +238,13 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{--
                                 @if(empty($companyLogo = Auth::user()->company->logo_url))
                                     <img src="/backend/themes/adminpanel/images/no_avatar.png" class="user-image" alt="User Image">
                                 @else
                                     <img src="/uploads/images/{{$companyLogo}}" class="user-image" alt="User Image">
                                 @endif
+                                --}}
 
                                 @if(is_null($userName = Auth::user()->name))
                                     <span class="hidden-xs">No Name</span>
@@ -252,6 +254,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
+                                {{--
                                 <li class="user-header">
                                     @if(empty($companyLogo = Auth::user()->company->logo_url))
                                         <img src="/backend/themes/adminpanel/images/no_avatar.png" class="img-circle" alt="User Image">
@@ -271,7 +274,10 @@
                                         @endif
                                         <small>Зарегистрирован  {{ Auth::user()->created_at->diffForHumans() }}</small>
                                     </p>
+
                                 </li>
+                                --}}
+
                                 <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="col-xs-4 text-center">

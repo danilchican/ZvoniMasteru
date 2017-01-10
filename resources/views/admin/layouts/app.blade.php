@@ -1,11 +1,11 @@
-@include('adminpanel.partials.head')
+@include('admin.partials.head')
 
 <!-- Сайдбар -->
-@include('adminpanel.partials.sidebar')
+@include('admin.partials.sidebar')
 
 <!-- Область контента -->
 @yield('content')
 
 <!-- Подвал админ-панели-->
-@include('adminpanel.partials.footer')
+@include('admin.partials.footer')
 

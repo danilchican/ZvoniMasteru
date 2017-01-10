@@ -1,4 +1,4 @@
-@extends('adminpanel.layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -46,7 +46,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>{{ $countReviews }}</h3>
+                        <h3>0</h3>
                         <p>Having Reviews</p>
                     </div>
                     <div class="icon">
@@ -59,7 +59,7 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>{{ $countCompanies }}</h3>
+                        <h3>0</h3>
                         <p>Unique Companies</p>
                     </div>
                     <div class="icon">

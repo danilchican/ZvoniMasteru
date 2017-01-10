@@ -3,6 +3,7 @@
     <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
+            {{--
             <div class="pull-left image">
                 @if(empty($image = Auth::user()->company->logo_url))
                     <img src="/backend/themes/adminpanel/images/no_avatar.png" class="img-circle" alt="User Image">
@@ -10,6 +11,7 @@
                     <img src="/uploads/images/{{$image}}" class="img-circle" alt="User Image">
                 @endif
             </div>
+            --}}
             <div class="pull-left info">
                 @if(is_null($name = Auth::user()->name))
                     <p>No Name</p>
@@ -35,10 +37,10 @@
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li @if(Request::is('admin')) class="active" @endif>
-                <a href="{{ route('adminpanel_index') }}"><i class="fa fa-dashboard"></i> <span>Admin-panel</span></a>
+                <a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> <span>Admin-panel</span></a>
             </li>
             <li @if(Request::is('admin/companies')) class="active" @endif>
-                <a href="{{ route('companies_index') }}"><i class="fa fa-user"></i><span>Companies</span>
+                <a href=""><i class="fa fa-user"></i><span>Companies</span>
                     <!-- If having a new companies today that it will be display as 'new' -->
                     <small class="label pull-right bg-red" data-toggle="tooltip" data-original-title="Today">new</small>
                 </a>
@@ -67,18 +69,18 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.tariffs.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li><a href="{{ route('admin.tariffs.additional') }}"><i class="fa fa-circle-o"></i> Services</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> List</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> Services</a></li>
                 </ul>
             </li>
             <li>
                 <a href="/adminpanel/news"><i class="fa fa-file-text-o"></i> <span>News</span></a>
             </li>
             <li>
-                <a href="{{ route('admin.categories.index') }}"><i class="fa fa-list-ul"></i> <span>Categories</span></a>
+                <a href=""><i class="fa fa-list-ul"></i> <span>Categories</span></a>
             </li>
             <li>
-                <a href="{{ route('admin.specialization.index') }}"><i class="fa fa-list-ul"></i> <span>Specializations</span></a>
+                <a href=""><i class="fa fa-list-ul"></i> <span>Specializations</span></a>
             </li>
             <li>
                 <a href="/adminpanel/menus"><i class="fa fa-th"></i> <span>Menus</span></a>
