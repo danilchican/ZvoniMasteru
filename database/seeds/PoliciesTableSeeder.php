@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Policy;
+use Illuminate\Database\Seeder;
 
 class PoliciesTableSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class PoliciesTableSeeder extends Seeder
 
         $policies = ['Administrator', 'Master'];
 
-        foreach($policies as $policy) {
+        foreach ($policies as $policy) {
             Policy::create([
                'title' => $policy,
             ]);

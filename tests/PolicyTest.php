@@ -1,9 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-
-use App\Models\User;
 use App\Models\Policy;
+use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class PolicyTest extends TestCase
 {

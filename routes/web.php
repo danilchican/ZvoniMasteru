@@ -22,4 +22,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', 'Admin\HomeController@index')->name('admin.index');
 });
-
