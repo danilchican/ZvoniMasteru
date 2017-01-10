@@ -38,4 +38,70 @@ class Company extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Getting the company's logo url.
+     *
+     * @return mixed
+     */
+    public function getLogoUrl()
+    {
+        return $this->logo_url;
+    }
+
+    /**
+     * Check if the company has any logo.
+     *
+     * @return bool
+     */
+    public function hasLogo()
+    {
+        if(!$this->getLogoUrl()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get the company logo.
+     *
+     * @return mixed
+     */
+    public function getLogo()
+    {
+        if($this->hasLogo()) {
+            return $this->getLogoUrl();
+        }
+
+        return '/images/no_avatar.png';
+    }
+
+    /**
+     * Check if the user has name.
+     *
+     * @return bool
+     */
+    public function nameIsEmpty()
+    {
+        if(!$this->name) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the name of the company owner.
+     *
+     * @return mixed
+     */
+    public function getName()
+    {
+        if($this->nameIsEmpty()) {
+            return 'No name';
+        }
+
+        return $this->name;
+    }
 }

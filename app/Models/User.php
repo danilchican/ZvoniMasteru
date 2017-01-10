@@ -73,4 +73,32 @@ class User extends Authenticatable
     {
         return $this->hasOne(Company::class);
     }
+
+    /**
+     * Check if the user has name.
+     *
+     * @return bool
+     */
+    public function nameIsEmpty()
+    {
+        if(!$this->name) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the name of the company owner.
+     *
+     * @return mixed
+     */
+    public function getName()
+    {
+        if($this->nameIsEmpty()) {
+            return 'No name';
+        }
+
+        return $this->name;
+    }
 }
