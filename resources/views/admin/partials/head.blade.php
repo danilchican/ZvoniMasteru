@@ -226,35 +226,18 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {{--
-                                @if(empty($companyLogo = Auth::user()->company->logo_url))
-                                    <img src="/backend/themes/adminpanel/images/no_avatar.png" class="user-image" alt="User Image">
-                                @else
-                                    <img src="/uploads/images/{{$companyLogo}}" class="user-image" alt="User Image">
-                                @endif
-                                --}}
-
-                                @if(is_null($userName = Auth::user()->name))
-                                    <span class="hidden-xs">No Name</span>
-                                @else
-                                    <span class="hidden-xs">{{ $userName }}</span>
-                                @endif
+                                <img src="{{ $companyLogo = Auth::user()->company->getLogo() }}" class="user-image" alt="User Image">
+                                <span class="hidden-xs">{{ $userName = Auth::user()->getName() }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                {{--
                                 <li class="user-header">
-                                    @if(empty($companyLogo = Auth::user()->company->logo_url))
-                                        <img src="/backend/themes/adminpanel/images/no_avatar.png" class="img-circle" alt="User Image">
-                                    @else
-                                        <img src="/uploads/images/{{$companyLogo}}" class="img-circle" alt="User Image">
-                                    @endif
-
+                                    <img src="{{ $companyLogo }}" class="img-circle" alt="User Image">
                                     <p>
-                                        @if(is_null($userName = Auth::user()->name))
-                                          No name
+                                        @if(Auth::user()->nameIsEmpty())
+                                          {{ $userName }}
                                         @else
-                                            @if(empty($companyName = Auth::user()->company->name))
+                                            @if(empty($companyName = Auth::user()->company->getName()))
                                                 {{ $userName }}
                                             @else
                                                 {{ $userName }} - {{ $companyName }}
@@ -264,7 +247,7 @@
                                     </p>
 
                                 </li>
-                                --}}
+
 
                                 <!-- Menu Body -->
                                 <li class="user-body">
@@ -272,7 +255,7 @@
                                         <a href="#">Компания</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="#"> <!-- Какой-то раздел --> </a>
+                                        <a href="#"><!-- Какой-то раздел --></a>
                                     </div>
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Отзывы</a>
@@ -281,7 +264,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ url('/account') }}" class="btn btn-default btn-flat">Мой аккаунт</a>
+                                        <a href="" class="btn btn-default btn-flat">Мой аккаунт</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Выйти</a>
