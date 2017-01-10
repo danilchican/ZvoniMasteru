@@ -1,11 +1,15 @@
+<!-- Header -->
 @include('admin.partials.head')
 
-<!-- Сайдбар -->
+<!-- Sidebar -->
 @include('admin.partials.sidebar')
 
-<!-- Область контента -->
-@yield('content')
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    @yield('breadcrumbs')
+    @yield('content')
+</div><!-- /.content-wrapper -->
 
-<!-- Подвал админ-панели-->
+<!-- Footer -->
 @include('admin.partials.footer')
-
