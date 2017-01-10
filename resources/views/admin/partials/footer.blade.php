@@ -188,9 +188,8 @@
     <script src="/js/admin/demo.js"></script>
     <!-- Pace loader -->
     <script src="/js/admin/pace.min.js"></script>
-    <script>
-        $(document).ajaxStart(function() { Pace.restart(); });
-    </script>
-@yield('javascripts')
+    <!-- Admin scripts-->
+    <script src="/js/admin/pace.min.js"></script>
+    @yield('javascripts')
 </body>
 </html>

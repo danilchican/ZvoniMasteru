@@ -1,1 +1,1 @@
-require('./bootstrap');
+$(document).ajaxStart(function() { Pace.restart(); });
