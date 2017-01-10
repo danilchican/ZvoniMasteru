@@ -16,11 +16,13 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('name', 255);
-            $table->string('slug', 80);
-            $table->text('description');
-            $table->string('logo_url', 255);
-            $table->string('status')->default('none');  // approved, refused, moderate, none
+            $table->string('name')->nullable();
+            $table->string('slug', 80)->nullable();
+            $table->text('description')->nullable();
+            $table->string('logo_url')->nullable();
+
+            // approved, refused, moderate, none
+            $table->string('status')->default('none')->comment('approved, refused, moderate, none')	;
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
