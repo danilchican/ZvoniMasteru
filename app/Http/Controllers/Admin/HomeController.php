@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends AdminController
 {
     /**
      * Show the application admin dashboard.
@@ -14,6 +13,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $titlePage = $this->titlePage;
+
+        return view('admin.index')->with(compact('titlePage'));
     }
 }
