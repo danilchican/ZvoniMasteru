@@ -123,8 +123,8 @@ return [
 
     'attributes'           => [
         'company'  => [
-            'name' => 'Название компании',
-            'unp_number' => 'УНП',
+            'name'        => 'Название компании',
+            'unp_number'  => 'УНП',
             'description' => 'Описание компании',
         ],
         'user' => [

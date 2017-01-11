@@ -41,7 +41,6 @@ class InitializeApp extends Command
 
     /**
      * Execute the console command.
-     *
      */
     public function handle()
     {

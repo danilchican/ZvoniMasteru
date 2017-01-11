@@ -21,9 +21,10 @@ class Tariff extends Model
     ];
 
     /**
-     * Get all published tariffs
+     * Get all published tariffs.
      *
      * @param $query
+     *
      * @return mixed
      */
     public function scopePublished($query)

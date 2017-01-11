@@ -235,11 +235,11 @@ return [
         /*
          * Installed new
          */
-        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Breadcrumbs'       => DaveJamesMiller\Breadcrumbs\Facade::class,
         'LocalizedCarbon'   => Laravelrus\LocalizedCarbon\LocalizedCarbon::class,
         'DiffFormatter'     => Laravelrus\LocalizedCarbon\DiffFactoryFacade::class,
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
+        'Form'              => Collective\Html\FormFacade::class,
+        'Html'              => Collective\Html\HtmlFacade::class,
     ],
 
 ];

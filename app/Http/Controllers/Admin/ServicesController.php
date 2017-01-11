@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CreateServiceRequest;
 use App\Models\Service;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ServicesController extends AdminController
 {
@@ -19,7 +19,8 @@ class ServicesController extends AdminController
      * Get the services for tariffs.
      *
      * @param Request $request
-     * @param null $count
+     * @param null    $count
+     *
      * @return mixed
      */
     public function getServices(Request $request, $count = null)
@@ -59,31 +60,33 @@ class ServicesController extends AdminController
      * Store a newly created resource in storage.
      *
      * @param CreateServiceRequest $request
+     *
      * @return mixed
      */
     public function store(CreateServiceRequest $request)
     {
         $service = Service::create($request->only('title'));
 
-        if(!$service) {
+        if (!$service) {
             return Response::json([
                         'Can\'t create a new service.',
                 ], 305);
         }
 
         return Response::json([
-                'success' => true,
-                'service' => $service,
+                'success'  => true,
+                'service'  => $service,
                 'messages' => [
-                    'Service created successfully.'
-                ]
+                    'Service created successfully.',
+                ],
             ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -94,7 +97,8 @@ class ServicesController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -105,8 +109,9 @@ class ServicesController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -117,7 +122,8 @@ class ServicesController extends AdminController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

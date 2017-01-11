@@ -65,7 +65,7 @@ class User extends Authenticatable
     }
 
     /**
-     * User has one company
+     * User has one company.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -81,7 +81,7 @@ class User extends Authenticatable
      */
     public function nameIsEmpty()
     {
-        if(!$this->name) {
+        if (!$this->name) {
             return true;
         }
 
@@ -95,7 +95,7 @@ class User extends Authenticatable
      */
     public function getName()
     {
-        if($this->nameIsEmpty()) {
+        if ($this->nameIsEmpty()) {
             return 'No name';
         }
 

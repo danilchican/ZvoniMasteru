@@ -23,14 +23,14 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin'], function (
     Route::get('/', 'Admin\HomeController@index')->name('admin.index');
 
     Route::resource('companies', 'Admin\CompaniesController', [
-        'as' => 'admin'
+        'as' => 'admin',
     ]);
     Route::resource('tariffs', 'Admin\TariffsController', [
-        'as' => 'admin'
+        'as' => 'admin',
     ]);
 
     Route::get('/services/get/{count?}', 'Admin\ServicesController@getServices');
     Route::resource('services', 'Admin\ServicesController', [
-        'as' => 'admin'
+        'as' => 'admin',
     ]);
 });

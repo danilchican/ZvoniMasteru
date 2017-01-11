@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class CompaniesController extends AdminController
 {
@@ -19,7 +18,7 @@ class CompaniesController extends AdminController
         $titlePage = $this->titlePage;
 
         return view('admin.companies.index')->with(compact([
-            'companies', 'titlePage'
+            'companies', 'titlePage',
         ]));
     }
 
@@ -36,7 +35,8 @@ class CompaniesController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,7 +47,8 @@ class CompaniesController extends AdminController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,7 +59,8 @@ class CompaniesController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -69,8 +71,9 @@ class CompaniesController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -81,7 +84,8 @@ class CompaniesController extends AdminController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

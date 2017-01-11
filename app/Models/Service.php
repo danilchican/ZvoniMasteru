@@ -31,6 +31,7 @@ class Service extends Model
      * Set title of the Service obj.
      *
      * @param $title
+     *
      * @return mixed
      */
     public function setTitle($title)
