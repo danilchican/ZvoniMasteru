@@ -2,8 +2,7 @@
 
 // Admin > Dashboard
 Breadcrumbs::register('admin', function ($breadcrumbs) {
-    $breadcrumbs->push('Admin', route('admin.index'));
-    $breadcrumbs->push('Dashboard');
+    $breadcrumbs->push('Dashboard', route('admin.index'));
 });
 
 // Admin > Dashboard > Companies
