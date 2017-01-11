@@ -31,22 +31,32 @@
                 this.$http.post('/admin/services', {title: this.title})
                     .then((data) => {
                         // success callback
-                        //var response = JSON.parse(data.body);
-                        var savedService = data;
+                        var savedService = data.body.service;
+
                         if(data.body.success === true) {
-                            toastr.success('Новая услуга сохранена!', 'Success');
+                            var messages = data.body.messages;
+
+                            $.each( messages, function( key, value ) {
+                                toastr.success(value, 'Success')
+                            });
                         } else {
                             toastr.error('Что-то пошло не так...', 'Error')
                         }
 
-                        console.log(data.body);
+                        //console.log(savedService);
 
                         this.$emit('serviceCreated', savedService);
                         this.title = '';
                     }, (data) => {
                         // error callback
-                        var response = JSON.parse(data.body);
-                        console.log(response)
+                        var errors = data.body;
+                        $.each( errors, function( key, value ) {
+                            if(data.status === 422) {
+                                toastr.error(value[0], 'Error')
+                            } else {
+                                toastr.error(value, 'Error')
+                            }
+                        });
                     });
             }
         }

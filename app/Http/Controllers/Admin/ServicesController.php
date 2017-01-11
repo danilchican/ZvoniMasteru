@@ -46,10 +46,7 @@ class ServicesController extends AdminController
 
         if(!$service) {
             return Response::json([
-                    'success' => false,
-                    'messages' => [
-                        'Can\'t create a new service.'
-                    ]
+                        'Can\'t create a new service.',
                 ], 305
             );
         }
