@@ -18,7 +18,7 @@
                             <td v-if="list.length == 0">
                                 <h5 style="padding-left: 15px;">Haven't any services.</h5>
                             </td>
-                            <view-service @serviceRemoved="removeFromList()" v-else v-for="service in list" :service="service"></view-service>
+                            <view-service v-else v-for="service in list" :service="service" @serviceRemoved="removeFromList()" ></view-service>
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
@@ -31,7 +31,7 @@
             </div>
         </div><!-- /.col -->
         <div class="col-xs-6">
-            <create-service @serviceCreated="updateList()"></create-service>
+            <create-service @serviceCreated="getServicesList()"></create-service>
         </div>
     </div>
 </template>
@@ -53,7 +53,7 @@
         },
 
         created: function () {
-            this.updateList();
+            this.getServicesList();
         },
 
         methods: {
@@ -78,18 +78,20 @@
             /**
              * Process data for request.
              */
-            processRequest(services) {
+            processRequest(services, count) {
                 this.list = services.data;
                 this.setCount(this.list.length);
-                this.handleShowMoreBtn(this.step);
+                this.handleShowMoreBtn(count);
             },
 
             /**
              * Get services from storage.
              */
-            updateList() {
+            getServicesList() {
+                var count = this.count + this.step;
+
                 this.$http.get('/admin/services/get').then((services) => {
-                    this.processRequest(services);
+                    this.processRequest(services, count);
                 });
             },
 
@@ -100,7 +102,17 @@
                 var count = this.count + this.step;
 
                 this.$http.get('/admin/services/get/' + count).then((services) => {
-                    this.processRequest(services);
+                    this.processRequest(services, count);
+                });
+            },
+
+            /**
+             * Get services from storage.
+             */
+            updateList(count) {
+
+                this.$http.get('/admin/services/get/' + count).then((services) => {
+                    this.processRequest(services, count);
                 });
             },
 
@@ -110,12 +122,8 @@
              * @param service
              */
             removeFromList() {
-                this.updateList();
-                console.log("removing");
-                let index = this.list.indexOf(service);
-
-                console.log("Removing from list by index: ", index);
-                this.list.splice(index, 1);
+                var count = this.list.length;
+                this.updateList(count);
             }
         },
 

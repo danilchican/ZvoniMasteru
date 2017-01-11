@@ -5,7 +5,7 @@
         <td>
             <div class="btn-group">
                 <button type="button" class="btn btn-info btn-xs">Edit</button>
-                <button type="button" @click="removeService(service)" class="btn btn-danger btn-xs">Delete</button>
+                <button type="button" @click="!isDisabled() ? removeService(service) : null" class="btn btn-danger btn-xs">Delete</button>
             </div>
         </td>
     </tr>
@@ -23,12 +23,29 @@
 
         methods: {
 
+            setDisable() {
+                this.disable = true;
+            },
+
+            unsetDisable() {
+                this.disable = false;
+            },
+
+            /**
+             * Check if the request sended.
+             */
+            isDisabled() {
+                return this.disable;
+            },
+
             /**
              * Remove service from DB.
              *
              * @param service
              */
             removeService(service) {
+                this.setDisable();
+
                 this.$http.delete('/admin/services/' + service.id).then((data) => {
                     // success callback
                     if(data.body.success === true) {
@@ -41,8 +58,10 @@
                         toastr.error('Что-то пошло не так...', 'Error')
                     }
 
-                    this.$emit('serviceRemoved', service);
+                    this.$emit('serviceRemoved');
+                    this.unsetDisable();
                 }, (data) => {
+                    this.unsetDisable();
                     // error callback
                     var errors = data.body;
                     $.each( errors, function( key, value ) {

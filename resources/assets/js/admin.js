@@ -13,7 +13,7 @@ require('./bootstrap');
 window.toastr = require('toastr');
 
 window.toastr.options = {
-    "timeOut": "2000"
+    "timeOut": "3000"
 }
 
 /**
