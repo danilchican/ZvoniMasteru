@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreateServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class ServicesController extends AdminController
 {
@@ -35,12 +37,31 @@ class ServicesController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateServiceRequest $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function store(CreateServiceRequest $request)
     {
-        //
+        $service = Service::create($request->only('title'));
+
+        if(!$service) {
+            return Response::json([
+                    'success' => false,
+                    'messages' => [
+                        'Can\'t create a new service.'
+                    ]
+                ], 305
+            );
+        }
+
+        return Response::json([
+                'success' => true,
+                'service' => $service,
+                'messages' => [
+                    'Service created successfully.'
+                ]
+            ], 200
+        );
     }
 
     /**
