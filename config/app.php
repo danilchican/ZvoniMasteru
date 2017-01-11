@@ -177,8 +177,13 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        /*
+         * Installed new
+         */
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Laravelrus\LocalizedCarbon\LocalizedCarbonServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -233,6 +238,8 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'LocalizedCarbon'   => Laravelrus\LocalizedCarbon\LocalizedCarbon::class,
         'DiffFormatter'     => Laravelrus\LocalizedCarbon\DiffFactoryFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 
 ];
