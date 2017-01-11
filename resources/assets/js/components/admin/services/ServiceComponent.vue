@@ -27,7 +27,7 @@
             </div><!-- /.box -->
         </div><!-- /.col -->
         <div class="col-xs-6">
-            <create-service></create-service>
+            <create-service @serviceCreated="updateList($event)"></create-service>
         </div>
     </div>
 </template>
@@ -42,6 +42,11 @@
         data() {
             return {
                 list: []
+            }
+        },
+        methods: {
+            updateList(title) {
+                console.log(title)
             }
         },
 

@@ -22,12 +22,6 @@
             return {
 
             }
-        },
-
-        methods: {
-            createService() {
-                console.log('clicked new');
-            }
         }
     }
 </script>
