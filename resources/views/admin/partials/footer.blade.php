@@ -169,10 +169,8 @@
 
 </div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.4 -->
-    <script src="/js/admin/jQuery-2.1.4.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="/js/admin/bootstrap.min.js"></script>
+    <!-- Admin scripts-->
+    <script src="/js/admin/admin.js"></script>
     <!-- FastClick -->
     <script src="/js/admin/fastclick.min.js"></script>
     <!-- AdminLTE App -->
@@ -188,8 +186,9 @@
     <script src="/js/admin/demo.js"></script>
     <!-- Pace loader -->
     <script src="/js/admin/pace.min.js"></script>
-    <!-- Admin scripts-->
-    <script src="/js/admin/pace.min.js"></script>
+    <script>
+        $(document).ajaxStart(function() { Pace.restart(); });
+    </script>
     @yield('javascripts')
 </body>
 </html>

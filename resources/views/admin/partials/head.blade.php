@@ -16,7 +16,7 @@
     @yield('styles')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
+    <div class="wrapper" id="app">
         <header class="main-header">
             <!-- Logo -->
             <a href="{{ route('admin.index') }}" class="logo">
