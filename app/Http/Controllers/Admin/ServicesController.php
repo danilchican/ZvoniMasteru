@@ -114,7 +114,7 @@ class ServicesController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateServiceRequest $request, $id)
     {
         try {
             $service = Service::findOrFail($id);
