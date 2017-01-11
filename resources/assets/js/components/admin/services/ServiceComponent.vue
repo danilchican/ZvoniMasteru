@@ -5,7 +5,7 @@
                 <div class="box-header">
                     <h3 class="box-title">{{ titlePage }}</h3>
                 </div><!-- /.box-header -->
-                <div class="box-body table-responsive @if(count($services) > 0) no-padding no-margin @endif">
+                <div class="box-body table-responsive no-padding no-margin">
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                         <tr>
