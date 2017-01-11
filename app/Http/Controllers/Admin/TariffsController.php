@@ -15,7 +15,7 @@ class TariffsController extends AdminController
      */
     public function index()
     {
-        $titlePage = $this->titlePage;
+        $titlePage = 'Tariffs';
         $tariffs = Tariff::paginate(5);
 
         return view('admin.tariffs.index')->with(compact([
@@ -30,7 +30,11 @@ class TariffsController extends AdminController
      */
     public function create()
     {
-        //
+        $titlePage = 'Create Tariff';
+
+        return view('admin.tariffs.create')->with(compact([
+            'titlePage'
+        ]));
     }
 
     /**
