@@ -68,9 +68,12 @@
                                 </td> <!-- Description -->
                                 <td>
                                     <div class="btn-group">
-                                        <a href="/adminpanel/companies/edit/{{ $company->id }}"><button type="button" class="btn btn-info btn-xs">Edit</button></a>
-                                        <a href="/adminpanel/companies/delete/{{ $company->id }}"><button type="button" class="btn btn-danger btn-xs">Delete</button></a>
-                                    </div>
+                                        <a href="{{ route('admin.companies.edit', ['id' => $company->id]) }}"><button type="button" class="btn btn-info btn-xs">Edit</button></a>
+
+                                        {!! Form::open(['route' => ['admin.companies.destroy', $company->id], 'method' => 'delete', null, 'style' => 'display: inline;']) !!}
+                                        <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+                                        {!! Form::close() !!}
+                                        </div>
                                 </td>
                             </tr>
                         @endforeach
