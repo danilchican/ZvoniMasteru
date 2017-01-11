@@ -245,7 +245,6 @@
                                         @endif
                                         <small>Зарегистрирован  {{ Auth::user()->created_at->diffForHumans() }}</small>
                                     </p>
-
                                 </li>
 
 

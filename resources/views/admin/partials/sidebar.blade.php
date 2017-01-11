@@ -30,7 +30,7 @@
                 <a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> <span>Admin-panel</span></a>
             </li>
             <li @if(Request::is('admin/companies')) class="active" @endif>
-                <a href=""><i class="fa fa-user"></i><span>Companies</span>
+                <a href="{{ route('admin.companies.index') }}"><i class="fa fa-user"></i><span>Companies</span>
                     <!-- If having a new companies today that it will be display as 'new' -->
                     <small class="label pull-right bg-red" data-toggle="tooltip" data-original-title="Today">new</small>
                 </a>
