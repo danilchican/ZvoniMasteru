@@ -21,7 +21,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', 'Admin\HomeController@index')->name('admin.index');
+
     Route::resource('companies', 'Admin\CompaniesController', [
+        'as' => 'admin'
+    ]);
+    Route::resource('tariffs', 'Admin\TariffsController', [
         'as' => 'admin'
     ]);
 });
