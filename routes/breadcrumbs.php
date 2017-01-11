@@ -22,3 +22,9 @@ Breadcrumbs::register('admin.tariffs.create', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.tariffs');
     $breadcrumbs->push('Create Tariff', route('admin.tariffs.create'));
 });
+
+// Dashboard > Tariffs > Services
+Breadcrumbs::register('admin.tariffs.services', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.tariffs');
+    $breadcrumbs->push('Services', route('admin.services.index'));
+});

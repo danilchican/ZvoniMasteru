@@ -28,4 +28,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin'], function (
     Route::resource('tariffs', 'Admin\TariffsController', [
         'as' => 'admin'
     ]);
+    Route::resource('services', 'Admin\ServicesController', [
+        'as' => 'admin'
+    ]);
 });

@@ -5,7 +5,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        {!! Form::open(['route' => 'admin.tariffs.additional.create', 'id' => 'create-service-form']) !!}
+        {!! Form::open(['route' => 'admin.services.create', 'id' => 'create-service-form']) !!}
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title" placeholder="Введите название услуги">

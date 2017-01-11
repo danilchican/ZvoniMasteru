@@ -1,4 +1,4 @@
-@extends('adminpanel.layouts.app')
+@extends('admin.layouts.app')
 
 @section('styles')
 <!-- DataTables -->
@@ -9,7 +9,7 @@
 @section('breadcrumbs')
     <section class="content-header">
         <h1>{{ $titlePage }}</h1>
-        {!! Breadcrumbs::render('admin.companies.index') !!}
+        {!! Breadcrumbs::render('admin.tariffs.services') !!}
     </section>
 @endsection
 
@@ -41,7 +41,7 @@
                             </thead>
                             <tbody>
                             @foreach($services as $service)
-                                @include('admin.tariffs.additionals.show')
+                                @include('admin.tariffs.services.show')
                             @endforeach
                             </tbody>
                         </table>
@@ -52,7 +52,7 @@
             </div><!-- /.box -->
         </div><!-- /.col -->
         <div class="col-xs-6">
-            @include('adminpanel.tariffs.additionals.create')
+            @include('admin.tariffs.services.create')
         </div>
     </div><!-- /.row -->
 
