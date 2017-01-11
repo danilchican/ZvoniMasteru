@@ -23,38 +23,7 @@
         any Price or Service by clicking on buttons.</p>" !!}
     </div>
 
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="box no-margin">
-                <div class="box-header">
-                    <h3 class="box-title">{{ $titlePage }}</h3>
-                </div><!-- /.box-header -->
-                    <div class="box-body table-responsive @if(count($services) > 0) no-padding no-margin @endif">
-                        @if(count($services) > 0)
-                        <table class="table table-bordered table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($services as $service)
-                                @include('admin.tariffs.services.show')
-                            @endforeach
-                            </tbody>
-                        </table>
-                        @else
-                            <h4>Услуг пока нет.</h4>
-                        @endif
-                    </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div><!-- /.col -->
-        <div class="col-xs-6">
-            @include('admin.tariffs.services.create')
-        </div>
-    </div><!-- /.row -->
+    <service title-page="{{ $titlePage }}"></service>
 
     <div class="row">
         <div class="col-sm-6">

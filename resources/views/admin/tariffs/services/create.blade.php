@@ -1,3 +1,4 @@
+{{--
 <div class="box box-default create-category">
     <div class="box-header with-border">
         <i class="fa fa-edit"></i>
@@ -15,3 +16,5 @@
     </div>
     <!-- /.box-body -->
 </div>
+--}}
+<service></service>
