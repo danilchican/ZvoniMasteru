@@ -31,7 +31,7 @@
             </div>
         </div><!-- /.col -->
         <div class="col-xs-6">
-            <create-service @serviceCreated="getServicesList()"></create-service>
+            <create-service @serviceCreated="updateList(count)"></create-service>
         </div>
     </div>
 </template>
@@ -87,8 +87,9 @@
             /**
              * Get services from storage.
              */
-            getServicesList() {
+            getServicesList(update) {
                 var count = this.count + this.step;
+
 
                 this.$http.get('/admin/services/get').then((services) => {
                     this.processRequest(services, count);
@@ -110,7 +111,6 @@
              * Get services from storage.
              */
             updateList(count) {
-
                 this.$http.get('/admin/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
