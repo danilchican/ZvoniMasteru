@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-xs-6">
-            <div class="box no-margin">
+            <div class="box no-margin" id="box-table-services">
                 <div class="box-header">
                     <h3 class="box-title">{{ titlePage }}</h3>
                 </div><!-- /.box-header -->
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+    var loading_box = '<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>';
+
     import CreateService from './CreateServiceComponent.vue'
     import ViewService from './ViewServiceComponent.vue'
 
@@ -48,7 +50,8 @@
                 list: [],
                 canShowMore: false,
                 count: 0,
-                step: 5
+                step: 5,
+                disable: false,
             }
         },
 
@@ -57,6 +60,23 @@
         },
 
         methods: {
+
+            setDisable() {
+                this.disable = true;
+                $('#box-table-services').append(loading_box);
+            },
+
+            unsetDisable() {
+                this.disable = false;
+                $('#box-table-services').find('.overlay').remove();
+            },
+
+            /**
+             * Check if the request sended.
+             */
+            isDisabled() {
+                return this.disable;
+            },
 
             /**
              * Set count of retrieved data.
@@ -82,15 +102,20 @@
                 this.list = services.data;
                 this.setCount(this.list.length);
                 this.handleShowMoreBtn(count);
+
+                this.unsetDisable();
             },
 
             /**
              * Get services from storage.
              */
-            getServicesList(update) {
+            getServicesList() {
+                if(this.isDisabled())
+                    return;
+
                 var count = this.count + this.step;
 
-
+                this.setDisable();
                 this.$http.get('/admin/services/get').then((services) => {
                     this.processRequest(services, count);
                 });
@@ -100,8 +125,12 @@
              * Show more orders by step = 5.
              */
             showMore () {
+                if(this.isDisabled())
+                    return;
+
                 var count = this.count + this.step;
 
+                this.setDisable();
                 this.$http.get('/admin/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
@@ -111,6 +140,10 @@
              * Get services from storage.
              */
             updateList(count) {
+                if(this.isDisabled())
+                    return;
+
+                this.setDisable();
                 this.$http.get('/admin/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
@@ -123,6 +156,7 @@
              */
             removeFromList() {
                 var count = this.list.length;
+
                 this.updateList(count);
             }
         },
