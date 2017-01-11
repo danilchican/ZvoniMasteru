@@ -1,11 +1,11 @@
-@extends('adminpanel.layouts.app')
+@extends('admin.layouts.app')
 
 @section('styles')
-        <!-- DataTables -->
-<link rel="stylesheet" href="/backend/themes/adminpanel/css/dataTables.bootstrap.css">
-<link rel="stylesheet" href="/backend/themes/adminpanel/css/jquery.dataTables.css">
-<link rel="stylesheet" href="/backend/themes/adminpanel/css/pace.min.css">
-<link rel="stylesheet" href="/backend/themes/adminpanel/css/select2.min.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="/css/admin/dataTables.bootstrap.css">
+<link rel="stylesheet" href="/css/admin/jquery.dataTables.css">
+<link rel="stylesheet" href="/css/admin/pace.min.css">
+<link rel="stylesheet" href="/css/admin/select2.min.css">
 <style>
     .select2-container--default
     .select2-selection--multiple
@@ -15,19 +15,14 @@
 </style>
 @endsection
 
-@section('content')
-        <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+@section('breadcrumbs')
     <section class="content-header">
-        <h1>Tariffs</h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>Tariffs</li>
-            <li class="active">Create tariff</li>
-        </ol>
+        <h1>{{ $titlePage }}</h1>
+        {!! Breadcrumbs::render('admin.tariffs.create') !!}
     </section>
+@endsection
 
+@section('content')
     <!-- Main content -->
     <section class="content">
         <!-- Info boxes -->
@@ -42,7 +37,7 @@
                 <div class="box box-primary create-tariff">
                     <div class="box-header with-border">
                         <i class="fa fa-edit"></i>
-                        <h3 class="box-title">{{ $title }}</h3>
+                        <h3 class="box-title">{{ $titlePage }}</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -123,13 +118,17 @@
                             <h3 class="box-title">Services</h3>
                         </div>
                         <div class="box-body">
-                            <div class="form-group">
-                                <select name="services[]" multiple="multiple" class="form-control select2 select2-hidden-accessible services-select" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                    @foreach($services as $service)
-                                        <option value="{{ $service->id }}">{{ $service->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            @if(count($services) > 0)
+                                <div class="form-group">
+                                    <select name="services[]" multiple="multiple" class="form-control select2 select2-hidden-accessible services-select" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        @foreach($services as $service)
+                                            <option value="{{ $service->id }}">{{ $service->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @else
+                                <span>Услуг пока нет.</span>
+                            @endif
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -151,13 +150,11 @@
                 {!! Form::close() !!}
             </div>
         </div>
-
     </section><!-- /.content -->
-</div><!-- /.content-wrapper -->
 @endsection
 
 @section('javascripts')
-    <script src="/backend/themes/adminpanel/js/select2.min.js"></script>
+    <script src="/js/admin/select2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(".services-select").select2({

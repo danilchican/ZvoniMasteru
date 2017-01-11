@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Service;
 use App\Models\Tariff;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,9 +32,10 @@ class TariffsController extends AdminController
     public function create()
     {
         $titlePage = 'Create Tariff';
+        $services = Service::all();
 
         return view('admin.tariffs.create')->with(compact([
-            'titlePage'
+            'titlePage', 'services',
         ]));
     }
 
