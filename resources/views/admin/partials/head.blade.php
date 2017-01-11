@@ -243,7 +243,7 @@
                                                 {{ $userName }} - {{ Auth::user()->company->getName() }}
                                             @endif
                                         @endif
-                                        <small>Зарегистрирован  {{ Auth::user()->created_at->diffForHumans() }}</small>
+                                        <small>Зарегистрирован  {{ LocalizedCarbon::instance(Auth::user()->created_at)->diffForHumans() }}</small>
                                     </p>
                                 </li>
 

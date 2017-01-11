@@ -55,7 +55,7 @@
                             <tr>
                                 <td>{{ $company->id }}.</td>
                                 <td><a href="/adminpanel/companies/view/{{ $company->id }}" data-toggle="tooltip" data-original-title="View Company">{!! empty($company->name) ? 'No name' : $company->name !!}</a></td>
-                                <td>{{ $company->user->created_at->diffForHumans() }}</td> <!-- Registration date -->
+                                <td>{{ LocalizedCarbon::instance($company->user->created_at)->diffForHumans() }}</td> <!-- Registration date -->
                                 <td>
                                     @if($company->status == 2)
                                         <span class="label label-success">Approved</span>
