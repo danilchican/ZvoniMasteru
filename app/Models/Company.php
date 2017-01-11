@@ -26,7 +26,7 @@ class Company extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'logo_url', 'unp_number', 'slug', 'status'
+        'name', 'description', 'logo_url', 'unp_number', 'slug', 'status',
     ];
 
     /**
@@ -56,7 +56,7 @@ class Company extends Model
      */
     public function hasLogo()
     {
-        if(!$this->getLogoUrl()) {
+        if (!$this->getLogoUrl()) {
             return false;
         }
 
@@ -70,7 +70,7 @@ class Company extends Model
      */
     public function getLogo()
     {
-        if($this->hasLogo()) {
+        if ($this->hasLogo()) {
             return $this->getLogoUrl();
         }
 
@@ -84,7 +84,7 @@ class Company extends Model
      */
     public function nameIsEmpty()
     {
-        if(!$this->name) {
+        if (!$this->name) {
             return true;
         }
 
@@ -98,7 +98,7 @@ class Company extends Model
      */
     public function getName()
     {
-        if($this->nameIsEmpty()) {
+        if ($this->nameIsEmpty()) {
             return 'No name';
         }
 

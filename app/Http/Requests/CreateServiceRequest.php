@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
 
 class CreateServiceRequest extends FormRequest
 {
@@ -25,7 +24,7 @@ class CreateServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:255|'
+            'title' => 'required|min:3|max:255|',
         ];
     }
 }

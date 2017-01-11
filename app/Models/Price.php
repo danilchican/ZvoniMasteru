@@ -31,6 +31,7 @@ class Price extends Model
      * Set price of the Price obj.
      *
      * @param $price
+     *
      * @return mixed
      */
     public function setPrice($price)
@@ -42,6 +43,7 @@ class Price extends Model
      * Set range of the Range obj.
      *
      * @param $range
+     *
      * @return mixed
      */
     public function setRange($range)
