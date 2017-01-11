@@ -6,9 +6,31 @@ use App\Http\Requests\CreateServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ServicesController extends AdminController
 {
+    /**
+     * Variable to limit orders to display.
+     */
+    const LIMIT_SERVICES_TO_DISPLAY = 5;
+
+    /**
+     * Get the services for tariffs.
+     *
+     * @param Request $request
+     * @param null $count
+     * @return mixed
+     */
+    public function getServices(Request $request, $count = null)
+    {
+        $_count = $count ? $count : self::LIMIT_SERVICES_TO_DISPLAY;
+
+        return Response::json(
+            Service::limit($_count)->orderBy('id', 'desc')->get(), 200
+        );
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +39,9 @@ class ServicesController extends AdminController
     public function index()
     {
         $titlePage = 'Services';
-        $services = Service::paginate(5);
 
         return view('admin.tariffs.services.index')->with(compact([
-            'titlePage', 'services'
+            'titlePage',
         ]));
     }
 
@@ -47,8 +68,7 @@ class ServicesController extends AdminController
         if(!$service) {
             return Response::json([
                         'Can\'t create a new service.',
-                ], 305
-            );
+                ], 305);
         }
 
         return Response::json([
@@ -57,8 +77,7 @@ class ServicesController extends AdminController
                 'messages' => [
                     'Service created successfully.'
                 ]
-            ], 200
-        );
+            ], 200);
     }
 
     /**
@@ -103,6 +122,20 @@ class ServicesController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        try {
+            $service = Service::findOrFail($id);
+            $service->delete();
+        } catch (ModelNotFoundException $ex) {
+            return Response::json([
+                    'Service was not found',
+            ], 305);
+        }
+
+        return Response::json([
+            'success'  => true,
+            'messages' => [
+                'Order successfully deleted',
+            ],
+        ], 200);
     }
 }
