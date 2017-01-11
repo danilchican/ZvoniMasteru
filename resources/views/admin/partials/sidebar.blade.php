@@ -35,7 +35,7 @@
                     <small class="label pull-right bg-red" data-toggle="tooltip" data-original-title="Today">new</small>
                 </a>
             </li>
-
+            {{--
             <li @if(Request::is('adminpanel/orders')) class="active" @endif>
                 <a href="/adminpanel/orders">
                     <i class="fa fa-share"></i> <span>Orders</span>
@@ -52,6 +52,7 @@
                            data-toggle="tooltip" data-original-title="Today">new</small>
                 </a>
             </li>
+            --}}
             <li class="treeview @if(Request::is('admin/tariffs*') || Request::is('admin/services*')) active @endif">
                 <a href="#">
                     <i class="fa fa-list-ul"></i>
@@ -63,21 +64,25 @@
                     <li @if(Request::is('admin/services*')) class="active" @endif><a href="{{ route('admin.services.index') }}"><i class="fa fa-circle-o"></i> Services</a></li>
                 </ul>
             </li>
+            {{--
             <li>
                 <a href="/adminpanel/news"><i class="fa fa-file-text-o"></i> <span>News</span></a>
             </li>
+            --}}
             <li>
                 <a href=""><i class="fa fa-list-ul"></i> <span>Categories</span></a>
             </li>
             <li>
                 <a href=""><i class="fa fa-list-ul"></i> <span>Specializations</span></a>
             </li>
+            {{--
             <li>
                 <a href="/adminpanel/menus"><i class="fa fa-th"></i> <span>Menus</span></a>
             </li>
             <li>
                 <a href="/adminpanel/galleries"><i class="fa fa-picture-o"></i> <span>Galleries</span></a>
             </li>
+            --}}
         </ul>
     </section>
     <!-- /.sidebar -->
