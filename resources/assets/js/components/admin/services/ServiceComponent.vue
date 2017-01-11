@@ -18,7 +18,7 @@
                             <td v-if="list.length == 0">
                                 <h5 style="padding-left: 15px;">Haven't any services.</h5>
                             </td>
-                            <view-service v-else v-for="service in list" :service="service" @serviceRemoved="removeFromList()" ></view-service>
+                            <view-service v-else v-for="service in list" :service="service" @serviceRemoved="removeFromList()" @serviceEdited="getServiceInfo($event)"></view-service>
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
@@ -32,6 +32,27 @@
         </div><!-- /.col -->
         <div class="col-xs-6">
             <create-service @serviceCreated="updateList(count)"></create-service>
+        </div>
+        <!-- Edit Service Modal -->
+        <div class="modal fade" id="editServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="editServiceModalLabel">Редактировать {{ editService.title }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title-edit">Title</label>
+                            <input type="text" id="title-edit" @keyup.enter="updateService()" v-model="editService.title" :value="editService.title" placeholder="Введите название услуги" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" @click="updateService()" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -52,6 +73,10 @@
                 count: 0,
                 step: 5,
                 disable: false,
+                editService: {
+                    id: 0,
+                    title: ''
+                }
             }
         },
 
@@ -104,6 +129,51 @@
                 this.handleShowMoreBtn(count);
 
                 this.unsetDisable();
+            },
+
+            setEditingService(service) {
+                this.editService.id = service.id;
+                this.editService.title = service.title;
+            },
+
+            unsetEditingService() {
+                this.editService.id = 0;
+                this.editService.title = '';
+            },
+
+            getServiceInfo(service) {
+              this.setEditingService(service);
+            },
+
+            updateService() {
+                this.$http.put('/admin/services/' + this.editService.id, this.editService).then((data) => {
+                    // success callback
+
+                    this.updateList(this.count);
+
+                    if(data.body.success === true) {
+                        var messages = data.body.messages;
+
+                        $('#editServiceModal').modal('hide');
+                        $.each( messages, function( key, value ) {
+                            toastr.success(value, 'Success')
+                        });
+                    } else {
+                        toastr.error('Что-то пошло не так...', 'Error')
+                    }
+
+                }, (data) => {
+                    this.unsetDisable();
+                    // error callback
+                    var errors = data.body;
+                    $.each( errors, function( key, value ) {
+                        if(data.status === 422) {
+                            toastr.error(value[0], 'Error')
+                        } else {
+                            toastr.error(value, 'Error')
+                        }
+                    });
+                });
             },
 
             /**

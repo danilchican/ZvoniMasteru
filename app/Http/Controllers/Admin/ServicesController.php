@@ -116,7 +116,21 @@ class ServicesController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $service = Service::findOrFail($id);
+            $service->update($request->only('title'));
+        } catch (ModelNotFoundException $ex) {
+            return Response::json([
+                'Service was not found',
+            ], 305);
+        }
+
+        return Response::json([
+            'success'  => true,
+            'messages' => [
+                'Order successfully updated',
+            ],
+        ], 200);
     }
 
     /**

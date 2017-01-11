@@ -4,7 +4,7 @@
         <td>{{ service.title }}</td>
         <td>
             <div class="btn-group">
-                <button type="button" class="btn btn-info btn-xs">Edit</button>
+                <button type="button" @click="editService(service)" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editServiceModal">Edit</button>
                 <button type="button" @click="!isDisabled() ? removeService(service) : null" class="btn btn-danger btn-xs">Delete</button>
             </div>
         </td>
@@ -36,6 +36,10 @@
              */
             isDisabled() {
                 return this.disable;
+            },
+
+            editService(service) {
+                this.$emit('serviceEdited', service);
             },
 
             /**
