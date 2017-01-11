@@ -6,7 +6,7 @@
                     <h3 class="box-title">{{ titlePage }}</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding no-margin">
-                    <table class="table table-bordered table-striped table-hover">
+                    <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -15,19 +15,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <td v-if="list.length == 0">
-                            <h5 style="padding-left: 15px;">Haven't any services.</h5>
-                        </td>
-                        <tr v-else v-for="service in list">
-                            <view-service :service="service"></view-service>
-                        </tr>
+                            <td v-if="list.length == 0">
+                                <h5 style="padding-left: 15px;">Haven't any services.</h5>
+                            </td>
+                            <view-service @serviceRemoved="removeFromList()" v-else v-for="service in list" :service="service"></view-service>
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+
+            <div class="col-xs-12" style="margin-top: 15px;">
+                <div class="row" style="text-align: center" v-if="canShowMore">
+                    <button class="btn btn-default" @click="showMore()" style="display: inline-block">Show More</button>
+                </div>
+            </div>
         </div><!-- /.col -->
         <div class="col-xs-6">
-            <create-service @serviceCreated="updateList($event)"></create-service>
+            <create-service @serviceCreated="updateList()"></create-service>
         </div>
     </div>
 </template>
@@ -41,12 +45,77 @@
 
         data() {
             return {
-                list: []
+                list: [],
+                canShowMore: false,
+                count: 0,
+                step: 5
             }
         },
+
+        created: function () {
+            this.updateList();
+        },
+
         methods: {
-            updateList(title) {
-                console.log(title)
+
+            /**
+             * Set count of retrieved data.
+             *
+             * @param count
+             */
+            setCount (count){
+                this.count = count;
+            },
+            /**
+             * Handle showing ShowMore button.
+             *
+             * @param count
+             */
+            handleShowMoreBtn (count) {
+                this.canShowMore = (this.count < count) ? false : true;
+            },
+
+            /**
+             * Process data for request.
+             */
+            processRequest(services) {
+                this.list = services.data;
+                this.setCount(this.list.length);
+                this.handleShowMoreBtn(this.step);
+            },
+
+            /**
+             * Get services from storage.
+             */
+            updateList() {
+                this.$http.get('/admin/services/get').then((services) => {
+                    this.processRequest(services);
+                });
+            },
+
+            /**
+             * Show more orders by step = 5.
+             */
+            showMore () {
+                var count = this.count + this.step;
+
+                this.$http.get('/admin/services/get/' + count).then((services) => {
+                    this.processRequest(services);
+                });
+            },
+
+            /**
+             * Remove service from list.
+             *
+             * @param service
+             */
+            removeFromList() {
+                this.updateList();
+                console.log("removing");
+                let index = this.list.indexOf(service);
+
+                console.log("Removing from list by index: ", index);
+                this.list.splice(index, 1);
             }
         },
 

@@ -24,12 +24,5 @@
     </div>
 
     <service title-page="{{ $titlePage }}"></service>
-
-    <div class="row">
-        <div class="col-sm-6">
-            {!! $services->links() !!}
-        </div><!-- /.col -->
-    </div><!-- /.row -->
-
 </section><!-- /.content -->
 @endsection

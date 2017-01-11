@@ -28,6 +28,8 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin'], function (
     Route::resource('tariffs', 'Admin\TariffsController', [
         'as' => 'admin'
     ]);
+
+    Route::get('/services/get/{count?}', 'Admin\ServicesController@getServices');
     Route::resource('services', 'Admin\ServicesController', [
         'as' => 'admin'
     ]);
