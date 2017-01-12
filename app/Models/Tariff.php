@@ -39,7 +39,7 @@ class Tariff extends Model
      */
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'service_to_tariff', 'tariff_id', 'service_id');
+        return $this->belongsToMany(Service::class, 'service_tariff', 'tariff_id', 'service_id');
     }
 
     /**
