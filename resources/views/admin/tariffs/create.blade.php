@@ -147,11 +147,12 @@
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="{{ ($old = old('published')) ? $old : 1 }}" name="published" checked> Published
-                                </label>
-                            </div>
+                            <label for="published">Published
+                                <select name="published">
+                                    <option value="1">Да</option>
+                                    <option value="0">Нет</option>
+                                </select>
+                            </label>
                         </div>
                     </div>
                     <div class="row">
