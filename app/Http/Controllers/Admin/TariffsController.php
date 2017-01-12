@@ -79,16 +79,19 @@ class TariffsController extends AdminController
                 $price = new Price();
                 $price->setPrice($prices[$i]);
                 $price->setRange($ranges[$i]);
+                $price->save();
 
-                $prices_objects[] = $price;
+                if($price->id) {
+                    $prices_objects[] = $price->id;
+                }
             }
         }
 
         $tariff = new Tariff($request->only($this->attributes));
         $tariff->save();
 
-        $tariff->services()->sync($services);
-        $tariff->prices()->saveMany($prices_objects);
+        $tariff->services()->attach($services);
+        $tariff->prices()->attach($prices_objects);
 
         return redirect()->route('admin.tariffs.index')
             ->with(['success' => 'Tariff successfully added']);
@@ -119,11 +122,7 @@ class TariffsController extends AdminController
         $tariff = Tariff::find($id);
         $services = Service::all();
 
-        $tariff_services = [];
-
-        foreach ($tariff->services()->get() as $service) {
-            $tariff_services[] = $service->id;
-        }
+        $tariff_services = $tariff->services()->get()->pluck('id')->toArray();
 
         if(!$tariff) {
             return redirect()->back()
@@ -165,8 +164,11 @@ class TariffsController extends AdminController
                 $price = new Price();
                 $price->setPrice($prices[$i]);
                 $price->setRange($ranges[$i]);
+                $price->save();
 
-                $prices_objects[] = $price;
+                if($price->id) {
+                    $prices_objects[] = $price->id;
+                }
             }
         }
 
@@ -174,7 +176,8 @@ class TariffsController extends AdminController
         $tariff->update($request->only($this->attributes));
 
         $tariff->services()->sync($services);
-        $tariff->prices()->saveMany($prices_objects);
+        $tariff->prices()->detach();
+        $tariff->prices()->sync($prices_objects);
 
         return redirect()->route('admin.tariffs.index')
             ->with(['success' => 'Tariff has been updated.']);
