@@ -27,6 +27,17 @@ class Service extends Model
      */
     protected $fillable = ['title'];
 
+
+    /**
+     * Get the title of the service.
+     *
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
     /**
      * Set title of the Service obj.
      *

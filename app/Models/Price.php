@@ -78,6 +78,6 @@ class Price extends Model
      */
     public function tariffs()
     {
-        return $this->belongsToMany(Tariff::class);
+        return $this->belongsToMany(Tariff::class, 'price_tariff', 'price_id', 'tariff_id');
     }
 }
