@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreateTariffRequest;
 use App\Models\Service;
 use App\Models\Tariff;
 use App\Models\Price;
@@ -45,7 +46,7 @@ class TariffsController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTariffRequest $request)
     {
         $attributes = ['title', 'whom', 'additional_service', 'top', 'published'];
 

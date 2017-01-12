@@ -31,6 +31,17 @@
             {!! $about or "<p>This page has been created for control of all tariffs. You can create, delete and edit
             any tariff by clicking on buttons.</p>" !!}
         </div>
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="col-xs-12">
             <div class="row">
                 {!! Form::open(['route' => 'admin.tariffs.store']) !!}
@@ -46,13 +57,13 @@
                                 <div class="col-xs-6" style="padding-left:0;">
                                     <div class="form-group">
                                         <label for="name">Название тарифа</label>
-                                        <input type="text" class="form-control" name="title" placeholder="Введите название тарифа">
+                                        <input type="text" value="{{ old('title') }}" class="form-control" name="title" placeholder="Введите название тарифа">
                                     </div>
                                 </div>
                                 <div class="col-xs-6" style="padding-right:0;">
                                     <div class="form-group">
                                         <label for="slug">Топ</label>
-                                        <input type="number" value="0" min="0" class="form-control" name="top">
+                                        <input type="number" value="{{ ($old = old('top')) ? $old : 0 }}" min="0" class="form-control" name="top">
                                     </div>
                                 </div>
                             </div>
@@ -62,13 +73,13 @@
                                 <div class="col-xs-6" style="padding-left:0;">
                                     <div class="form-group">
                                         <label for="desc">Для кого</label>
-                                        <input type="text" class="form-control" name="whom" placeholder="Для малого бизнеса">
+                                        <input type="text" class="form-control" value="{{ old('whom') }}" name="whom" placeholder="Для малого бизнеса">
                                     </div>
                                 </div>
                                 <div class="col-xs-6" style="padding-right:0;">
                                     <div class="form-group">
                                         <label for="desc">Доп. услуга</label>
-                                        <input type="text" class="form-control" name="additional_service" placeholder="Наполнение карточки">
+                                        <input type="text" class="form-control" value="{{ old('additional_service') }}" name="additional_service" placeholder="Наполнение карточки">
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +133,7 @@
                                 <div class="form-group">
                                     <select name="services[]" multiple="multiple" class="form-control select2 select2-hidden-accessible services-select" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         @foreach($services as $service)
-                                            <option value="{{ $service->id }}">{{ $service->title }}</option>
+                                            <option value="{{ $service->id }}" {{ ( old('services') ? in_array($service->id, old('services')) : false) ? 'selected' :'' }}>{{ $service->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -138,7 +149,7 @@
                         <div class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    {{ Form::checkbox('published', 1, true) }} Published
+                                    <input type="checkbox" value="{{ ($old = old('published')) ? $old : 1 }}" name="published" checked> Published
                                 </label>
                             </div>
                         </div>
