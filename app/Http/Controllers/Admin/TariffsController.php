@@ -106,7 +106,24 @@ class TariffsController extends AdminController
      */
     public function edit($id)
     {
-        //
+        $titlePage = 'Edit Tariff';
+        $tariff = Tariff::find($id);
+        $services = Service::all();
+
+        $tariff_services = [];
+
+        foreach ($tariff->services()->get() as $service) {
+            $tariff_services[] = $service->id;
+        }
+
+        if(!$tariff) {
+            return redirect()->back()
+                ->with(['error' => 'Tariff has not been found.']);
+        }
+
+        return view('admin.tariffs.edit')->with(compact([
+            'titlePage', 'tariff', 'services', 'tariff_services',
+        ]));
     }
 
     /**

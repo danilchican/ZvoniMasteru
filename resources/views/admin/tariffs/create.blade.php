@@ -1,18 +1,18 @@
 @extends('admin.layouts.app')
 
 @section('styles')
-<!-- DataTables -->
-<link rel="stylesheet" href="/css/admin/dataTables.bootstrap.css">
-<link rel="stylesheet" href="/css/admin/jquery.dataTables.css">
-<link rel="stylesheet" href="/css/admin/pace.min.css">
-<link rel="stylesheet" href="/css/admin/select2.min.css">
-<style>
-    .select2-container--default
-    .select2-selection--multiple
-    .select2-selection__choice {
-        color: #000;
-    }
-</style>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/css/admin/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="/css/admin/jquery.dataTables.css">
+    <link rel="stylesheet" href="/css/admin/pace.min.css">
+    <link rel="stylesheet" href="/css/admin/select2.min.css">
+    <style>
+        .select2-container--default
+        .select2-selection--multiple
+        .select2-selection__choice {
+            color: #000;
+        }
+    </style>
 @endsection
 
 @section('breadcrumbs')

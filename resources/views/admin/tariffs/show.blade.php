@@ -1,8 +1,8 @@
 <tr>
     <td>{{ $tariff->id }}.</td>
-    <td><a href="/adminpanel/tariffs/view/{{ $tariff->id }}" data-toggle="tooltip" data-original-title="View Tariff">{{ $tariff->title }}</a></td>
+    <td><a href="{{ route('admin.tariffs.edit', $tariff->id) }}" data-toggle="tooltip" data-original-title="View Tariff">{{ $tariff->title }}</a></td>
     <td>TOP {{ $tariff->top }}</td>
-    <td>{{ $tariff->created_at->format('m.d.Y H:i') }}</td>
+    <td>{{ $tariff->created_at->format('d.m.Y H:i') }}</td>
     <td>
         @if($tariff->published)
             <span class="label label-success">Published</span>
