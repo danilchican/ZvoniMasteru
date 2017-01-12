@@ -18,7 +18,7 @@
 @section('breadcrumbs')
     <section class="content-header">
         <h1>{{ $titlePage }}</h1>
-        {!! Breadcrumbs::render('admin.tariffs.create') !!}
+        {!! Breadcrumbs::render('admin.tariffs.edit') !!}
     </section>
 @endsection
 
@@ -152,7 +152,7 @@
                             <label for="published">Published
                                 <select name="published">
                                     <option value="1">Да</option>
-                                    <option value="0">Нет</option>
+                                    <option value="0" {{ (!$tariff->isPublished() ? 'selected' : '') }}>Нет</option>
                                 </select>
                             </label>
                         </div>
