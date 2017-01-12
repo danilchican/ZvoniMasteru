@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CreateTariffRequest;
+use App\Http\Requests\UpdateTariffRequest;
 use App\Models\Service;
 use App\Models\Tariff;
 use App\Models\Price;
@@ -10,6 +11,16 @@ use Illuminate\Http\Request;
 
 class TariffsController extends AdminController
 {
+
+    /**
+     * Attrributes for setting.
+     *
+     * @var array
+     */
+    private $attributes = [
+        'title', 'whom', 'additional_service', 'top', 'published',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -48,8 +59,6 @@ class TariffsController extends AdminController
      */
     public function store(CreateTariffRequest $request)
     {
-        $attributes = ['title', 'whom', 'additional_service', 'top', 'published'];
-
         $prices = $request->input('prices');
         $ranges = $request->input('ranges');
         $services = (array)$request->input('services');
@@ -75,7 +84,7 @@ class TariffsController extends AdminController
             }
         }
 
-        $tariff = new Tariff($request->only($attributes));
+        $tariff = new Tariff($request->only($this->attributes));
         $tariff->save();
 
         $tariff->services()->sync($services);
@@ -134,9 +143,41 @@ class TariffsController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTariffRequest $request, $id)
     {
-        //
+        $prices = $request->input('prices');
+        $ranges = $request->input('ranges');
+        $services = (array)$request->input('services');
+
+        $services_objects = [];
+        $prices_objects = [];
+
+        if($services) {
+            foreach($services as $service) {
+                $service_obj = new Service();
+                $service_obj->setTitle($service);
+                $services_objects[] = $service_obj;
+            }
+        }
+
+        if(count($prices) === count($ranges)) {
+            for($i = 0, $max = count($prices); $i < $max; $i++) {
+                $price = new Price();
+                $price->setPrice($prices[$i]);
+                $price->setRange($ranges[$i]);
+
+                $prices_objects[] = $price;
+            }
+        }
+
+        $tariff = Tariff::find($id);
+        $tariff->update($request->only($this->attributes));
+
+        $tariff->services()->sync($services);
+        $tariff->prices()->saveMany($prices_objects);
+
+        return redirect()->route('admin.tariffs.index')
+            ->with(['success' => 'Tariff has been updated.']);
     }
 
     /**
