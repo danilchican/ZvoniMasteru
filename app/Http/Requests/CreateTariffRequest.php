@@ -27,7 +27,6 @@ class CreateTariffRequest extends FormRequest
             'title' => 'required|min:3|max:80|unique:tariffs',
             'whom' => 'required',
             'top' => 'required|integer',
-            'published' => 'required|boolean',
             'prices' => 'required|array',
             'services' => 'required|array',
             'ranges' => 'required|array'
