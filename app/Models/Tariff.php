@@ -21,6 +21,56 @@ class Tariff extends Model
     ];
 
     /**
+     * Check if the tariff has been published.
+     *
+     * @return mixed
+     */
+    public function isPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * Get the top number of the tariff.
+     *
+     * @return mixed
+     */
+    public function getTopNumber()
+    {
+        return $this->top;
+    }
+
+    /**
+     * Get the additional service for tariff.
+     *
+     * @return mixed
+     */
+    public function getAdditionalService()
+    {
+        return $this->additional_service;
+    }
+
+    /**
+     * Get the whom variable.
+     *
+     * @return mixed
+     */
+    public function getWhom()
+    {
+        return $this->whom;
+    }
+
+    /**
+     * Get the title of the Tariff.
+     *
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Get all published tariffs.
      *
      * @param $query

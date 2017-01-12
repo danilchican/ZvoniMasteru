@@ -28,6 +28,26 @@ class Price extends Model
     protected $fillable = ['tariff_id', 'price', 'range'];
 
     /**
+     * Get the range of the price.
+     *
+     * @return mixed
+     */
+    public function getRange()
+    {
+        return $this->range;
+    }
+
+    /**
+     * Get the price.
+     *
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
      * Set price of the Price obj.
      *
      * @param $price
