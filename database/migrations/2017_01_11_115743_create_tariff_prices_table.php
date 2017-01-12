@@ -15,11 +15,8 @@ class CreateTariffPricesTable extends Migration
     {
         Schema::create('tariff_prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tariff_id')->unsigned();
             $table->decimal('price', 10, 2);
             $table->string('range');
-
-            $table->foreign('tariff_id')->references('id')->on('tariffs')->onDelete('cascade');
         });
     }
 
