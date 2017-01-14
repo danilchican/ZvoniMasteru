@@ -254,7 +254,9 @@
                 console.log(count);
 
                 this.setDisable();
+
                 count = (count < this.countPerPage()) ? this.countPerPage() : count;
+
                 this.$http.get('/admin/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
