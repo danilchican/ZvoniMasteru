@@ -32,15 +32,7 @@
             any tariff by clicking on buttons.</p>" !!}
         </div>
 
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('admin.partials.errors')
 
         <div class="col-xs-12">
             <div class="row">

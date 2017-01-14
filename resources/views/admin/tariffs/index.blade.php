@@ -22,18 +22,21 @@
         {!! $about or "<p>This page has been created for control of all tariffs. You can create, delete and edit
         any tariff by clicking on buttons.</p>" !!}
     </div>
+
     @if (session('success'))
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             {{ session('success') }}
         </div>
     @endif
+
     @if (session('error'))
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             {{ session('error') }}
         </div>
     @endif
+
     <div class="col-xs-12" style="margin-bottom: 15px;">
         <div class="row">
             <div class="col-xs-2">

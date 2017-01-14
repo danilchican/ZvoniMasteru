@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CreateTariffRequest;
-use App\Http\Requests\UpdateTariffRequest;
+use App\Http\Requests\Admin\TariffRequest;
 use App\Models\Service;
 use App\Models\Tariff;
 use App\Models\Price;
@@ -57,7 +56,7 @@ class TariffsController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateTariffRequest $request)
+    public function store(TariffRequest $request)
     {
         $prices = $request->input('prices');
         $ranges = $request->input('ranges');
@@ -142,7 +141,7 @@ class TariffsController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTariffRequest $request, $id)
+    public function update(TariffRequest $request, $id)
     {
         $prices = $request->input('prices');
         $ranges = $request->input('ranges');

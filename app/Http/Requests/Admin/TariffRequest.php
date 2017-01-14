@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTariffRequest extends FormRequest
+class TariffRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,9 @@ class UpdateTariffRequest extends FormRequest
             'whom' => 'required',
             'top' => 'required|integer',
             'prices' => 'required|array',
+            'prices.*' => 'required|numeric',
             'services' => 'required|array',
+            'services.*' => 'integer|exists:tariff_services,id',
             'ranges' => 'required|array'
         ];
     }
