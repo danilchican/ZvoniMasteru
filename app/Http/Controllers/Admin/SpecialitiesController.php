@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\CreateSpecialityRequest;
 use App\Models\Speciality;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
@@ -48,10 +49,10 @@ class SpecialitiesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\CreateSpecialityRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateSpecialityRequest $request)
     {
         $speciality = Speciality::create($request->all());
 
@@ -73,11 +74,11 @@ class SpecialitiesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\CreateSpecialityRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateSpecialityRequest $request, $id)
     {
         try {
             $speciality = Speciality::findOrFail($id);
