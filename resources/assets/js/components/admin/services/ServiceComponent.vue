@@ -86,11 +86,17 @@
 
         methods: {
 
+            /**
+             * Set disable for boxes.
+             */
             setDisable() {
                 this.disable = true;
                 $('#box-table-services').append(loading_box);
             },
 
+            /**
+             * Unset disable from box.
+             */
             unsetDisable() {
                 this.disable = false;
                 $('#box-table-services').find('.overlay').remove();
@@ -111,6 +117,14 @@
             setCount (count){
                 this.count = count;
             },
+
+            /**
+             * Get the count of services.
+             */
+            getCount() {
+                return this.count;
+            },
+
             /**
              * Handle showing ShowMore button.
              *
@@ -131,25 +145,39 @@
                 this.unsetDisable();
             },
 
+            /**
+             * Set editing service for modal.
+             *
+             * @param service
+             */
             setEditingService(service) {
                 this.editService.id = service.id;
                 this.editService.title = service.title;
             },
 
+            /**
+             * Unset editing service for modal.
+             */
             unsetEditingService() {
                 this.editService.id = 0;
                 this.editService.title = '';
             },
 
+            /**
+             * Get service info form modal.
+             *
+             * @param service
+             */
             getServiceInfo(service) {
               this.setEditingService(service);
             },
 
+            /**
+             * Update service model.
+             */
             updateService() {
                 this.$http.put('/admin/services/' + this.editService.id, this.editService).then((data) => {
-                    // success callback
-
-                    this.updateList(this.count);
+                    this.updateList(this.getCount());
 
                     if(data.body.success === true) {
                         var messages = data.body.messages;
@@ -186,6 +214,7 @@
                 var count = this.count + this.step;
 
                 this.setDisable();
+
                 this.$http.get('/admin/services/get').then((services) => {
                     this.processRequest(services, count);
                 });
@@ -201,6 +230,7 @@
                 var count = this.count + this.step;
 
                 this.setDisable();
+
                 this.$http.get('/admin/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
@@ -214,6 +244,7 @@
                     return;
 
                 this.setDisable();
+
                 this.$http.get('/admin/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
@@ -225,9 +256,8 @@
              * @param service
              */
             removeFromList() {
-                var count = this.list.length;
-
-                this.updateList(count);
+                this.setCount(this.list.length);
+                this.updateList(this.count);
             }
         },
 
