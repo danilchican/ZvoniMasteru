@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-7">
             <div class="box no-margin" id="box-table-services">
                 <div class="box-header">
                     <h3 class="box-title">{{ titlePage }}</h3>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div><!-- /.col -->
-        <div class="col-xs-6">
+        <div class="col-xs-5">
             <create-service @serviceCreated="updateList(getCount())"></create-service>
         </div>
         <!-- Edit Service Modal -->
@@ -264,8 +264,6 @@
 
             /**
              * Remove service from list.
-             *
-             * @param service
              */
             removeFromList() {
                 this.setCount(this.list.length);

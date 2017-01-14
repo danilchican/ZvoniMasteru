@@ -5,7 +5,7 @@
         <td>
             <div class="btn-group">
                 <button type="button" @click="editService(service)" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editServiceModal">Edit</button>
-                <button type="button" @click="!isDisabled() ? removeService(service) : null" class="btn btn-danger btn-xs">Delete</button>
+                <button type="button" @click="removeService(service)" class="btn btn-danger btn-xs">Delete</button>
             </div>
         </td>
     </tr>
@@ -15,29 +15,7 @@
     export default {
         props: ['service'],
 
-        data() {
-            return {
-
-            }
-        },
-
         methods: {
-
-            setDisable() {
-                this.disable = true;
-            },
-
-            unsetDisable() {
-                this.disable = false;
-            },
-
-            /**
-             * Check if the request sended.
-             */
-            isDisabled() {
-                return this.disable;
-            },
-
             editService(service) {
                 this.$emit('serviceEdited', service);
             },
@@ -48,8 +26,6 @@
              * @param service
              */
             removeService(service) {
-                this.setDisable();
-
                 this.$http.delete('/admin/services/' + service.id).then((data) => {
                     // success callback
                     if(data.body.success === true) {
@@ -63,9 +39,7 @@
                     }
 
                     this.$emit('serviceRemoved');
-                    this.unsetDisable();
                 }, (data) => {
-                    this.unsetDisable();
                     // error callback
                     var errors = data.body;
                     $.each( errors, function( key, value ) {
