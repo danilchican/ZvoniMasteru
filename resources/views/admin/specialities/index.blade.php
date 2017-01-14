@@ -9,7 +9,7 @@
 @section('breadcrumbs')
     <section class="content-header">
         <h1>{{ $titlePage }}</h1>
-        {!! Breadcrumbs::render('admin.tariffs.services') !!}
+        {!! Breadcrumbs::render('admin.specialities') !!}
     </section>
 @endsection
 
@@ -23,6 +23,6 @@
         any Price or Service by clicking on buttons.</p>" !!}
     </div>
 
-    <services title-page="{{ $titlePage }}"></services>
+    <specialities title-page="{{ $titlePage }}"></specialities>
 </section><!-- /.content -->
 @endsection

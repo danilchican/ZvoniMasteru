@@ -34,3 +34,9 @@ Breadcrumbs::register('admin.tariffs.services', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.tariffs');
     $breadcrumbs->push('Services', route('admin.services.index'));
 });
+
+// Dashboard > Specialities
+Breadcrumbs::register('admin.specialities', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin');
+    $breadcrumbs->push('Specialities', route('admin.specialities.index'));
+});

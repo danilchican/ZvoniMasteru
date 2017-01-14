@@ -72,8 +72,8 @@
             <li>
                 <a href=""><i class="fa fa-list-ul"></i> <span>Categories</span></a>
             </li>
-            <li>
-                <a href=""><i class="fa fa-list-ul"></i> <span>Specializations</span></a>
+            <li @if(Request::is('admin/specialities')) class="active" @endif>
+                <a href="{{ route('admin.specialities.index') }}"><i class="fa fa-list-ul"></i> <span>Specialities</span></a>
             </li>
             {{--
             <li>
