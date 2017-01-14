@@ -90,6 +90,8 @@
 
                         this.$emit('specialityCreated', savedSpeciality);
                         this.title = '';
+                        this.slug = '';
+                        this.desc = '';
 
                         this.unsetDisable();
                     }, (data) => {

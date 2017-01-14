@@ -16,6 +16,8 @@ window.toastr.options = {
     "timeOut": "5000"
 }
 
+require('../../../public/js/admin/api_asvae/installer.js');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

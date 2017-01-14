@@ -240,7 +240,7 @@
             /**
              * Count services per page.
              */
-            countPerPage() {
+            getCountPerPage() {
               return this.countPerPage;
             },
 
@@ -255,7 +255,7 @@
 
                 this.setDisable();
 
-                count = (count < this.countPerPage()) ? this.countPerPage() : count;
+                count = (count < this.getCountPerPage()) ? this.getCountPerPage() : count;
 
                 this.$http.get('/admin/services/get/' + count).then((services) => {
                     this.processRequest(services, count);

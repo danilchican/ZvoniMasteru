@@ -33,6 +33,49 @@ class SpecialitiesController extends Controller
     }
 
     /**
+     * Search specialities by keywords.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function search(Request $request)
+    {
+        $keywords = $request->input('keywords');
+
+        $message = 'Some specialities founded.';
+        $code = 200;
+
+        if($keywords !== null) {
+            $specialities = Speciality::searchByKeywords($keywords)->get();
+
+            if($specialities->isEmpty()) {
+                $message = 'Can\'t found any speciality.';
+                $code = 305;
+            }
+
+            return Response::json([
+                'success'  => true,
+                'messages' => [ $message ],
+                'specialities' => $specialities,
+            ], $code);
+        }
+
+        $specialities = Speciality::limit(self::LIMIT_SPECIALITIES_TO_DISPLAY)
+            ->orderBy('id', 'desc')->get();
+
+        if($specialities->isEmpty()) {
+            $message = 'Can\'t found any speciality.';
+            $code = 305;
+        }
+
+        return Response::json([
+            'success'  => true,
+            'messages' => [ $message ],
+            'specialities' => $specialities,
+        ], $code);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

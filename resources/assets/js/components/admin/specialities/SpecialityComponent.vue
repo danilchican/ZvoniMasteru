@@ -4,6 +4,14 @@
             <div class="box no-margin" id="box-table-specialities">
                 <div class="box-header">
                     <h3 class="box-title">{{ titlePage }}</h3>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" :value="keywords" v-model="keywords" @keyup.enter="search()" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button type="submit" @click="search()" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding no-margin">
                     <table class="table table-bordered table-hover">
@@ -83,6 +91,7 @@
                 step: 5,
                 disable: false,
                 countPerPage: 5,
+                keywords: '',
                 editSpeciality: {
                     id: 0,
                     title: '',
@@ -97,6 +106,41 @@
         },
 
         methods: {
+
+            /**
+             * Search speciality by keywords.
+             */
+            search() {
+                if(this.isDisabled())
+                    return;
+
+                this.setDisable();
+
+                this.$http.post('/admin/specialities/search', {keywords: this.keywords}).then((response) => {
+                    if(response.body.success === true) {
+                        this.list = response.data.specialities;
+                        var messages = response.body.messages;
+
+                        $.each( messages, function( key, value ) {
+                            toastr.success(value, 'Success')
+                        });
+                    } else {
+                        toastr.error('Что-то пошло не так...', 'Error')
+                    }
+                    this.unsetDisable();
+                }, (data) => {
+                    this.unsetDisable();
+                    // error callback
+                    var errors = data.body.messages;
+                    $.each( errors, function( key, value ) {
+                        if(data.status === 422) {
+                            toastr.error(value[0], 'Error')
+                        } else {
+                            toastr.error(value, 'Error')
+                        }
+                    });
+                });
+            },
 
             /**
              * Set disable for boxes.
@@ -265,8 +309,6 @@
             updateList(count) {
                 if(this.isDisabled())
                     return;
-
-                console.log(count);
 
                 this.setDisable();
 

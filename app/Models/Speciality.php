@@ -28,4 +28,22 @@ class Speciality extends Model
     protected $fillable = [
         'title', 'slug', 'desc',
     ];
+
+    /**
+     * Search specialities by keywords.
+     *
+     * @param $query
+     * @param $keywords
+     * @return mixed
+     */
+    public function scopeSearchByKeywords($query, $keywords)
+    {
+        $query->where(function ($query) use ($keywords) {
+            $query->where('title', 'LIKE',"%$keywords%")
+                ->orWhere('slug', 'LIKE', "%$keywords%")
+                ->orWhere('desc', 'LIKE', "%$keywords%");
+        });
+
+        return $query;
+    }
 }

@@ -23,6 +23,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin'], function (
     Route::get('/', 'Admin\HomeController@index')->name('admin.index');
 
     Route::get('/services/get/{count?}', 'Admin\ServicesController@getServices');
+    Route::post('/specialities/search', 'Admin\SpecialitiesController@search');
     Route::get('/specialities/get/{count?}', 'Admin\SpecialitiesController@getSpecialities');
 
     Route::resource('companies', 'Admin\CompaniesController', [
