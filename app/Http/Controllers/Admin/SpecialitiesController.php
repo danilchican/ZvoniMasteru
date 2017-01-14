@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Speciality;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -62,7 +63,21 @@ class SpecialitiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $speciality = Speciality::create($request->all());
+
+        if (!$speciality) {
+            return Response::json([
+                'Can\'t create a new speciality.',
+            ], 305);
+        }
+
+        return Response::json([
+            'success'  => true,
+            'speciality'  => $speciality,
+            'messages' => [
+                'Speciality created successfully.',
+            ],
+        ], 200);
     }
 
     /**
@@ -96,7 +111,21 @@ class SpecialitiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $speciality = Speciality::findOrFail($id);
+            $speciality->update($request->all());
+        } catch (ModelNotFoundException $ex) {
+            return Response::json([
+                'Speciality was not found',
+            ], 305);
+        }
+
+        return Response::json([
+            'success'  => true,
+            'messages' => [
+                'Speciality successfully updated',
+            ],
+        ], 200);
     }
 
     /**
@@ -107,6 +136,20 @@ class SpecialitiesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $speciality = Speciality::findOrFail($id);
+            $speciality->delete();
+        } catch (ModelNotFoundException $ex) {
+            return Response::json([
+                'Speciality was not found',
+            ], 305);
+        }
+
+        return Response::json([
+            'success'  => true,
+            'messages' => [
+                'Speciality successfully deleted',
+            ],
+        ], 200);
     }
 }

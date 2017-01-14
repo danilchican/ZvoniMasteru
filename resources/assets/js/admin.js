@@ -24,7 +24,9 @@ window.toastr.options = {
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
-Vue.component('service', require('./components/admin/services/ServiceComponent.vue'));
+Vue.component('services', require('./components/admin/services/ServiceComponent.vue'));
+
+Vue.component('specialities', require('./components/admin/specialities/SpecialityComponent.vue'));
 
 const app = new Vue({
     el: '#app'
