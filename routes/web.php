@@ -22,15 +22,19 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', 'Admin\HomeController@index')->name('admin.index');
 
+    Route::get('/services/get/{count?}', 'Admin\ServicesController@getServices');
+    Route::get('/specialities/get/{count?}', 'Admin\SpecialitiesController@getSpecialities');
+
     Route::resource('companies', 'Admin\CompaniesController', [
         'as' => 'admin',
     ]);
     Route::resource('tariffs', 'Admin\TariffsController', [
         'as' => 'admin',
     ]);
-
-    Route::get('/services/get/{count?}', 'Admin\ServicesController@getServices');
     Route::resource('services', 'Admin\ServicesController', [
+        'as' => 'admin',
+    ]);
+    Route::resource('specialities', 'Admin\SpecialitiesController', [
         'as' => 'admin',
     ]);
 });
