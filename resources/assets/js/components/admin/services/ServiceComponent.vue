@@ -31,7 +31,7 @@
             </div>
         </div><!-- /.col -->
         <div class="col-xs-6">
-            <create-service @serviceCreated="updateList(count)"></create-service>
+            <create-service @serviceCreated="updateList(getCount())"></create-service>
         </div>
         <!-- Edit Service Modal -->
         <div class="modal fade" id="editServiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -131,7 +131,7 @@
              * @param count
              */
             handleShowMoreBtn (count) {
-                this.canShowMore = (this.count < count) ? false : true;
+                this.canShowMore = (this.getCount() < count) ? false : true;
             },
 
             /**
@@ -211,7 +211,7 @@
                 if(this.isDisabled())
                     return;
 
-                var count = this.count + this.step;
+                var count = this.getCount() + this.step;
 
                 this.setDisable();
 
@@ -227,7 +227,7 @@
                 if(this.isDisabled())
                     return;
 
-                var count = this.count + this.step;
+                var count = this.getCount() + this.step;
 
                 this.setDisable();
 
@@ -243,8 +243,10 @@
                 if(this.isDisabled())
                     return;
 
-                this.setDisable();
+                console.log(count);
 
+                this.setDisable();
+                count = (count < 5) ? 5 : count;
                 this.$http.get('/admin/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
@@ -257,7 +259,7 @@
              */
             removeFromList() {
                 this.setCount(this.list.length);
-                this.updateList(this.count);
+                this.updateList(this.getCount());
             }
         },
 
