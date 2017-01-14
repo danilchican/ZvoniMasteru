@@ -15,7 +15,7 @@ class CreateSpecialitiesTable extends Migration
     {
         Schema::create('specialities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('title');
             $table->string('slug')->nullable();
             $table->text('desc')->nullable();
         });
