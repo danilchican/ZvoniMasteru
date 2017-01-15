@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
-class CategoriesController extends Controller
+class CategoriesController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,14 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $titlePage = 'Categories';
+
+        $parents = Category::get();
+        $categories = $parents->toTree();
+
+        return view('admin.categories.index')->with(compact([
+            'categories', 'parents', 'titlePage',
+        ]));
     }
 
     /**
