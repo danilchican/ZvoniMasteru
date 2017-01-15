@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('slug')->nullable();
             $table->text('desc')->nullable();
+            $table->string('thumbnail_url')->nullable();
             NestedSet::columns($table);
             $table->timestamps();
             $table->index(['_lft', '_rgt', 'parent_id', 'slug']);
