@@ -23,19 +23,7 @@
         any tariff by clicking on buttons.</p>" !!}
     </div>
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            {{ session('error') }}
-        </div>
-    @endif
+    @include('admin.partials.errors')
 
     <div class="col-xs-12" style="margin-bottom: 15px;">
         <div class="row">
