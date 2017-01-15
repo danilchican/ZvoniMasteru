@@ -64,13 +64,8 @@
                     <li @if(Request::is('admin/services*')) class="active" @endif><a href="{{ route('admin.services.index') }}"><i class="fa fa-circle-o"></i> Services</a></li>
                 </ul>
             </li>
-            {{--
-            <li>
-                <a href="/adminpanel/news"><i class="fa fa-file-text-o"></i> <span>News</span></a>
-            </li>
-            --}}
-            <li>
-                <a href=""><i class="fa fa-list-ul"></i> <span>Categories</span></a>
+            <li @if(Request::is('admin/categories')) class="active" @endif>
+                <a href="{{ route('admin.categories.index') }}"><i class="fa fa-list-ul"></i> <span>Categories</span></a>
             </li>
             <li @if(Request::is('admin/specialities')) class="active" @endif>
                 <a href="{{ route('admin.specialities.index') }}"><i class="fa fa-list-ul"></i> <span>Specialities</span></a>
