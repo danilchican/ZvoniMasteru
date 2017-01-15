@@ -38,4 +38,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'admin'], function (
     Route::resource('specialities', 'Admin\SpecialitiesController', [
         'as' => 'admin',
     ]);
+    Route::resource('categories', 'Admin\CategoriesController', [
+        'as' => 'admin',
+    ]);
 });
