@@ -54,8 +54,10 @@ class CategoriesController extends AdminController
         $category = new Category($request->only(['name', 'slug', 'desc']));
         $category->setParentCategory($request->input('parent'));
 
-        $path = ImageController::saveCategoryThumbnail($thumbnail);
-        $category->setThumbnailPath($path);
+        if($thumbnail !== null) {
+            $path = ImageController::saveCategoryThumbnail($thumbnail);
+            $category->setThumbnailPath($path);
+        }
 
         $category->save();
 
