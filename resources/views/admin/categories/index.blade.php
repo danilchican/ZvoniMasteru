@@ -100,6 +100,15 @@
     <script>
         $('document').ready(function() {
             $(".spoiler").spoiler();
+            $(".spoiler").on('click', function () {
+                if($(this).hasClass('spoiler-active')) {
+                    $(this).removeClass('fa-plus');
+                    $(this).addClass('fa-minus');
+                } else {
+                    $(this).addClass('fa-plus');
+                    $(this).removeClass('fa-minus');
+                }
+            });
         });
     </script>
 @endsection
