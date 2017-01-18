@@ -9,6 +9,8 @@ class Category extends Model
 {
     use NodeTrait;
 
+    const DEFAULT_THUMBNAIL = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjcwIiB5PSI3MCIgc3R5bGU9ImZpbGw6I2FhYTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjE0MHgxNDA8L3RleHQ+PC9zdmc+';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +23,7 @@ class Category extends Model
     /**
      * Set parent id for current category.
      *
-     * @param null $parent_id
+     * @param null $parent_id |int
      */
     public function setParentCategory($parent_id = null)
     {
@@ -31,10 +33,44 @@ class Category extends Model
     /**
      * Set thumbnail url for a category.
      *
-     * @param $path|string
+     * @param $path |string
      */
     public function setThumbnailPath($path)
     {
         $this->thumbnail_url = $path;
+    }
+
+    /**
+     * Check if the category has thumbnail
+     *
+     * @return bool
+     */
+    public function hasThumbnail()
+    {
+        return ($this->getThumbnailPath() !== null);
+    }
+
+    /**
+     * Get the thumbnail URL of the category.
+     *
+     * @return mixed|string
+     */
+    public function getThumbnailURL()
+    {
+        if ($this->hasThumbnail()) {
+            return $this->getThumbnailPath();
+        }
+
+        return self::DEFAULT_THUMBNAIL;
+    }
+
+    /**
+     * Get thumbnail path of the category.
+     *
+     * @return mixed|string
+     */
+    public function getThumbnailPath()
+    {
+        return $this->thumbnail_url;
     }
 }

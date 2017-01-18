@@ -10,6 +10,12 @@ use App\Http\Controllers\Controller;
 
 class ImageController extends Controller
 {
+    /**
+     * Save the category thumbnail to storage.
+     *
+     * @param $thumbnail
+     * @return string
+     */
     public static function saveCategoryThumbnail($thumbnail)
     {
         $image = Image::make($thumbnail)->resize(300, null, function ($constraint) {
@@ -27,5 +33,16 @@ class ImageController extends Controller
         $image->save($_path.'/'.$image_name);
 
         return $_path.'/'.$image_name;
+    }
+
+    /**
+     * Remove the category thumbnail.
+     *
+     * @param $path
+     * @return mixed|boolean
+     */
+    public static function removeCategoryThumbnail($path)
+    {
+        return File::delete($path);
     }
 }

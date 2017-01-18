@@ -107,6 +107,10 @@ class CategoriesController extends AdminController
     {
         try {
             $category = Category::findOrFail($id);
+            $path = $category->getThumbnailPath();
+
+            ImageController::removeCategoryThumbnail($path);
+
             $category->delete();
         } catch (ModelNotFoundException $ex) {
             return redirect()->back()
