@@ -1,6 +1,6 @@
-<div class="spoiler category" data-spoiler-link="{{ $category->id }}">
+<div class="category">
     @if($count = $category->getDescendantCount() > 0)
-        <i class="fa fa-plus left-ico" aria-hidden="true"></i>
+        <i class="fa fa-plus left-ico spoiler" data-spoiler-link="{{ $category->id }}" aria-hidden="true"></i>
     @endif
     <b>{{ $category->name }}</b>
     <div class="pull-right" style="margin-top: -2px;">

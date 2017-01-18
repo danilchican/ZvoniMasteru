@@ -11,14 +11,22 @@
             padding: 5px 12px;
             margin: 3px 10px;
             border-radius: 2px;
-            cursor: pointer;
             border: 1px solid #d2d6de;
+        }
+        .category i {
+            cursor: pointer;
+        }
+        .spoiler-content {
+            display: none;
+        }
+        .spoiler-content-visible {
+            display: block;
         }
         .pull-right {
             float: right;
         }
         .categories-table {
-            padding-bottom: 6px!important;
+            padding: 0 0 7px 0!important;
         }
     </style>
 @endsection
@@ -69,7 +77,7 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body table-responsive no-padding categories-table">
+                <div class="box-body table-responsive categories-table">
                     @if(count($categories) < 1)
                         <h4 style="padding-left: 8px">Категорий пока нет.</h4>
                     @else
@@ -83,9 +91,6 @@
             <!-- /.box -->
         </div>
     </div>
-
-    @include('admin.categories.edit')
-
 </section><!-- /.content -->
 @endsection
 
@@ -95,13 +100,6 @@
     <script>
         $('document').ready(function() {
             $(".spoiler").spoiler();
-            $(".parent-select").select2({
-                placeholder: "Выберите категорию...",
-                allowClear: true
-            });
-            $('#edit-cat-modal').modal({
-                show : false
-            });
         });
     </script>
 @endsection
