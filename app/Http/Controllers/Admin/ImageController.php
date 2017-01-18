@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Intervention\Image\ImageManagerStatic as Image;
-use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ImageController extends Controller
 {
@@ -14,6 +13,7 @@ class ImageController extends Controller
      * Save the category thumbnail to storage.
      *
      * @param $thumbnail
+     *
      * @return string
      */
     public static function saveCategoryThumbnail($thumbnail)
@@ -26,7 +26,7 @@ class ImageController extends Controller
 
         $_path = 'uploads/'.Carbon::now()->year.'/'.Carbon::now()->month;
 
-        if(!File::exists(public_path($_path))) {
+        if (!File::exists(public_path($_path))) {
             File::makeDirectory(public_path($_path), 775, true);
         }
 
@@ -39,7 +39,8 @@ class ImageController extends Controller
      * Remove the category thumbnail.
      *
      * @param $path
-     * @return mixed|boolean
+     *
+     * @return mixed|bool
      */
     public static function removeCategoryThumbnail($path)
     {

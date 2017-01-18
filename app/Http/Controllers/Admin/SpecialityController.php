@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateSpecialityRequest;
 use App\Models\Speciality;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class SpecialityController extends Controller
 {
@@ -20,7 +20,7 @@ class SpecialityController extends Controller
      * Get the services for tariffs.
      *
      * @param Request $request
-     * @param null $count
+     * @param null    $count
      *
      * @return mixed
      */
@@ -37,6 +37,7 @@ class SpecialityController extends Controller
      * Search specialities by keywords.
      *
      * @param Request $request
+     *
      * @return mixed
      */
     public function search(Request $request)
@@ -55,8 +56,8 @@ class SpecialityController extends Controller
             }
 
             return Response::json([
-                'success' => true,
-                'messages' => [$message],
+                'success'      => true,
+                'messages'     => [$message],
                 'specialities' => $specialities,
             ], $code);
         }
@@ -70,8 +71,8 @@ class SpecialityController extends Controller
         }
 
         return Response::json([
-            'success' => true,
-            'messages' => [$message],
+            'success'      => true,
+            'messages'     => [$message],
             'specialities' => $specialities,
         ], $code);
     }
@@ -93,7 +94,8 @@ class SpecialityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\CreateSpecialityRequest $request
+     * @param \App\Http\Requests\Admin\CreateSpecialityRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CreateSpecialityRequest $request)
@@ -107,9 +109,9 @@ class SpecialityController extends Controller
         }
 
         return Response::json([
-            'success' => true,
+            'success'    => true,
             'speciality' => $speciality,
-            'messages' => [
+            'messages'   => [
                 'Speciality created successfully.',
             ],
         ], 200);
@@ -118,8 +120,9 @@ class SpecialityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\CreateSpecialityRequest $request
-     * @param  int $id
+     * @param \App\Http\Requests\Admin\CreateSpecialityRequest $request
+     * @param int                                              $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(CreateSpecialityRequest $request, $id)
@@ -134,7 +137,7 @@ class SpecialityController extends Controller
         }
 
         return Response::json([
-            'success' => true,
+            'success'  => true,
             'messages' => [
                 'Speciality successfully updated',
             ],
@@ -144,7 +147,8 @@ class SpecialityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -159,7 +163,7 @@ class SpecialityController extends Controller
         }
 
         return Response::json([
-            'success' => true,
+            'success'  => true,
             'messages' => [
                 'Speciality successfully deleted',
             ],

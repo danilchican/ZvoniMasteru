@@ -24,11 +24,11 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:80|unique:categories',
-            'slug' => 'required|min:3|max:80|alpha_dash|unique:categories',
-            'desc' => '',
-            'parent' => 'integer|exists:categories,id',
-            'thumbnail' => 'image|max:5000'
+            'name'      => 'required|min:3|max:80|unique:categories',
+            'slug'      => 'required|min:3|max:80|alpha_dash|unique:categories',
+            'desc'      => '',
+            'parent'    => 'integer|exists:categories,id',
+            'thumbnail' => 'image|max:5000',
         ];
     }
 }
