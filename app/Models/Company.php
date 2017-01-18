@@ -94,7 +94,7 @@ class Company extends Model
     /**
      * Get the name of the company owner.
      *
-     * @return mixed
+     * @return mixed|string
      */
     public function getName()
     {
@@ -103,5 +103,35 @@ class Company extends Model
         }
 
         return $this->name;
+    }
+
+    /**
+     * Get the description of the company.
+     *
+     * @return mixed|string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Get the UNP number of the company.
+     *
+     * @return mixed|string
+     */
+    public function getUNPNumber()
+    {
+        return $this->unp_number;
+    }
+
+    /**
+     * Get status of the company.
+     *
+     * @return mixed|string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

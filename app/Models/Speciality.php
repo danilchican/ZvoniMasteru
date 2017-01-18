@@ -30,6 +30,36 @@ class Speciality extends Model
     ];
 
     /**
+     * Get title of the speciality.
+     *
+     * @return mixed|string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Get slug of the speciality.
+     *
+     * @return mixed|string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Get description of the speciality.
+     *
+     * @return mixed|string
+     */
+    public function getDescription()
+    {
+        return $this->desc;
+    }
+
+    /**
      * Search specialities by keywords.
      *
      * @param $query

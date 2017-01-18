@@ -25,7 +25,9 @@ class Price extends Model
      *
      * @var array
      */
-    protected $fillable = ['tariff_id', 'price', 'range'];
+    protected $fillable = [
+        'tariff_id', 'price', 'range'
+    ];
 
     /**
      * Get the range of the price.
