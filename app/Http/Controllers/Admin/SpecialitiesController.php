@@ -6,6 +6,7 @@ use App\Http\Requests\Admin\CreateSpecialityRequest;
 use App\Models\Speciality;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\Controller;
 
 class SpecialitiesController extends Controller

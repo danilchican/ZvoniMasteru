@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CreateCategoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Category;
 
 class CategoriesController extends AdminController
@@ -104,6 +105,15 @@ class CategoriesController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        try {
+            $category = Category::findOrFail($id);
+            $category->delete();
+        } catch (ModelNotFoundException $ex) {
+            return redirect()->back()
+                ->with(['error' => 'Category has not been found.']);
+        }
+
+        return redirect()->back()
+            ->with(['success' => 'Category successfully deleted.']);
     }
 }

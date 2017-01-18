@@ -3,9 +3,15 @@
         <i class="fa fa-plus left-ico" aria-hidden="true"></i>
     @endif
     <b>{{ $category->name }}</b>
-    <div class="pull-right">
-        <i class="fa fa-pencil edit-cat" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit" data-toggle="modal" data-target="#edit-cat-modal"></i>
-        <i class="fa fa-times del-cat" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete"></i>
+    <div class="pull-right" style="margin-top: -2px;">
+        <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-default btn-xs">
+            <i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit"></i>
+        </a>
+        {!! Form::open(['route' => ['admin.categories.destroy', $category->id], 'method' => 'delete', null, 'style' => 'display: inline;']) !!}
+        <button type="submit" class="btn btn-danger btn-xs">
+            <i class="fa fa-times" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Delete"></i>
+        </button>
+        {!! Form::close() !!}
     </div>
 </div>
 @if($count > 0)
