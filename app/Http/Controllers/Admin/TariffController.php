@@ -8,7 +8,7 @@ use App\Models\Tariff;
 use App\Models\Price;
 use Illuminate\Http\Request;
 
-class TariffsController extends AdminController
+class TariffController extends AdminController
 {
 
     /**

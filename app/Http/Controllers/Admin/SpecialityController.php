@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\Controller;
 
-class SpecialitiesController extends Controller
+class SpecialityController extends Controller
 {
     /**
      * Variable to limit specialities to display.

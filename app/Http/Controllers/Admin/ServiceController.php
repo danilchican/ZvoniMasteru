@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-class ServicesController extends AdminController
+class ServiceController extends AdminController
 {
     /**
      * Variable to limit orders to display.

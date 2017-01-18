@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Category;
 
-class CategoriesController extends AdminController
+class CategoryController extends AdminController
 {
     /**
      * Display a listing of the category.
