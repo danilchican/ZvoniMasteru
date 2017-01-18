@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CreateCategoryRequest;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class CategoryController extends AdminController
 {
@@ -46,6 +46,7 @@ class CategoryController extends AdminController
      * Store a newly created resource in storage.
      *
      * @param CreateCategoryRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateCategoryRequest $request)
@@ -54,7 +55,7 @@ class CategoryController extends AdminController
         $category = new Category($request->only(['name', 'slug', 'desc']));
         $category->setParentCategory($request->input('parent'));
 
-        if($thumbnail !== null) {
+        if ($thumbnail !== null) {
             $path = ImageController::saveCategoryThumbnail($thumbnail);
             $category->setThumbnailPath($path);
         }
@@ -68,7 +69,8 @@ class CategoryController extends AdminController
     /**
      * Display the category.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -79,7 +81,8 @@ class CategoryController extends AdminController
     /**
      * Show the form for editing the category.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -90,8 +93,9 @@ class CategoryController extends AdminController
     /**
      * Update the category in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -102,7 +106,8 @@ class CategoryController extends AdminController
     /**
      * Remove the category from storage.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

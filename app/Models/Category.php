@@ -41,13 +41,13 @@ class Category extends Model
     }
 
     /**
-     * Check if the category has thumbnail
+     * Check if the category has thumbnail.
      *
      * @return bool
      */
     public function hasThumbnail()
     {
-        return ($this->getThumbnailPath() !== null);
+        return $this->getThumbnailPath() !== null;
     }
 
     /**

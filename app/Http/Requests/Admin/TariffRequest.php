@@ -24,14 +24,14 @@ class TariffRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:80',
-            'whom' => 'required',
-            'top' => 'required|integer',
-            'prices' => 'required|array',
-            'prices.*' => 'required|numeric',
-            'services' => 'required|array',
+            'title'      => 'required|min:3|max:80',
+            'whom'       => 'required',
+            'top'        => 'required|integer',
+            'prices'     => 'required|array',
+            'prices.*'   => 'required|numeric',
+            'services'   => 'required|array',
             'services.*' => 'integer|exists:tariff_services,id',
-            'ranges' => 'required|array'
+            'ranges'     => 'required|array',
         ];
     }
 }

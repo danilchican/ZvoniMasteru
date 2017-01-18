@@ -25,8 +25,8 @@ class CreateSpecialityRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3|max:80',
-            'slug' => 'required|min:3|max:10|alpha_dash',
-            'desc' => 'required|min:3|max:255',
+            'slug'  => 'required|min:3|max:10|alpha_dash',
+            'desc'  => 'required|min:3|max:255',
         ];
     }
 }

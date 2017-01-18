@@ -34,12 +34,13 @@ class Speciality extends Model
      *
      * @param $query
      * @param $keywords
+     *
      * @return mixed
      */
     public function scopeSearchByKeywords($query, $keywords)
     {
         $query->where(function ($query) use ($keywords) {
-            $query->where('title', 'LIKE',"%$keywords%")
+            $query->where('title', 'LIKE', "%$keywords%")
                 ->orWhere('slug', 'LIKE', "%$keywords%")
                 ->orWhere('desc', 'LIKE', "%$keywords%");
         });

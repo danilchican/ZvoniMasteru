@@ -27,7 +27,6 @@ class Service extends Model
      */
     protected $fillable = ['title'];
 
-
     /**
      * Get the title of the service.
      *
