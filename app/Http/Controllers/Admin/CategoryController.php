@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Admin\CreateCategoryRequest;
+use App\Http\Requests\Admin\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -35,10 +36,10 @@ class CategoryController extends AdminController
     {
         $titlePage = 'Create Category';
 
-        $parentsCategories = Category::all();
+        $parentCategories = Category::all();
 
         return view('admin.categories.create')->with(compact([
-            'titlePage', 'parentsCategories',
+            'titlePage', 'parentCategories',
         ]));
     }
 
@@ -87,20 +88,48 @@ class CategoryController extends AdminController
      */
     public function edit($id)
     {
-        //
+        $titlePage = 'Edit Category';
+        $category = Category::find($id);
+
+        $parentCategories = Category::where('id', '!=', $category->id)->get();
+
+        if (!$category) {
+            return redirect()->back()
+                ->with(['error' => 'Category has not been found.']);
+        }
+
+        return view('admin.categories.edit')->with(compact([
+            'titlePage', 'category', 'parentCategories',
+        ]));
     }
 
     /**
      * Update the category in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param UpdateCategoryRequest $request
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
-        //
+        $thumbnail = $request->file('thumbnail');
+        $category = Category::find($id);
+        $category->setParentCategory($request->input('parent'));
+
+        if ($thumbnail !== null) {
+            $old_path = $category->getThumbnailPath();
+            ImageController::removeCategoryThumbnail($old_path);
+
+            $path = ImageController::saveCategoryThumbnail($thumbnail);
+            $category->setThumbnailPath($path);
+        }
+
+        $category->fill($request->only(['name', 'slug', 'desc']));
+        $category->save();
+
+        return redirect()->route('admin.categories.index')
+            ->with(['success' => 'Category successfully updated.']);
     }
 
     /**

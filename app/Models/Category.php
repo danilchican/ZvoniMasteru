@@ -58,7 +58,7 @@ class Category extends Model
     public function getThumbnailURL()
     {
         if ($this->hasThumbnail()) {
-            return $this->getThumbnailPath();
+            return '/'.$this->getThumbnailPath();
         }
 
         return self::DEFAULT_THUMBNAIL;
@@ -102,5 +102,15 @@ class Category extends Model
     public function getDescription()
     {
         return $this->desc;
+    }
+
+    /**
+     * Get parent category id.
+     *
+     * @return mixed|int
+     */
+    public function getParentCategoryID()
+    {
+        return $this->parent_id;
     }
 }

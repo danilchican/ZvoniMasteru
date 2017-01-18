@@ -63,7 +63,7 @@
                                         <label for="parent">Дочерняя категория</label>
                                         <select name="parent" class="form-control select2 select2-hidden-accessible parent-category-select" data-placeholder="Select a Сategory" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                             <option></option>
-                                            @foreach($parentsCategories as $category)
+                                            @foreach($parentCategories as $category)
                                                 <option value="{{ $category->id }}" {{ (old('parent') == $category->id) ? 'selected' :'' }}>{{ $category->name }}</option>
                                             @endforeach
                                         </select>
@@ -82,7 +82,6 @@
                                         <label for="thumbnail">Изображение категории</label>
                                         {!! Form::file('thumbnail') !!}
                                     </div>
-                                </button>
                                 </div>
                             </div>
                             <div class="row">

@@ -52,3 +52,9 @@ Breadcrumbs::register('admin.categories.create', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.categories');
     $breadcrumbs->push('Create Category', route('admin.categories.create'));
 });
+
+// Dashboard > Categories > Edit Category
+Breadcrumbs::register('admin.categories.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.categories');
+    $breadcrumbs->push('Edit Category');
+});
