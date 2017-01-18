@@ -73,4 +73,34 @@ class Category extends Model
     {
         return $this->thumbnail_url;
     }
+
+    /**
+     * Get the name of the category.
+     *
+     * @return mixed|string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get the slug.
+     *
+     * @return mixed|string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Get the description.
+     *
+     * @return mixed|string
+     */
+    public function getDescription()
+    {
+        return $this->desc;
+    }
 }

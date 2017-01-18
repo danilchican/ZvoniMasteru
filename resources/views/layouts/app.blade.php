@@ -55,7 +55,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    @if(Auth::user()->isAdministrator())
+                                    @if(Auth::user()->hasRole('admin'))
                                         <li><a href="{{ route('admin.index') }}">Админ-панель</a></li>
                                     @endif
                                     <li><a href="{{ route('home') }}">Личный кабинет</a></li>
