@@ -27,7 +27,7 @@
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li @if(Request::is('admin')) class="active" @endif>
-                <a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> <span>Admin-panel</span></a>
+                <a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
             </li>
             <li @if(Request::is('admin/companies')) class="active" @endif>
                 <a href="{{ route('admin.companies.index') }}"><i class="fa fa-user"></i><span>Companies</span>

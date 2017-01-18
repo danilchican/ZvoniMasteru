@@ -6,5 +6,5 @@ use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-    protected $titlePage = 'Admin Dashboard';
+    protected $titlePage = 'Dashboard';
 }
