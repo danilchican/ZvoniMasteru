@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Admin\CreateCategoryRequest;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 
 class CategoriesController extends AdminController
@@ -32,18 +32,34 @@ class CategoriesController extends AdminController
      */
     public function create()
     {
-        //
+        $titlePage = 'Create Category';
+
+        $parentsCategories = Category::all();
+
+        return view('admin.categories.create')->with(compact([
+            'titlePage', 'parentsCategories',
+        ]));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateCategoryRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        //
+        $thumbnail = $request->file('thumbnail');
+        $category = new Category($request->only(['name', 'slug', 'desc']));
+        $category->setParentCategory($request->input('parent'));
+
+        $path = ImageController::saveCategoryThumbnail($thumbnail);
+        $category->setThumbnailPath($path);
+
+        $category->save();
+
+        return redirect()->route('admin.categories.index')
+            ->with(['success' => 'Category successfully created.']);
     }
 
     /**

@@ -74,7 +74,7 @@
                         <h4 style="padding-left: 8px">Категорий пока нет.</h4>
                     @else
                         @foreach ($categories as $category)
-                            @include('admin.categories.category', ['category' => $category, 'dep' => '-'])
+                            @include('admin.categories.show', ['category' => $category, 'dep' => '-'])
                         @endforeach
                     @endif
                 </div>

@@ -40,3 +40,15 @@ Breadcrumbs::register('admin.specialities', function ($breadcrumbs) {
     $breadcrumbs->parent('admin');
     $breadcrumbs->push('Specialities', route('admin.specialities.index'));
 });
+
+// Dashboard > Categories
+Breadcrumbs::register('admin.categories', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin');
+    $breadcrumbs->push('Categories', route('admin.categories.index'));
+});
+
+// Dashboard > Categories > Create Category
+Breadcrumbs::register('admin.categories.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.categories');
+    $breadcrumbs->push('Create Category', route('admin.categories.create'));
+});

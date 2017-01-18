@@ -28,14 +28,15 @@
         <!-- Info boxes -->
         <div class="callout callout-info">
             <h4>About this page!</h4>
-            {!! $about or "<p>This page has been created for control of all categories. You can create a new category.</p>" !!}
+            {!! $about or "<p>This page has been created for control of all categories. You can create, delete and edit
+            any category by clicking on buttons.</p>" !!}
         </div>
 
         @include('admin.partials.errors')
 
         <div class="col-xs-12">
             <div class="row">
-                {!! Form::open(['route' => 'admin.tariffs.store']) !!}
+                {!! Form::open(['route' => 'admin.categories.store', 'files' => 'true']) !!}
                 <div class="box box-primary create-tariff">
                     <div class="box-header with-border">
                         <i class="fa fa-edit"></i>
@@ -45,110 +46,52 @@
                     <div class="box-body">
                         <div class="col-xs-12">
                             <div class="row">
-                                <div class="col-xs-6" style="padding-left:0;">
+                                <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label for="name">Название тарифа</label>
-                                        <input type="text" value="{{ old('title') }}" class="form-control" name="title" placeholder="Введите название тарифа">
+                                        <label for="name">Название категории</label>
+                                        <input type="text" value="{{ old('name') }}" class="form-control" name="name" placeholder="Введите название категории">
                                     </div>
                                 </div>
-                                <div class="col-xs-6" style="padding-right:0;">
+                                <div class="col-xs-4">
                                     <div class="form-group">
-                                        <label for="slug">Топ</label>
-                                        <input type="number" value="{{ ($old = old('top')) ? $old : 0 }}" min="0" class="form-control" name="top">
+                                        <label for="slug">Ссылка</label>
+                                        <input type="text" value="{{ ($old = old('slug')) ? $old : '' }}" class="form-control" name="slug" placeholder="Название на латинице">
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label for="parent">Дочерняя категория</label>
+                                        <select name="parent" class="form-control select2 select2-hidden-accessible parent-category-select" data-placeholder="Select a Сategory" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option></option>
+                                            @foreach($parentsCategories as $category)
+                                                <option value="{{ $category->id }}" {{ (old('parent') == $category->id) ? 'selected' :'' }}>{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12">
                             <div class="row">
-                                <div class="col-xs-6" style="padding-left:0;">
+                                <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label for="desc">Для кого</label>
-                                        <input type="text" class="form-control" value="{{ old('whom') }}" name="whom" placeholder="Для малого бизнеса">
+                                        <label for="desc">Описание категории</label>
+                                        <textarea class="form-control" value="{{ ($old = old('desc')) ? $old : '' }}" name="desc" rows="10"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-xs-6" style="padding-right:0;">
+                                <div class="col-xs-6">
                                     <div class="form-group">
-                                        <label for="desc">Доп. услуга</label>
-                                        <input type="text" class="form-control" value="{{ old('additional_service') }}" name="additional_service" placeholder="Наполнение карточки">
+                                        <label for="thumbnail">Изображение категории</label>
+                                        {!! Form::file('thumbnail') !!}
                                     </div>
+                                </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="submit" class="btn btn-primary save-button">Save</button>
                                 </div>
                             </div>
                         </div>
                     </div><!-- /.box-body -->
-                </div>
-
-                <div class="col-xs-6">
-                    <div class="box box-success">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Prices</h3>
-                        </div>
-                        <div class="box-body">
-                            <div id="prices">
-                                <div class="col-xs-12 price-item">
-                                    <div class="row">
-                                        <div class="col-xs-6" style="padding-left:0;">
-                                            <label for="desc">Price <i class="fa fa-fw fa-remove remove-price-btn"></i></label>
-                                            <div class="input-group">
-                                                <input type="number" class="form-control" step="any" value="0" name="prices[]">
-                                                <span class="input-group-addon">руб.</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6" style="padding-right:0;">
-                                            <div class="form-group">
-                                                <label for="desc">Time</label>
-                                                <input type="text" class="form-control" name="ranges[]" placeholder="1 месяц">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-3">
-                                <div class="row">
-                                    <button type="button" id="add-new-price-btn" style="text-align: left;" class="btn btn-block btn-success">
-                                        <i class="fa fa-fw fa-plus"></i> Add more
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="box box-success">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Services</h3>
-                        </div>
-                        <div class="box-body">
-                            @if(count($services) > 0)
-                                <div class="form-group">
-                                    <select name="services[]" multiple="multiple" class="form-control select2 select2-hidden-accessible services-select" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        @foreach($services as $service)
-                                            <option value="{{ $service->id }}" {{ ( old('services') ? in_array($service->id, old('services')) : false) ? 'selected' :'' }}>{{ $service->title }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @else
-                                <span>Услуг пока нет.</span>
-                            @endif
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="published">Published
-                                <select name="published">
-                                    <option value="1">Да</option>
-                                    <option value="0">Нет</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <button type="submit" class="btn btn-primary save-button">Save</button>
-                    </div>
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -159,38 +102,10 @@
 @section('javascripts')
     <script src="/js/admin/select2.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $(".services-select").select2({
-                placeholder: "Выберите услуги...",
+        $('document').ready(function() {
+            $(".parent-category-select").select2({
                 allowClear: true
             });
-
-            var add_price_btn = $('#add-new-price-btn');
-            var prices_block = $('#prices');
-            var new_price_block   = '';
-
-            new_price_block = '<div class=\"col-xs-12 price-item\">'
-                + '<div class=\"row\">'
-                + '<div class=\"col-xs-6\" style=\"padding-left:0;\">'
-                + '<label for=\"desc\">Price <i class=\"fa fa-fw fa-remove remove-price-btn\"></i></label>'
-                + '<div class=\"input-group\">'
-                + '<input type=\"number\" class=\"form-control\" step=\"any\" value=\"0\" name=\"prices[]\">'
-                + '<span class=\"input-group-addon\">руб.</span>'
-                + '</div></div>'
-                + '<div class=\"col-xs-6\" style=\"padding-right:0;\">'
-                + '<div class=\"form-group\">'
-                + '<label for=\"desc\">Time</label>'
-                + '<input type=\"text\" class=\"form-control\" name=\"ranges[]\" placeholder=\"1 месяц\">'
-                + '</div></div></div></div>';
-
-            add_price_btn.on('click', function () {
-                prices_block.append(new_price_block);
-            });
-
-            $('.content').on("click", ".remove-price-btn",  function () {
-                this.closest('.price-item').remove();
-            });
-
         });
     </script>
 @endsection

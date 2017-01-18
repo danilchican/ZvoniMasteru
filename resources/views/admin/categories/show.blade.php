@@ -11,7 +11,7 @@
 @if($count > 0)
     <div class="spoiler-content" data-spoiler-link="{{ $category->id }}">
         @foreach ($category->children as $child)
-            @include('admin.categories.category', ['category' => $child, 'dep' => $dep.'-'])
+            @include('admin.categories.show', ['category' => $child, 'dep' => $dep.'-'])
         @endforeach
     </div>
 @endif

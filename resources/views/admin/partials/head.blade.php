@@ -8,7 +8,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="/css/admin/admin-styles.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,6 +20,7 @@
         ]); ?>
     </script>
     @yield('styles')
+    <link rel="stylesheet" href="/css/admin/admin-styles.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper" id="app">
