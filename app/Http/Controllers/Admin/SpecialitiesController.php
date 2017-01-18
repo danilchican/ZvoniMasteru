@@ -20,7 +20,7 @@ class SpecialitiesController extends Controller
      * Get the services for tariffs.
      *
      * @param Request $request
-     * @param null    $count
+     * @param null $count
      *
      * @return mixed
      */
@@ -46,17 +46,17 @@ class SpecialitiesController extends Controller
         $message = 'Some specialities founded.';
         $code = 200;
 
-        if($keywords !== null) {
+        if ($keywords !== null) {
             $specialities = Speciality::searchByKeywords($keywords)->get();
 
-            if($specialities->isEmpty()) {
+            if ($specialities->isEmpty()) {
                 $message = 'Can\'t found any speciality.';
                 $code = 305;
             }
 
             return Response::json([
-                'success'  => true,
-                'messages' => [ $message ],
+                'success' => true,
+                'messages' => [$message],
                 'specialities' => $specialities,
             ], $code);
         }
@@ -64,14 +64,14 @@ class SpecialitiesController extends Controller
         $specialities = Speciality::limit(self::LIMIT_SPECIALITIES_TO_DISPLAY)
             ->orderBy('id', 'desc')->get();
 
-        if($specialities->isEmpty()) {
+        if ($specialities->isEmpty()) {
             $message = 'Can\'t found any speciality.';
             $code = 305;
         }
 
         return Response::json([
-            'success'  => true,
-            'messages' => [ $message ],
+            'success' => true,
+            'messages' => [$message],
             'specialities' => $specialities,
         ], $code);
     }
@@ -93,7 +93,7 @@ class SpecialitiesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\CreateSpecialityRequest  $request
+     * @param  \App\Http\Requests\Admin\CreateSpecialityRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateSpecialityRequest $request)
@@ -107,8 +107,8 @@ class SpecialitiesController extends Controller
         }
 
         return Response::json([
-            'success'  => true,
-            'speciality'  => $speciality,
+            'success' => true,
+            'speciality' => $speciality,
             'messages' => [
                 'Speciality created successfully.',
             ],
@@ -118,8 +118,8 @@ class SpecialitiesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\CreateSpecialityRequest  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Admin\CreateSpecialityRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(CreateSpecialityRequest $request, $id)
@@ -134,7 +134,7 @@ class SpecialitiesController extends Controller
         }
 
         return Response::json([
-            'success'  => true,
+            'success' => true,
             'messages' => [
                 'Speciality successfully updated',
             ],
@@ -144,7 +144,7 @@ class SpecialitiesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -159,7 +159,7 @@ class SpecialitiesController extends Controller
         }
 
         return Response::json([
-            'success'  => true,
+            'success' => true,
             'messages' => [
                 'Speciality successfully deleted',
             ],

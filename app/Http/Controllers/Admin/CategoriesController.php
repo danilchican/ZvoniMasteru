@@ -10,7 +10,7 @@ use App\Models\Category;
 class CategoriesController extends AdminController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the category.
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,7 +27,7 @@ class CategoriesController extends AdminController
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new category.
      *
      * @return \Illuminate\Http\Response
      */
@@ -64,9 +64,9 @@ class CategoriesController extends AdminController
     }
 
     /**
-     * Display the specified resource.
+     * Display the category.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -75,9 +75,9 @@ class CategoriesController extends AdminController
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the category.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -86,10 +86,10 @@ class CategoriesController extends AdminController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the category in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -98,9 +98,9 @@ class CategoriesController extends AdminController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the category from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
