@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('index');
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'dashboard'], function () {
     Route::get('/', 'Admin\HomeController@index')->name('admin.index');
@@ -29,4 +27,8 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'dashboard'], functi
     Route::resource('services', 'Admin\ServiceController', ['as' => 'admin']);
     Route::resource('specialities', 'Admin\SpecialityController', ['as' => 'admin']);
     Route::resource('categories', 'Admin\CategoryController', ['as' => 'admin']);
+});
+
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function () {
+    Route::get('/', 'Account\AccountController@index')->name('account.index');
 });
