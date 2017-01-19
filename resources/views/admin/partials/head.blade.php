@@ -42,7 +42,7 @@
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/') }}">Back to Site</a></li>
+                        <li><a href="{{ route('home') }}">Back to Site</a></li>
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -253,8 +253,6 @@
                                         <small>Зарегистрирован  {{ LocalizedCarbon::instance(Auth::user()->created_at)->diffForHumans() }}</small>
                                     </p>
                                 </li>
-
-
                                 <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="col-xs-4 text-center">
@@ -270,10 +268,17 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="" class="btn btn-default btn-flat">Мой аккаунт</a>
+                                        <a href="{{ route('account.index') }}" class="btn btn-default btn-flat">Мой аккаунт</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Выйти</a>
+                                        <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-btn fa-sign-out"></i>Выйти
+                                        </a>
+                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
                                     </div>
                                 </li>
                             </ul>

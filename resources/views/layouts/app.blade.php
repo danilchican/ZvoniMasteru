@@ -58,7 +58,7 @@
                                     @if(Auth::user()->hasRole('admin'))
                                         <li><a href="{{ route('admin.index') }}">Админ-панель</a></li>
                                     @endif
-                                    <li><a href="{{ route('home') }}">Личный кабинет</a></li>
+                                    <li><a href="{{ route('account.index') }}">Личный кабинет</a></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
