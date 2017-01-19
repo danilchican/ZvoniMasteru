@@ -177,7 +177,7 @@
              * Update service model.
              */
             updateService() {
-                this.$http.put('/admin/services/' + this.editService.id, this.editService).then((data) => {
+                this.$http.put('/dashboard/services/' + this.editService.id, this.editService).then((data) => {
                     this.updateList(this.getCount());
 
                     if(data.body.success === true) {
@@ -216,7 +216,7 @@
 
                 this.setDisable();
 
-                this.$http.get('/admin/services/get').then((services) => {
+                this.$http.get('/dashboard/services/get').then((services) => {
                     this.processRequest(services, count);
                 });
             },
@@ -232,7 +232,7 @@
 
                 this.setDisable();
 
-                this.$http.get('/admin/services/get/' + count).then((services) => {
+                this.$http.get('/dashboard/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
             },
@@ -257,7 +257,7 @@
 
                 count = (count < this.getCountPerPage()) ? this.getCountPerPage() : count;
 
-                this.$http.get('/admin/services/get/' + count).then((services) => {
+                this.$http.get('/dashboard/services/get/' + count).then((services) => {
                     this.processRequest(services, count);
                 });
             },

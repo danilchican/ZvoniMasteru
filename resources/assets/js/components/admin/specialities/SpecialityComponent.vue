@@ -116,7 +116,7 @@
 
                 this.setDisable();
 
-                this.$http.post('/admin/specialities/search', {keywords: this.keywords}).then((response) => {
+                this.$http.post('/dashboard/specialities/search', {keywords: this.keywords}).then((response) => {
                     if(response.body.success === true) {
                         this.list = response.data.specialities;
                         var messages = response.body.messages;
@@ -236,7 +236,7 @@
              * Update speciality model.
              */
             updateSpeciality() {
-                this.$http.put('/admin/specialities/' + this.editSpeciality.id, this.editSpeciality).then((data) => {
+                this.$http.put('/dashboard/specialities/' + this.editSpeciality.id, this.editSpeciality).then((data) => {
                     this.updateList(this.getCount());
 
                     if(data.body.success === true) {
@@ -275,7 +275,7 @@
 
                 this.setDisable();
 
-                this.$http.get('/admin/specialities/get').then((specialities) => {
+                this.$http.get('/dashboard/specialities/get').then((specialities) => {
                     this.processRequest(specialities, count);
                 });
             },
@@ -291,7 +291,7 @@
 
                 this.setDisable();
 
-                this.$http.get('/admin/specialities/get/' + count).then((specialities) => {
+                this.$http.get('/dashboard/specialities/get/' + count).then((specialities) => {
                     this.processRequest(specialities, count);
                 });
             },
@@ -314,7 +314,7 @@
 
                 count = (count < this.getCountPerPage()) ? this.getCountPerPage() : count;
 
-                this.$http.get('/admin/specialities/get/' + count).then((specialities) => {
+                this.$http.get('/dashboard/specialities/get/' + count).then((specialities) => {
                     this.processRequest(specialities, count);
                 });
             },

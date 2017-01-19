@@ -73,7 +73,7 @@
                     desc: this.desc
                 }
 
-                this.$http.post('/admin/specialities', dataSend)
+                this.$http.post('/dashboard/specialities', dataSend)
                     .then((data) => {
                         // success callback
                         var savedSpeciality = data.body.speciality;

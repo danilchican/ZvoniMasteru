@@ -27,7 +27,6 @@ require('../../../public/js/admin/api_asvae/installer.js');
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
 Vue.component('services', require('./components/admin/services/ServiceComponent.vue'));
-
 Vue.component('specialities', require('./components/admin/specialities/SpecialityComponent.vue'));
 
 const app = new Vue({

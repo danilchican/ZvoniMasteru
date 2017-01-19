@@ -93,7 +93,7 @@
 
                 this.setDisable();
 
-                this.$http.get('/admin/tariffs/get').then((tariffs) => {
+                this.$http.get('/dashboard/tariffs/get').then((tariffs) => {
                     this.processRequest(tariffs, count);
                 });
             },

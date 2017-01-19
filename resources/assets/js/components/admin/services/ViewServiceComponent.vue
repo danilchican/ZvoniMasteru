@@ -26,7 +26,7 @@
              * @param service
              */
             removeService(service) {
-                this.$http.delete('/admin/services/' + service.id).then((data) => {
+                this.$http.delete('/dashboard/services/' + service.id).then((data) => {
                     // success callback
                     if(data.body.success === true) {
                         var messages = data.body.messages;

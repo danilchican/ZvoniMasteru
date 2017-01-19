@@ -58,7 +58,7 @@
 
                 this.setDisable();
 
-                this.$http.post('/admin/services', {title: this.title})
+                this.$http.post('/dashboard/services', {title: this.title})
                     .then((data) => {
                         // success callback
                         var savedService = data.body.service;

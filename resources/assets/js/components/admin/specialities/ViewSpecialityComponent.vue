@@ -27,7 +27,7 @@
              * @param speciality
              */
             removeSpeciality(speciality) {
-                this.$http.delete('/admin/specialities/' + speciality.id).then((data) => {
+                this.$http.delete('/dashboard/specialities/' + speciality.id).then((data) => {
                     // success callback
                     if(data.body.success === true) {
                         var messages = data.body.messages;
