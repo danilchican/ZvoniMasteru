@@ -53,29 +53,29 @@
                 </a>
             </li>
             --}}
-            <li class="treeview @if(Request::is('admin/tariffs*') || Request::is('admin/services*')) active @endif">
+            <li class="treeview @if(Request::is('dashboard/tariffs*') || Request::is('dashboard/services*')) active @endif">
                 <a href="#">
                     <i class="fa fa-list-ul"></i>
                     <span>Tariffs</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li @if(Request::is('admin/tariffs*')) class="active" @endif><a href="{{ route('admin.tariffs.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li @if(Request::is('admin/services*')) class="active" @endif><a href="{{ route('admin.services.index') }}"><i class="fa fa-circle-o"></i> Services</a></li>
+                    <li @if(Request::is('dashboard/tariffs*')) class="active" @endif><a href="{{ route('admin.tariffs.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+                    <li @if(Request::is('dashboard/services*')) class="active" @endif><a href="{{ route('admin.services.index') }}"><i class="fa fa-circle-o"></i> Services</a></li>
                 </ul>
             </li>
-            <li class="treeview @if(Request::is('admin/categories*')) active @endif">
+            <li class="treeview @if(Request::is('dashboard/categories*')) active @endif">
                 <a href="#">
                     <i class="fa fa-list-ul"></i>
                     <span>Categories</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li @if(Request::is('admin/categories')) class="active" @endif><a href="{{ route('admin.categories.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li @if(Request::is('admin/categories/create')) class="active" @endif><a href="{{ route('admin.categories.create') }}"><i class="fa fa-circle-o"></i> Create</a></li>
+                    <li @if(Request::is('dashboard/categories')) class="active" @endif><a href="{{ route('admin.categories.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+                    <li @if(Request::is('dashboard/categories/create')) class="active" @endif><a href="{{ route('admin.categories.create') }}"><i class="fa fa-circle-o"></i> Create</a></li>
                 </ul>
             </li>
-            <li @if(Request::is('admin/specialities')) class="active" @endif>
+            <li @if(Request::is('dashboard/specialities')) class="active" @endif>
                 <a href="{{ route('admin.specialities.index') }}"><i class="fa fa-list-ul"></i> <span>Specialities</span></a>
             </li>
             {{--
