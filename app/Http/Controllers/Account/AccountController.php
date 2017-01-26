@@ -14,7 +14,12 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = \Auth::user();
+        $company = $user->company;
+
+        return view('account.index')->with(compact([
+            'user', 'company',
+        ]));
     }
 
     /**

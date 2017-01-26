@@ -99,7 +99,7 @@ class Company extends Model
     public function getName()
     {
         if ($this->nameIsEmpty()) {
-            return 'No name';
+            return 'Без имени';
         }
 
         return $this->name;
