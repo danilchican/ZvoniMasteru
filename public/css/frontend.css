@@ -8,3 +8,6 @@ body {
     text-align: center;
     margin: 15px 0;
 }
+.list-group-item > .badge {
+    margin-top:2px;
+}

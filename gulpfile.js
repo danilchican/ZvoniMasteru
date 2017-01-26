@@ -17,5 +17,6 @@ elixir((mix) => {
     mix.sass('app.scss')
         .sass('admin-styles.scss', 'public/css/admin')
        .webpack('app.js')
-        .webpack('admin.js', 'public/js/admin/admin.js');
+        .webpack('admin.js', 'public/js/admin/admin.js')
+        .webpack('account.js', 'public/js/account.js');
 });

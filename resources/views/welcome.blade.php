@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+    <title>{{ config('app.name') }}</title>
+@endsection
+
 @section('content')
 <div class="container" style="margin-bottom:20px;">
     <div class="col-lg-12">
@@ -23,4 +27,8 @@
     </div><!-- /.row -->
 
 </div><!-- /.main-catalog -->
+@endsection
+
+@section('scripts')
+    <script src="/js/app.js"></script>
 @endsection

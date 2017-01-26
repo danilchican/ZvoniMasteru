@@ -30,5 +30,5 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'dashboard'], functi
 });
 
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function () {
-    Route::get('/', 'Account\AccountController@index')->name('account.index');
+    Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });
