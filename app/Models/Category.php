@@ -21,6 +21,13 @@ class Category extends Model
     ];
 
     /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = ['id', 'name', 'children'];
+
+    /**
      * Set parent id for current category.
      *
      * @param null $parent_id |int

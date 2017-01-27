@@ -1,4 +1,5 @@
 import Home         from './components/Home.vue'
+import Services     from './components/Services.vue'
 import VueRouter    from 'vue-router'
 import Vue          from 'vue'
 
@@ -8,8 +9,6 @@ import Vue          from 'vue'
 Vue.use(VueRouter)
 
 //Define route components
-const Services = { template: '<h3>Services</h3>' }
-const Specialities = { template: '<h3>Specialities</h3>' }
 const Portfolio = { template: '<h3>Portfolio</h3>' }
 const Reviews = { template: '<h3>Reviews</h3>' }
 const Tariffs = { template: '<h3>Tariffs</h3>' }
@@ -21,7 +20,6 @@ export default new VueRouter({
     routes: [
         { path: '/account', component: Home },
         { path: '/account/services', component: Services },
-        { path: '/account/specialities', component: Specialities },
         { path: '/account/portfolio', component: Portfolio }, // example of route with a seperate component
         { path: '/account/reviews', component: Reviews },
         { path: '/account/tariffs', component: Tariffs }
