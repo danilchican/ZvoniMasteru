@@ -16,4 +16,26 @@ class CategoryController extends Controller
             'success'  => true,
         ], 200);
     }
+
+    public function toggleCategory(Request $request)
+    {
+        $user = \Auth::user();
+        $user->company->categories()->toggle($request->id);
+
+        if($request->status === true) {
+            return Response::json([
+                'messages' => [
+                    'Услуга удалена'
+                ],
+                'success'  => true,
+            ], 200);
+        }
+
+        return Response::json([
+            'messages' => [
+                'Услуга добавлена'
+            ],
+            'success'  => true,
+        ], 200);
+    }
 }

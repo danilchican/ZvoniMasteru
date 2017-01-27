@@ -5,6 +5,7 @@
 @endsection
 
 @section('styles')
+    <link rel="stylesheet" href="/css/admin/toastr.css">
     <link rel="stylesheet" type="text/css" href="/css/lightbox/lightbox.css">
     <style>
         .btn-file { position: relative; overflow: hidden; margin-right: 4px; }
