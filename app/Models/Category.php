@@ -120,4 +120,14 @@ class Category extends Model
     {
         return $this->parent_id;
     }
+
+    /**
+     * Getting companies for a category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'company_category', 'category_id', 'company_id');
+    }
 }

@@ -134,4 +134,15 @@ class Company extends Model
     {
         return $this->status;
     }
+
+    /**
+     * Getting categories for a company.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'company_category', 'company_id', 'category_id');
+    }
+
 }
