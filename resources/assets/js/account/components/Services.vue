@@ -59,7 +59,8 @@
 
         data : function() {
             return {
-                services: []
+                services: [],
+                attached: []
             }
         },
 
@@ -94,6 +95,36 @@
                 }
             },
 
+            setAttachedServices() {
+                this.attached.forEach(function(id, index) {
+                    var checkbox = $( "input[type=checkbox][value=" + id + "]" );
+                    checkbox.prop('checked', 'checked');
+                });
+            },
+
+            getAttachedServices() {
+                this.$http.get('/account/categories/attached')
+                    .then((data) => {
+                        // success callback
+                        this.attached = data.body.services;
+                        this.setAttachedServices();
+
+                        if(data.body.success !== true) {
+                            toastr.error('Что-то пошло не так...', 'Error')
+                        }
+                    }, (data) => {
+                        // error callback
+                        var errors = data.body;
+                        $.each( errors, function( key, value ) {
+                            if(data.status === 422) {
+                                toastr.error(value[0], 'Error')
+                            } else {
+                                toastr.error(value, 'Error')
+                            }
+                        });
+                    });
+            },
+
             /**
              * Get all services from server.
              */
@@ -102,7 +133,7 @@
                     .then((data) => {
                         // success callback
                         this.services = data.body.services;
-                        console.log(this.services);
+                        this.getAttachedServices();
 
                         if(data.body.success !== true) {
                             toastr.error('Что-то пошло не так...', 'Error')

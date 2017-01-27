@@ -1,14 +1,14 @@
 <template>
     <ul v-if="hasChildren(service)" class="col-md-6">
-        <input type="checkbox" @click="updateService($event, service)"> {{ service.name }}
+        <input type="checkbox" :value="service.id" @click="updateService($event, service)"> {{ service.name }}
         <ul>
             <li v-for="item in getChildren(service)">
-                <input type="checkbox" @click="updateService($event, service)"> {{ service.name }}
+                <input type="checkbox" :value="item.id" @click="updateService($event, item)"> {{ item.name }}
             </li>
         </ul>
     </ul>
     <li v-else>
-        <input type="checkbox" @click="updateService($event, service)"> {{ service.name }}
+        <input type="checkbox" :value="service.id" @click="updateService($event, service)"> {{ service.name }}
     </li>
 </template>
 

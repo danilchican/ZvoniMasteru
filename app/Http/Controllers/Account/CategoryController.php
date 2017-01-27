@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Response;
 
 class CategoryController extends Controller
 {
+    /**
+     * Get all categories in Tree.
+     *
+     * @return mixed
+     */
     public function getCategories()
     {
         return Response::json([
@@ -17,12 +22,31 @@ class CategoryController extends Controller
         ], 200);
     }
 
+    /**
+     * Get attached categories to company.
+     *
+     * @return mixed
+     */
+    public function getAttachedCategories()
+    {
+        return Response::json([
+            'services' => \Auth::user()->company->categories()->get()->pluck('id')->toArray(),
+            'success'  => true,
+        ], 200);
+    }
+
+    /**
+     * Toggle category for a company.
+     *
+     * @param Request $request
+     * @return mixed
+     */
     public function toggleCategory(Request $request)
     {
         $user = \Auth::user();
         $user->company->categories()->toggle($request->id);
 
-        if($request->status === true) {
+        if($request->status !== true) {
             return Response::json([
                 'messages' => [
                     'Услуга удалена'
