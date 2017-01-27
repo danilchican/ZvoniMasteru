@@ -53,7 +53,6 @@
 
     export default {
         mounted() {
-            console.log('Services Component ready.');
             this.getServices();
         },
 

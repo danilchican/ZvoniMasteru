@@ -55,7 +55,6 @@
 
             updateService(event, service) {
                 var checked = event.target.checked;
-                console.log(checked);
                 this.toggleServiceFromList(service, checked);
             }
         }
