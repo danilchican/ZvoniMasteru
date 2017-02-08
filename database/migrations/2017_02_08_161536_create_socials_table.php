@@ -16,9 +16,6 @@ class CreateSocialsTable extends Migration
         Schema::create('socials', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('contact_id')->unsigned();
-            $table->string('vk_name', 80);
-            $table->string('ok_name', 80);
-            $table->string('fb_name', 80);
             $table->string('vk_url', 80);
             $table->string('ok_url', 80);
             $table->string('fb_url', 80);
