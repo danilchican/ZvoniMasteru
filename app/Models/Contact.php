@@ -33,6 +33,65 @@ class Contact extends Model
     ];
 
     /**
+     * Get the company website URL.
+     *
+     * @return mixed
+     */
+    public function getWebsiteURL()
+    {
+        return $this->website_url;
+    }
+
+    /**
+     * Get the company email.
+     *
+     * @return mixed
+     */
+    public function getCompanyEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Get the company skype.
+     *
+     * @return mixed
+     */
+    public function getSkype()
+    {
+        return $this->skype;
+    }
+
+    /**
+     * Get the company viber.
+     *
+     * @return mixed
+     */
+    public function getViber()
+    {
+        return $this->viber;
+    }
+
+    /**
+     * Get the company icq.
+     *
+     * @return mixed
+     */
+    public function getICQ()
+    {
+        return $this->icq;
+    }
+
+    /**
+     * Get the company address.
+     *
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+    /**
      * An contacts is owned by a company.
      *
      * @return array

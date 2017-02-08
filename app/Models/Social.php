@@ -30,6 +30,36 @@ class Social extends Model
     ];
 
     /**
+     * Get VK url.
+     *
+     * @return mixed|string
+     */
+    public function getVkontakteURL()
+    {
+        return $this->vk_url;
+    }
+
+    /**
+     * Get FB url.
+     *
+     * @return mixed|string
+     */
+    public function getFacebookURL()
+    {
+        return $this->fb_url;
+    }
+
+    /**
+     * Get OK url.
+     *
+     * @return mixed|string
+     */
+    public function getOdnoklassnikiURL()
+    {
+        return $this->ok_url;
+    }
+
+    /**
      * An socials groups is owned by a contact of company.
      *
      * @return array
