@@ -40,6 +40,16 @@ class Company extends Model
     }
 
     /**
+     * An contacts is owned by a company.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function contacts()
+    {
+        return $this->hasOne(Contact::class);
+    }
+
+    /**
      * Getting the company's logo url.
      *
      * @return mixed
