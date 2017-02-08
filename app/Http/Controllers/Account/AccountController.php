@@ -22,13 +22,42 @@ class AccountController extends Controller
         ]));
     }
 
+    /**
+     * Get account info.
+     *
+     * @return mixed
+     */
     public function getAccountInfo()
     {
         $user = \Auth::user();
+        $company = $user->company;
+        $contacts = \Auth::user()->company->contacts()->with('groups')->first();
+
+        $companyInfo = [
+            'name' => $company->getName(),
+            'unp_number' => (int)$company->getUNPNumber(),
+            'description' => $company->getDescription(),
+        ];
+
+        $contactsInfo = [
+            'address' => $contacts->getAddress(),
+            'website_url' => $contacts->getWebsiteURL(),
+            'email' => $contacts->getCompanyEmail(),
+            'skype' => $contacts->getSkype(),
+            'viber' => $contacts->getViber(),
+            'icq' => $contacts->getICQ(),
+
+            'groups' => [
+                'vk' => $contacts->groups->getVkontakteURL(),
+                'ok' => $contacts->groups->getOdnoklassnikiURL(),
+                'fb' => $contacts->groups->getFacebookURL(),
+            ]
+        ];
 
         return Response::json([
-            'user' => $user,
-            'contacts' => $user->company->contacts()->with('groups')->get(),
+            'username' => $user->getName(),
+            'company' => $companyInfo,
+            'contacts' => $contactsInfo,
             'success'  => true,
         ], 200);
     }
