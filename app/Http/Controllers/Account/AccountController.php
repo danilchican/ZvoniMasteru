@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Account;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class AccountController extends Controller
 {
@@ -20,5 +20,16 @@ class AccountController extends Controller
         return view('account.index')->with(compact([
             'user', 'company',
         ]));
+    }
+
+    public function getAccountInfo()
+    {
+        $user = \Auth::user();
+
+        return Response::json([
+            'user' => $user,
+            'contacts' => $user->company->contacts()->with('groups')->get(),
+            'success'  => true,
+        ], 200);
     }
 }

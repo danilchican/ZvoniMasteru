@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\User;
+use App\Models\Contact;
+use App\Models\Social;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Http\Request;
@@ -69,8 +71,8 @@ class RegisterController extends Controller
         $this->guard()->login($user);
 
         Auth::user()->company()->save(new Company());
-        //$user->company->contacts()->save(new Contact());
-        //$user->company->contacts->groups()->save(new Social());
+        $user->company->contacts()->save(new Contact());
+        $user->company->contacts->groups()->save(new Social());
 
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());

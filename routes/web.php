@@ -30,8 +30,9 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'dashboard'], functi
 });
 
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function () {
-    Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
     Route::get('/categories/list', 'Account\CategoryController@getCategories');
     Route::get('/categories/attached', 'Account\CategoryController@getAttachedCategories');
     Route::post('/categories/toggle', 'Account\CategoryController@toggleCategory');
+    Route::get('/info', 'Account\AccountController@getAccountInfo');
+    Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });
