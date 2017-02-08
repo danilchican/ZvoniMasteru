@@ -31,21 +31,21 @@ class AccountController extends Controller
     {
         $user = \Auth::user();
         $company = $user->company;
-        $contacts = \Auth::user()->company->contacts()->with('groups')->first();
+        $contacts = $company->contacts()->with('groups')->first();
 
         $companyInfo = [
             'name' => $company->getName(),
-            'unp_number' => (int)$company->getUNPNumber(),
+            'unp_number'  => (int)$company->getUNPNumber(),
             'description' => $company->getDescription(),
         ];
 
         $contactsInfo = [
-            'address' => $contacts->getAddress(),
+            'address'     => $contacts->getAddress(),
             'website_url' => $contacts->getWebsiteURL(),
-            'email' => $contacts->getCompanyEmail(),
-            'skype' => $contacts->getSkype(),
-            'viber' => $contacts->getViber(),
-            'icq' => $contacts->getICQ(),
+            'email'       => $contacts->getCompanyEmail(),
+            'skype'       => $contacts->getSkype(),
+            'viber'       => $contacts->getViber(),
+            'icq'         => $contacts->getICQ(),
 
             'groups' => [
                 'vk' => $contacts->groups->getVkontakteURL(),
@@ -56,7 +56,7 @@ class AccountController extends Controller
 
         return Response::json([
             'username' => $user->getName(),
-            'company' => $companyInfo,
+            'company'  => $companyInfo,
             'contacts' => $contactsInfo,
             'success'  => true,
         ], 200);
