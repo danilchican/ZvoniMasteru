@@ -82,4 +82,25 @@ class AccountController extends Controller
             'success'  => true,
         ], 200);
     }
+
+    /**
+     * Update socials of the company.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updateSocials(Request $request) {
+        $user = \Auth::user();
+        $user->company->contacts
+            ->groups()->update(
+                $request->only(['vk_url', 'ok_url', 'fb_url'])
+            );
+
+        return Response::json([
+            'messages' => [
+                'Ссылки на соц.сети обновлены.'
+            ],
+            'success'  => true,
+        ], 200);
+    }
 }

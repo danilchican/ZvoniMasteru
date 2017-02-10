@@ -35,5 +35,6 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function 
     Route::post('/categories/toggle', 'Account\CategoryController@toggleCategory');
     Route::get('/info', 'Account\AccountController@getAccountInfo');
     Route::post('/info/update', 'Account\AccountController@updateMainInfo');
+    Route::post('/socials/update', 'Account\AccountController@updateSocials');
     Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });

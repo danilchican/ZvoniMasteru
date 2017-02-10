@@ -232,7 +232,41 @@
                 if(this.disable)
                     return;
 
-                console.log("update socials")
+                this.disableInputs();
+
+                var _socials = {
+                    vk_url: this.socials.vkontakte,
+                    ok_url: this.socials.odnoklassniki,
+                    fb_url: this.socials.facebook,
+                };
+
+                this.$http.post('/account/socials/update', _socials)
+                    .then((data) => {
+                        // success callback
+
+                        if(data.body.success === true) {
+                            var messages = data.body.messages;
+
+                            $.each( messages, function( key, value ) {
+                                toastr.success(value, 'Success')
+                            });
+                        } else {
+                            toastr.error('Что-то пошло не так...', 'Error')
+                        }
+
+                        this.undisableInputs();
+                    }, (data) => {
+                        this.undisableInputs();
+                        // error callback
+                        var errors = data.body;
+                        $.each( errors, function( key, value ) {
+                            if(data.status === 422) {
+                                toastr.error(value[0], 'Error')
+                            } else {
+                                toastr.error(value, 'Error')
+                            }
+                        });
+                    });
             },
 
             updateContacts() {
