@@ -273,7 +273,44 @@
                 if(this.disable)
                     return;
 
-                console.log("update contacts")
+                this.disableInputs();
+
+                var _contacts = {
+                    website_url: this.contacts.websiteUrl,
+                    address: this.contacts.address,
+                    email: this.contacts.email,
+                    skype: this.contacts.skype,
+                    viber: this.contacts.viber,
+                    icq: this.contacts.icq,
+                };
+
+                this.$http.post('/account/contacts/update', _contacts)
+                    .then((data) => {
+                        // success callback
+
+                        if(data.body.success === true) {
+                            var messages = data.body.messages;
+
+                            $.each( messages, function( key, value ) {
+                                toastr.success(value, 'Success')
+                            });
+                        } else {
+                            toastr.error('Что-то пошло не так...', 'Error')
+                        }
+
+                        this.undisableInputs();
+                    }, (data) => {
+                        this.undisableInputs();
+                        // error callback
+                        var errors = data.body;
+                        $.each( errors, function( key, value ) {
+                            if(data.status === 422) {
+                                toastr.error(value[0], 'Error')
+                            } else {
+                                toastr.error(value, 'Error')
+                            }
+                        });
+                    });
             },
 
             setMainSettings(username, company) {

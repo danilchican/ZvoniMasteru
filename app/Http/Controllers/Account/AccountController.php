@@ -103,4 +103,24 @@ class AccountController extends Controller
             'success'  => true,
         ], 200);
     }
+
+    /**
+     * Update contacts of the company.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updateContacts(Request $request) {
+        $user = \Auth::user();
+        $user->company->contacts()->update(
+                $request->only(['address', 'website_url', 'icq', 'viber', 'skype', 'email'])
+            );
+
+        return Response::json([
+            'messages' => [
+                'Контактные данные обновлены.'
+            ],
+            'success'  => true,
+        ], 200);
+    }
 }
