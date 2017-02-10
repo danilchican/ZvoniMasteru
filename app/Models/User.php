@@ -101,4 +101,14 @@ class User extends Authenticatable
 
         return $this->name;
     }
+
+    /**
+     * Set the name of the user.
+     *
+     * @param $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 }

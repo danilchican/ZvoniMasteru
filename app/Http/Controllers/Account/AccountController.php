@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 
@@ -58,6 +59,26 @@ class AccountController extends Controller
             'username' => $user->getName(),
             'company'  => $companyInfo,
             'contacts' => $contactsInfo,
+            'success'  => true,
+        ], 200);
+    }
+
+    /**
+     * Update main info of the company and the owner.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updateMainInfo(Request $request) {
+        $user = \Auth::user();
+        $user->setName($request->input('username'));
+        $user->save();
+        $user->company()->update($request->only(['name', 'description', 'unp_number']));
+
+        return Response::json([
+            'messages' => [
+                'Основная информация обновлена.'
+            ],
             'success'  => true,
         ], 200);
     }

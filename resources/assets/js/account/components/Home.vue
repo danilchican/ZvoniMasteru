@@ -143,7 +143,6 @@
 <script>
     export default {
         mounted() {
-            this.disableInputs();
             this.retrieveSettings();
         },
 
@@ -191,7 +190,42 @@
                 if(this.disable)
                     return;
 
-                console.log("update main settings")
+                this.disableInputs();
+
+                var _main = {
+                    username: this.main.username,
+                    name: this.main.companyName,
+                    unp_number: this.main.unpNumber,
+                    description: this.main.companyDescription,
+                };
+
+                this.$http.post('/account/info/update', _main)
+                    .then((data) => {
+                        // success callback
+
+                        if(data.body.success === true) {
+                            var messages = data.body.messages;
+
+                            $.each( messages, function( key, value ) {
+                                toastr.success(value, 'Success')
+                            });
+                        } else {
+                            toastr.error('Что-то пошло не так...', 'Error')
+                        }
+
+                        this.undisableInputs();
+                    }, (data) => {
+                        this.undisableInputs();
+                        // error callback
+                        var errors = data.body;
+                        $.each( errors, function( key, value ) {
+                            if(data.status === 422) {
+                                toastr.error(value[0], 'Error')
+                            } else {
+                                toastr.error(value, 'Error')
+                            }
+                        });
+                    });
             },
 
             updateSocialAccounts() {
@@ -235,6 +269,8 @@
             },
 
             retrieveSettings() {
+                this.disableInputs();
+
                 this.$http.get('/account/info')
                     .then((data) => {
                         // success callback
