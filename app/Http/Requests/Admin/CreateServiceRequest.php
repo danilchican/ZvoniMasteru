@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class CreateServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3|max:255|',
+            'title' => 'required|min:3|max:255',
         ];
     }
 }
