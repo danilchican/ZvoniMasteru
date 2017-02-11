@@ -37,5 +37,6 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function 
     Route::post('/info/update', 'Account\AccountController@updateMainInfo');
     Route::post('/socials/update', 'Account\AccountController@updateSocials');
     Route::post('/contacts/update', 'Account\AccountController@updateContacts');
+    Route::post('/phones/store', 'Account\AccountController@createPhone');
     Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });
