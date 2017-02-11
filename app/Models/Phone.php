@@ -28,6 +28,13 @@ class Phone extends Model
     protected $fillable = ['number'];
 
     /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = ['id', 'number'];
+
+    /**
      * An contacts is owned by a company.
      *
      * @return array

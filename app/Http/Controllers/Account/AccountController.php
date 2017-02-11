@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Requests\Account\UpdateContactsRequest;
 use App\Http\Requests\Account\UpdateMainSettingsRequest;
-use App\Http\Requests\Account\UpdatePhoneRequest;
 use App\Http\Requests\Account\UpdateSocialsRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 
@@ -123,35 +121,6 @@ class AccountController extends Controller
         return Response::json([
             'messages' => [
                 'Контактные данные обновлены.'
-            ],
-            'success'  => true,
-        ], 200);
-    }
-
-    /**
-     * Create new phone of the company.
-     *
-     * @param UpdatePhoneRequest $request
-     * @return mixed
-     */
-    public function createPhone(UpdatePhoneRequest $request)
-    {
-        $contacts = \Auth::user()->company->contacts;
-
-        if($contacts->phones()->count() + 1 > 3) {
-            return Response::json([
-                    'Вы можете иметь не более 3-х номеров.'
-            ], 419);
-        }
-
-        $phone = $contacts->phones()->create(
-            $request->only(['number'])
-        );
-
-        return Response::json([
-            'phone' => $phone,
-            'messages' => [
-                'Телефон добавлен.'
             ],
             'success'  => true,
         ], 200);
