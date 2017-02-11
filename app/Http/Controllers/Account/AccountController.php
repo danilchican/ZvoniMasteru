@@ -140,10 +140,7 @@ class AccountController extends Controller
 
         if($contacts->phones()->count() + 1 > 3) {
             return Response::json([
-                'messages' => [
                     'Вы можете иметь не более 3-х номеров.'
-                ],
-                'success'  => false,
             ], 419);
         }
 
