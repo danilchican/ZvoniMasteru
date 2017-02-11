@@ -109,23 +109,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="row">
-                            <div class="panel panel-default contacts-phones">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Телефоны</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="phones">
-                                    телефоны
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary add-phone-btn">
-                                        <i class="fa fa-plus" aria-hidden="true"></i> Добавить
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
+                        <phones></phones>
                     </div>
                 </div>
             </div>
@@ -141,9 +125,15 @@
 </style>
 
 <script>
+    import Phones from './Phones.vue'
+
     export default {
         mounted() {
             this.retrieveSettings();
+        },
+
+        components: {
+            'phones': Phones
         },
 
         data : function() {
@@ -346,13 +336,19 @@
                     .then((data) => {
                         // success callback
 
-                        if(data.body.success !== true) {
-                            toastr.error('Что-то пошло не так...', 'Error')
-                            return;
-                        }
+                        if(data.body.success === true) {
+                            var messages = data.body.messages;
 
-                        this.setMainSettings(data.body.username, data.body.company);
-                        this.setContacts(data.body.contacts);
+                            $.each( messages, function( key, value ) {
+                                toastr.success(value, 'Success')
+                            });
+
+                            this.setMainSettings(data.body.username, data.body.company);
+                            this.setContacts(data.body.contacts);
+
+                        } else {
+                            toastr.error('Что-то пошло не так...', 'Error')
+                        }
 
                         this.undisableInputs();
                     }, (data) => {

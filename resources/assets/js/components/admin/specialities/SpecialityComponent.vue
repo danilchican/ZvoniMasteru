@@ -322,7 +322,6 @@
             /**
              * Remove speciality from list.
              *
-             * @param service
              */
             removeFromList() {
                 this.setCount(this.list.length);
