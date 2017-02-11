@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Requests\Account\UpdateContactsRequest;
+use App\Http\Requests\Account\UpdateMainSettingsRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -67,10 +68,10 @@ class AccountController extends Controller
     /**
      * Update main info of the company and the owner.
      *
-     * @param Request $request
+     * @param UpdateMainSettingsRequest $request
      * @return mixed
      */
-    public function updateMainInfo(Request $request) {
+    public function updateMainInfo(UpdateMainSettingsRequest $request) {
         $user = \Auth::user();
         $user->setName($request->input('username'));
         $user->save();
@@ -108,7 +109,7 @@ class AccountController extends Controller
     /**
      * Update contacts of the company.
      *
-     * @param Request $request
+     * @param UpdateContactsRequest $request
      * @return mixed
      */
     public function updateContacts(UpdateContactsRequest $request) {
