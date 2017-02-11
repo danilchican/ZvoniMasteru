@@ -13,7 +13,8 @@
         "kalnoy/nestedset": "^4.2",
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "^5.3.0",
-        "laravelrus/localized-carbon": "dev-master"
+        "laravelrus/localized-carbon": "dev-master",
+        "propaganistas/laravel-phone": "^2.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
