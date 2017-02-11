@@ -99,8 +99,8 @@ return [
     */
 
     'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'viber' => [
+            'phone' => 'Viber должен содержать корректный номер.',
         ],
     ],
 
