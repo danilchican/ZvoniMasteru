@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Requests\Account\UpdateContactsRequest;
 use App\Http\Requests\Account\UpdateMainSettingsRequest;
+use App\Http\Requests\Account\UpdateSocialsRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -88,10 +89,10 @@ class AccountController extends Controller
     /**
      * Update socials of the company.
      *
-     * @param Request $request
+     * @param UpdateSocialsRequest $request
      * @return mixed
      */
-    public function updateSocials(Request $request) {
+    public function updateSocials(UpdateSocialsRequest $request) {
         $user = \Auth::user();
         $user->company->contacts
             ->groups()->update(
