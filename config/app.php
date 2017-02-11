@@ -185,6 +185,7 @@ return [
         Laravelrus\LocalizedCarbon\LocalizedCarbonServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
     ],
 
     /*

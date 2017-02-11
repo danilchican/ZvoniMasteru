@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Http\Requests\Account\UpdateContactsRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -110,7 +111,7 @@ class AccountController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function updateContacts(Request $request) {
+    public function updateContacts(UpdateContactsRequest $request) {
         $user = \Auth::user();
         $user->company->contacts()->update(
                 $request->only(['address', 'website_url', 'icq', 'viber', 'skype', 'email'])
