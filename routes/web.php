@@ -38,6 +38,8 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function 
     Route::post('/socials/update', 'Account\AccountController@updateSocials');
     Route::post('/contacts/update', 'Account\AccountController@updateContacts');
     Route::post('/phones/store', 'Account\PhoneController@createPhone');
+    Route::post('/phones/update', 'Account\PhoneController@updatePhone');
     Route::get('/phones/list', 'Account\PhoneController@getPhones');
+    Route::delete('/phones/{id}', 'Account\PhoneController@deletePhone');
     Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });

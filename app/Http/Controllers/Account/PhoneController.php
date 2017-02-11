@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Requests\Account\UpdatePhoneRequest;
+use App\Models\Phone;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PhoneController extends Controller
 {
@@ -22,7 +25,7 @@ class PhoneController extends Controller
     }
 
     /**
-     * Create new phone of the company.
+     * Create new phone number of the company.
      *
      * @param UpdatePhoneRequest $request
      * @return mixed
@@ -47,5 +50,48 @@ class PhoneController extends Controller
             ],
             'success'  => true,
         ], 200);
+    }
+
+    /**
+     * Update phone number of the company.
+     *
+     * @param UpdatePhoneRequest $request
+     * @return mixed
+     */
+    public function updatePhone(UpdatePhoneRequest $request)
+    {
+        try {
+            $phone = Phone::find($request->input('id'));
+            $phone->update($request->only(['number']));
+
+            return Response::json([
+                'messages' => [
+                    'Номер телефона обновлён.'
+                ],
+                'success'  => true,
+            ], 200);
+        } catch (ModelNotFoundException $ex) {
+            return Response::json([
+                'Такого телефона не существует. Обновите страницу.'
+            ], 419);
+        }
+    }
+
+    public function deletePhone(Request $request, $id = null) {
+        try {
+            $phone = Phone::find($id);
+            $phone->delete();
+
+            return Response::json([
+                'messages' => [
+                    'Номер телефона удалён.'
+                ],
+                'success'  => true,
+            ], 200);
+        } catch (ModelNotFoundException $ex) {
+            return Response::json([
+                'Такого телефона не существует. Обновите страницу.'
+            ], 419);
+        }
     }
 }

@@ -6,7 +6,7 @@
             </div>
             <div class="panel-body">
                 <p v-if="phones.length == 0">Телефонов пока нет.</p>
-                <view-phone v-else v-for="phone in phones" :phone="phone" @phoneRemoved="removeFromList()"></view-phone>
+                <view-phone v-else v-for="phone in phones" :phone="phone" @phoneRemoved="updatePhonesList()" @phoneUpdated="updatePhonesList()"></view-phone>
 
                 <div class="form-group" v-if="phones.length < 3">
                     <button type="submit" class="btn btn-primary add-phone-btn" data-toggle="modal" data-target="#addPhoneModal">
@@ -99,8 +99,9 @@
                             toastr.error('Что-то пошло не так...', 'Error')
                         }
 
-                        this.updatePhonesList();
                         this.undisableInputs();
+                        this.updatePhonesList();
+                        this.newPhoneNumber = '';
 
                         $('#addPhoneModal').modal('hide');
                     }, (data) => {
@@ -121,6 +122,11 @@
              * Get all company phones from server.
              */
             updatePhonesList() {
+                if(this.disable)
+                    return;
+
+                this.disableInputs();
+
                 this.$http.get('/account/phones/list')
                     .then((data) => {
                         // success callback
@@ -129,7 +135,9 @@
                         if(data.body.success !== true) {
                             toastr.error('Что-то пошло не так...', 'Error')
                         }
+                        this.undisableInputs();
                     }, (data) => {
+                        this.undisableInputs();
                         // error callback
                         var errors = data.body;
                         $.each( errors, function( key, value ) {
@@ -142,13 +150,6 @@
                     });
             },
 
-            /**
-             * Remove phone from list.
-             *
-             */
-            removeFromList() {
-                this.updatePhonesList();
-            }
         }
     }
 
