@@ -155,4 +155,14 @@ class Company extends Model
         return $this->belongsToMany(Category::class, 'company_category', 'company_id', 'category_id');
     }
 
+    /**
+     * Accepted for publish to catalog.
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('status', '=', 2);
+    }
 }

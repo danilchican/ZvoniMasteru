@@ -43,3 +43,5 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function 
     Route::delete('/phones/{id}', 'Account\PhoneController@deletePhone');
     Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });
+
+Route::get('/{category}', 'CategoryController@show')->name('category.show');
