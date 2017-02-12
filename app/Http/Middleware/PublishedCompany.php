@@ -16,7 +16,7 @@ class PublishedCompany
      */
     public function handle($request, Closure $next)
     {
-        $company = Company::find($request->id);
+        $company = Company::where('slug', '=', $request->slug)->first();
 
         if($company !== null) {
             if($company->isPublished()) {

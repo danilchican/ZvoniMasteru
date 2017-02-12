@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-6">
                 <div class="row">
-                    <h4><a href="{{ route('company.cart', $company->id) }}">{{ $company->getName() }}</a></h4>
+                    <h4><a href="{{ route('company.cart', $company->getSlug()) }}">{{ $company->getName() }}</a></h4>
                     <p>{{ $company->getDescription() }}</p>
                 </div>
             </div>

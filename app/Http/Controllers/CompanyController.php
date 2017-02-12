@@ -11,12 +11,12 @@ class CompanyController extends HomeController
     /**
      * View cart of the company.
      *
-     * @param $id
+     * @param $slug
      * @return $this|\Illuminate\Http\Response
      */
-    public function cart($id)
+    public function cart($slug)
     {
-        $company = Company::findOrFail($id);
+        $company = Company::where('slug', '=', $slug)->first();
         $phones = $company->contacts->phones()->filled()->get();
         $groups = $company->contacts->groups;
 
