@@ -44,4 +44,5 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function 
     Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });
 
+Route::get('/companies/{slug}', 'CompanyController@cart')->name('company.cart');
 Route::get('/{category}', 'CategoryController@show')->name('category.show');

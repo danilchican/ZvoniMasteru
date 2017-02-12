@@ -21,7 +21,7 @@
         @foreach($categories as $category)
             <div class="col-md-3 col-sm-3 col-xs-6 main-catalog-box">
                 <img class="img-circle" alt="{{ $category->name }}" src="{{ $category->getThumbnailURL() }}" style="width: 140px; height: 140px;">
-                <h4><a href="">{{ $category->name }}</a></h4>
+                <h4><a href="{{ route('category.show', ['category' => $category->getSlug()]) }}">{{ $category->name }}</a></h4>
             </div><!-- /.col-lg-4 -->
         @endforeach
     </div><!-- /.row -->

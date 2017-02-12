@@ -34,6 +34,11 @@ class Phone extends Model
      */
     protected $visible = ['id', 'number'];
 
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
     /**
      * An contacts is owned by a company.
      *
