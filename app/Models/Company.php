@@ -163,6 +163,6 @@ class Company extends Model
      */
     public function scopePublished($query)
     {
-        return $query->where('status', '=', 2);
+        return $query->where('status', '=', 'approved');
     }
 }
