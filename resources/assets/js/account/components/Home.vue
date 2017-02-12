@@ -28,6 +28,10 @@
                                             <input type="text" v-model="main.companyName" class="form-control" id="company-name" name="company-name" placeholder="Введите название компании">
                                         </div>
                                         <div class="form-group">
+                                            <label for="company-name">Название на латинице *</label>
+                                            <input type="text" v-model="main.slug" class="form-control" id="company-slug" name="company-slug" placeholder="Например, company-slug-name">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="unp-number">УНП *</label>
                                             <input type="text" v-model="main.unpNumber" class="form-control" id="unp-number" name="unp-number" placeholder="Введите номер УНП">
                                         </div>
@@ -142,6 +146,7 @@
                 main: {
                     username: '',
                     companyName: '',
+                    slug: '',
                     unpNumber: 0,
                     companyDescription: '',
                 },
@@ -185,6 +190,7 @@
                 var _main = {
                     username: this.main.username,
                     name: this.main.companyName,
+                    slug: this.main.slug,
                     unp_number: this.main.unpNumber,
                     description: this.main.companyDescription,
                 };
@@ -306,6 +312,7 @@
             setMainSettings(username, company) {
                 this.main.username = username;
                 this.main.companyName = company.name;
+                this.main.slug = company.slug;
                 this.main.unpNumber = company.unp_number;
                 this.main.companyDescription = company.description;
             },

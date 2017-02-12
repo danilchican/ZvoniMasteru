@@ -26,6 +26,7 @@ class UpdateMainSettingsRequest extends FormRequest
         return [
             'username' => 'min:2|max:30|required',
             'name' => 'min:2|max:30|required',
+            'slug' => 'min:5|max:30|alpha_dash|required',
             'unp_number' => 'required|size:9|regex:/[0-9]{9}/',
             'description' => 'required|min:3|max:300'
         ];

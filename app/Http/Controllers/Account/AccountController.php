@@ -38,6 +38,7 @@ class AccountController extends Controller
 
         $companyInfo = [
             'name' => $company->getName(),
+            'slug' => $company->getSlug(),
             'unp_number'  => (int)$company->getUNPNumber(),
             'description' => $company->getDescription(),
         ];
@@ -75,7 +76,7 @@ class AccountController extends Controller
         $user = \Auth::user();
         $user->setName($request->input('username'));
         $user->save();
-        $user->company()->update($request->only(['name', 'description', 'unp_number']));
+        $user->company()->update($request->only(['name', 'slug', 'description', 'unp_number']));
 
         return Response::json([
             'messages' => [
