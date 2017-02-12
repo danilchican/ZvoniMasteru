@@ -36,6 +36,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\AdminGroup::class,
         ],
 
+        'published' => [
+            \App\Http\Middleware\PublishedCompany::class,
+        ],
+
         'api' => [
             'throttle:60,1',
             'bindings',
