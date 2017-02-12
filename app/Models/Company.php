@@ -165,4 +165,18 @@ class Company extends Model
     {
         return $query->where('status', '=', 'approved');
     }
+
+    /**
+     * Check if the company published in catalog.
+     *
+     * @return bool
+     */
+    public function isPublished()
+    {
+        if(!strcmp($this->getStatus(), 'approved')) {
+            return true;
+        }
+
+        return false;
+    }
 }
