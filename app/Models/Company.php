@@ -60,6 +60,16 @@ class Company extends Model
     }
 
     /**
+     * Getting the company's slug.
+     *
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Check if the company has any logo.
      *
      * @return bool
