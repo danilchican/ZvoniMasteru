@@ -12,8 +12,10 @@
                 <div class="row">
                     <ul style="padding: 0;list-style: none;">
                         <li v-for="item in services" class="category">
-                            <i v-if="hasChildren(item)" class="fa fa-plus left-ico spoiler" @click="changeSpoiler($event)" v-bind:data-spoiler-link="item.id" aria-hidden="true"></i>
+                            <input type="checkbox" :value="item.id" @click="updateService($event, item)">
                             {{ item.name }}
+
+                            <i v-if="hasChildren(item)" style="float: right;margin-top: 5px;" class="fa fa-plus left-ico spoiler" @click="changeSpoiler($event)" v-bind:data-spoiler-link="item.id" aria-hidden="true"></i>
 
                             <div v-if="hasChildren(item)" class="spoiler-content" v-bind:data-spoiler-link="item.id">
                                 <view-service v-for="child in getChildren(item)" :service="child"></view-service>
@@ -148,6 +150,39 @@
                             }
                         });
                     });
+            },
+
+
+            toggleServiceFromList(service, checked) {
+                this.$http.post('/account/categories/toggle', {id: service.id, status: checked})
+                    .then((data) => {
+                        // success callback
+
+                        if(data.body.success === true) {
+                            var messages = data.body.messages;
+
+                            $.each( messages, function( key, value ) {
+                                toastr.success(value, 'Success')
+                            });
+                        } else {
+                            toastr.error('Что-то пошло не так...', 'Error')
+                        }
+                    }, (data) => {
+                        // error callback
+                        var errors = data.body;
+                        $.each( errors, function( key, value ) {
+                            if(data.status === 422) {
+                                toastr.error(value[0], 'Error')
+                            } else {
+                                toastr.error(value, 'Error')
+                            }
+                        });
+                    });
+            },
+
+            updateService(event, service) {
+                var checked = event.target.checked;
+                this.toggleServiceFromList(service, checked);
             }
         }
     }
