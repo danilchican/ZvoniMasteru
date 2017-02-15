@@ -19,7 +19,7 @@ class Review extends Model
      * @var array
      */
     protected $fillable = [
-        'company_id', 'author', 'email', 'advantages', 'disadvantages', 'phone'
+        'author', 'email', 'advantages', 'disadvantages', 'phone'
     ];
 
     /**
@@ -30,5 +30,45 @@ class Review extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Get author email of the review.
+     *
+     * @return mixed|string
+     */
+    public function getAuthorEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Get author name of the review.
+     *
+     * @return mixed|string
+     */
+    public function getAuthorName()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Get author advantages of the review.
+     *
+     * @return mixed|string
+     */
+    public function getAdvantages()
+    {
+        return $this->advantages;
+    }
+
+    /**
+     * Get author disadvantages of the review.
+     *
+     * @return mixed|string
+     */
+    public function getDisadvantages()
+    {
+        return $this->disadvantages;
     }
 }

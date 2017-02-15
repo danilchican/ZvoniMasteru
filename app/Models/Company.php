@@ -189,4 +189,14 @@ class Company extends Model
 
         return false;
     }
+
+    /**
+     * Getting reviews for a company.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
