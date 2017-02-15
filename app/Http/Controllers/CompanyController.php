@@ -17,9 +17,17 @@ class CompanyController extends HomeController
     public function cart($slug)
     {
         $company = Company::where('slug', '=', $slug)->first();
+
+        if(!$company) {
+            return view('errors.503');
+        }
+
         $phones = $company->contacts->phones()->filled()->get();
         $groups = $company->contacts->groups;
+        $reviews = $company->reviews()->get();
 
-        return view('companies.cart')->with(compact(['company', 'phones', 'groups']));
+        return view('companies.cart')->with(compact([
+            'company', 'phones', 'groups', 'reviews'
+        ]));
     }
 }
