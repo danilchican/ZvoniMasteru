@@ -22,8 +22,8 @@
                     </div>
                 @endforeach
             </div>
-            @if(count($companies) > 0)
             <div class="col-sm-9">
+            @if(count($companies) > 0)
                 <div class="row">
                     @foreach($companies as $company)
                         @include('categories.companies.show', ['company' => $company])
@@ -35,12 +35,10 @@
                         {!! $companies->links() !!}
                     </div><!-- /.col -->
                 </div><!-- /.row -->
-            </div>
             @else
-                <div class="col-md-12">
-                    <h4>Компаний в данной категории еще нет.</h4>
-                </div>
+                <h4>Компаний в данной категории еще нет.</h4>
             @endif
+            </div>
         </div>
     </div><!-- /.container -->
 @endsection
