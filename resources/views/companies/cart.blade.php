@@ -7,6 +7,17 @@
 @section('content')
     <div class="container companies">
         <div class="row">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <h3>{{ $company->getName() }}<a href="{{ URL::previous() }}" class="btn btn-default">Back</a></h3>
                 <img class="featurette-image img-responsive" id="logo" alt="150x150" width="150" src="{{ $company->getLogo() }}">
@@ -37,5 +48,9 @@
                 <!-- Тут будут отзывы -->
             </div>
         </div><!-- /.row -->
+        <!-- Reviews -->
+        <div class="row">
+            @include('companies.reviews.index')
+        </div>
     </div><!-- /.container -->
 @endsection
