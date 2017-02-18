@@ -42,7 +42,7 @@
                     <router-link to="/account" class="list-group-item" exact>Основная информация</router-link>
                     <router-link to="/account/services" class="list-group-item" exact>Услуги</router-link>
                     <router-link to="/account/portfolio" class="list-group-item" exact><span class="badge pull-right">0</span> Фото работ</router-link>
-                    <router-link to="/account/reviews" class="list-group-item" exact><span class="badge pull-right">0</span> Отзывы</router-link>
+                    <router-link to="/account/reviews" class="list-group-item" exact><span class="badge pull-right">{{ $countReviews }}</span> Отзывы</router-link>
                     <router-link to="/account/tariffs" class="list-group-item" exact>Продвижение в ТОП</router-link>
                 </ul>
             </div>

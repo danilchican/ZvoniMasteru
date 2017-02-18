@@ -19,9 +19,10 @@ class AccountController extends Controller
     {
         $user = \Auth::user();
         $company = $user->company;
+        $countReviews = $company->reviews()->count();
 
         return view('account.index')->with(compact([
-            'user', 'company',
+            'user', 'company', 'countReviews',
         ]));
     }
 
