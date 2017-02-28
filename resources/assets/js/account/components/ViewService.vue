@@ -74,7 +74,6 @@
 
                 parents.each(function(index) {
                     var block = $(this);
-                    console.log(block);
 
                     if(type == 'child') {
                         var checkboxes = block.find('input:checked:not(.parent)');
@@ -102,12 +101,9 @@
 
                             var cb = block.find('input[class=parent]:first');
 
-                            console.log(checkboxes);
-
                             if(checkboxes.length > 0) {
                                 cb.prop('checked', 'checked');
                             } else {
-                                console.log('Not founded');
                                 cb.prop('checked', false);
                             }
                         }
