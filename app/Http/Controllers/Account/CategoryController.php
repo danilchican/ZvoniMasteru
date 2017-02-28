@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Http\Requests\Account\SyncCategoriesRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -36,28 +37,19 @@ class CategoryController extends Controller
     }
 
     /**
-     * Toggle category for a company.
+     * Attach categories for a company.
      *
-     * @param Request $request
+     * @param SyncCategoriesRequest $request
      * @return mixed
      */
-    public function toggleCategory(Request $request)
+    public function attachCategories(SyncCategoriesRequest $request)
     {
         $user = \Auth::user();
-        $user->company->categories()->toggle($request->id);
-
-        if($request->status !== true) {
-            return Response::json([
-                'messages' => [
-                    'Услуга удалена'
-                ],
-                'success'  => true,
-            ], 200);
-        }
+        $user->company->categories()->sync($request->ids);
 
         return Response::json([
             'messages' => [
-                'Услуга добавлена'
+                'Услуги обновлены'
             ],
             'success'  => true,
         ], 200);

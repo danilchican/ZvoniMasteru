@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'dashboard'], functi
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function () {
     Route::get('/categories/list', 'Account\CategoryController@getCategories');
     Route::get('/categories/attached', 'Account\CategoryController@getAttachedCategories');
-    Route::post('/categories/toggle', 'Account\CategoryController@toggleCategory');
+    Route::post('/categories/attach', 'Account\CategoryController@attachCategories');
     Route::get('/info', 'Account\AccountController@getAccountInfo');
     Route::post('/info/update', 'Account\AccountController@updateMainInfo');
     Route::post('/socials/update', 'Account\AccountController@updateSocials');
