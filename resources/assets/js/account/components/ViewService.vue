@@ -20,7 +20,23 @@
     export default {
         props: ['service'],
 
+        data: function () {
+          return {
+              disable: false
+          }
+        },
+
         methods : {
+
+            disableInputs() {
+                $('input').attr('disabled', 'disabled');
+                this.disable = true;
+            },
+
+            undisableInputs() {
+                $('input').attr('disabled', false);
+                this.disable = false;
+            },
 
             getMenuId(service) {
                 return 'service-menu-' + service.id
@@ -43,8 +59,8 @@
 
                 this.$http.post('/account/categories/attach', {ids: values})
                     .then((data) => {
-
                         // success callback
+                        this.undisableInputs();
 
                         if(data.body.success === true) {
                             var messages = data.body.messages;
@@ -56,6 +72,7 @@
                             toastr.error('Что-то пошло не так...', 'Error')
                         }
                     }, (data) => {
+                        this.undisableInputs();
                         // error callback
                         var errors = data.body;
                         $.each( errors, function( key, value ) {
@@ -69,6 +86,11 @@
             },
 
             updateServices(event, type) {
+                if(this.disable)
+                    return;
+
+                this.disableInputs();
+
                 var checked = event.target.checked;
                 var parents = $(event.target).parents('ul.parent-bl');
 

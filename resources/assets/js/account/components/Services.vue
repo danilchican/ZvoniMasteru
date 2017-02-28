@@ -61,6 +61,7 @@
 
         data : function() {
             return {
+                disable: false,
                 services: [],
                 attached: []
             }
@@ -71,6 +72,15 @@
         },
 
         methods : {
+            disableInputs() {
+                $('input').attr('disabled', 'disabled');
+                this.disable = true;
+            },
+
+            undisableInputs() {
+                $('input').attr('disabled', false);
+                this.disable = false;
+            },
 
             getMenuId(service) {
                 return 'service-menu-' + service.id
@@ -115,11 +125,13 @@
                         this.attached = data.body.services;
                         this.setAttachedServices();
 
+                        this.undisableInputs();
                         if(data.body.success !== true) {
                             toastr.error('Что-то пошло не так...', 'Error')
                         }
                     }, (data) => {
                         // error callback
+                        this.undisableInputs();
                         var errors = data.body;
                         $.each( errors, function( key, value ) {
                             if(data.status === 422) {
@@ -139,13 +151,17 @@
                     .then((data) => {
                         // success callback
                         this.services = data.body.services;
+
+                        this.disableInputs();
                         this.getAttachedServices();
 
                         if(data.body.success !== true) {
                             toastr.error('Что-то пошло не так...', 'Error')
                         }
+
                     }, (data) => {
                         // error callback
+
                         var errors = data.body;
                         $.each( errors, function( key, value ) {
                             if(data.status === 422) {
@@ -168,6 +184,7 @@
                 this.$http.post('/account/categories/attach', {ids: values})
                     .then((data) => {
                         // success callback
+                        this.undisableInputs();
 
                         if(data.body.success === true) {
                             var messages = data.body.messages;
@@ -180,6 +197,8 @@
                         }
                     }, (data) => {
                         // error callback
+                        this.undisableInputs();
+
                         var errors = data.body;
                         $.each( errors, function( key, value ) {
                             if(data.status === 422) {
@@ -192,6 +211,11 @@
             },
 
             updateParentService(event, service) {
+                if(this.disable)
+                    return;
+
+                this.disableInputs();
+
                 var checked = event.target.checked;
                 var spoilerId = service.id;
 
