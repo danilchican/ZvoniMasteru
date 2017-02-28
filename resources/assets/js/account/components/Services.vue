@@ -12,16 +12,17 @@
                 <div class="row">
                     <ul style="padding: 0;list-style: none;">
                         <li v-for="item in services" class="category">
-                            <input type="checkbox" :value="item.id" @click="updateService($event, item)">
-                            {{ item.name }}
-
                             <i v-if="hasChildren(item)" style="float: right;margin-top: 5px;" class="fa fa-plus left-ico spoiler" @click="changeSpoiler($event)" v-bind:data-spoiler-link="item.id" aria-hidden="true"></i>
 
-                            <div v-if="hasChildren(item)" class="spoiler-content" v-bind:data-spoiler-link="item.id">
-                                <view-service v-for="child in getChildren(item)" :service="child"></view-service>
-                            </div>
+                            <ul class="parent-bl level-2" style="padding: 0;list-style: none;">
+                                <li>
+                                    <input type="checkbox" :value="item.id" class="parent" @click="updateParentService($event, item, 'parent')"> {{ item.name }}
+                                    <ul v-if="hasChildren(item)" :id="getMenuId(item)" style="padding-left:0" class="spoiler-content" v-bind:data-spoiler-link="item.id">
+                                        <view-service v-for="child in getChildren(item)" :service="child"></view-service>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -71,6 +72,10 @@
 
         methods : {
 
+            getMenuId(service) {
+                return 'service-menu-' + service.id
+            },
+
             getChildren(service) {
                 return service.children;
             },
@@ -81,7 +86,7 @@
 
             changeSpoiler(event) {
                 var spoilerId = event.target.getAttribute('data-spoiler-link');
-                var block = $( "div[data-spoiler-link=" + spoilerId + "]" );
+                var block = $( "ul[data-spoiler-link=" + spoilerId + "]" );
 
                 if($(event.target).hasClass('spoiler-active')) {
                     $(event.target).removeClass('spoiler-active');
@@ -178,6 +183,19 @@
                             }
                         });
                     });
+            },
+
+            updateParentService(event, service, whom) {
+                var checked = event.target.checked;
+                var spoilerId = service.id;
+
+                var checkboxes = $("ul[data-spoiler-link=" + spoilerId + "] input");
+
+                if(checked){
+                    checkboxes.prop('checked', 'checked');
+                } else {
+                    checkboxes.prop('checked', false);
+                }
             },
 
             updateService(event, service) {

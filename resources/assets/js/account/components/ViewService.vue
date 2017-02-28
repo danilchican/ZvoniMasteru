@@ -1,15 +1,19 @@
 <template>
-    <ul v-if="hasChildren(service)" class="col-md-6">
-        <input type="checkbox" :value="service.id" @click="updateService($event, service)"> {{ service.name }}
-        <ul>
-            <li v-for="item in getChildren(service)">
-                <input type="checkbox" :value="item.id" @click="updateService($event, item)"> {{ item.name }}
-            </li>
-        </ul>
+    <ul v-if="hasChildren(service)" :id="getMenuId(service)" style="list-style:none;" class="col-md-6 parent-bl level-1">
+        <li>
+            <input type="checkbox" :value="service.id" class="parent" @click="updateService($event, service, 'parent')"> {{ service.name }}
+
+            <ul class="parent-bl last-level">
+                <li v-for="item in getChildren(service)">
+                    <input type="checkbox" :value="item.id" @click="updateService($event, item, 'child')"> {{ item.name }}
+                </li>
+            </ul>
+        </li>
     </ul>
-    <li v-else>
-        <input type="checkbox" :value="service.id" @click="updateService($event, service)"> {{ service.name }}
-    </li>
+    <div v-else>
+        <input type="checkbox" :value="service.id" class="parent" @click="updateService($event, service, 'parent')">
+        {{ service.name }}
+    </div>
 </template>
 
 <script>
@@ -17,6 +21,10 @@
         props: ['service'],
 
         methods : {
+
+            getMenuId(service) {
+                return 'service-menu-' + service.id
+            },
 
             getChildren(service) {
                 return service.children;
@@ -29,6 +37,7 @@
             toggleServiceFromList(service, checked) {
                 this.$http.post('/account/categories/toggle', {id: service.id, status: checked})
                     .then((data) => {
+
                         // success callback
 
                         if(data.body.success === true) {
@@ -53,9 +62,54 @@
                     });
             },
 
-            updateService(event, service) {
+            updateService(event, service, type) {
                 var checked = event.target.checked;
-                this.toggleServiceFromList(service, checked);
+                var parents = $(event.target).parents('ul.parent-bl');
+                console.log(parents);
+
+                parents.each(function(index) {
+                    var block = $(this);
+                    console.log(block);
+
+                    if(type == 'child') {
+                        var checkboxes = block.find('input:checked:not(.parent)');
+
+                        var cb = block.find('input[class=parent]:first');
+
+                        if(checkboxes.length > 0) {
+                            cb.prop('checked', 'checked');
+                        } else {
+                            cb.prop('checked', false);
+                        }
+                    } else if(type == 'parent') {
+                        if(index == 0) {
+                            var checkboxes = block.find('input');
+
+                            if(checkboxes.length > 0) {
+                                if(checked) {
+                                    checkboxes.prop('checked', 'checked');
+                                } else {
+                                    checkboxes.prop('checked', false);
+                                }
+                            }
+                        } else if(index == 1) {
+                            var checkboxes = block.find('li > .spoiler-content input[class=parent]:checked:first');
+
+                            var cb = block.find('input[class=parent]:first');
+
+                            console.log(checkboxes);
+
+                            if(checkboxes.length > 0) {
+                                cb.prop('checked', 'checked');
+                            } else {
+                                console.log('Not founded');
+                                cb.prop('checked', false);
+                            }
+                        }
+                    }
+                });
+
+                //this.toggleServiceFromList(service, checked);
             }
         }
     }
