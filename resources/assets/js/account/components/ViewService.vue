@@ -1,17 +1,17 @@
 <template>
     <ul v-if="hasChildren(service)" :id="getMenuId(service)" style="list-style:none;" class="col-md-6 parent-bl level-1">
         <li>
-            <input type="checkbox" :value="service.id" class="parent" @click="updateService($event, service, 'parent')"> {{ service.name }}
+            <input type="checkbox" :value="service.id" class="parent" @click="updateServices($event, 'parent')"> {{ service.name }}
 
             <ul class="parent-bl last-level">
                 <li v-for="item in getChildren(service)">
-                    <input type="checkbox" :value="item.id" @click="updateService($event, item, 'child')"> {{ item.name }}
+                    <input type="checkbox" :value="item.id" @click="updateServices($event, 'child')"> {{ item.name }}
                 </li>
             </ul>
         </li>
     </ul>
     <div v-else>
-        <input type="checkbox" :value="service.id" class="parent" @click="updateService($event, service, 'parent')">
+        <input type="checkbox" :value="service.id" class="parent" @click="updateServices($event, 'parent')">
         {{ service.name }}
     </div>
 </template>
@@ -34,8 +34,14 @@
                 return service.children !== undefined;
             },
 
-            toggleServiceFromList(service, checked) {
-                this.$http.post('/account/categories/toggle', {id: service.id, status: checked})
+            attachServices() {
+                var values = [];
+
+                $.each($('#category-list input:checked'), function(){
+                    values.push(Number(this.value));
+                });
+
+                this.$http.post('/account/categories/attach', {ids: values})
                     .then((data) => {
 
                         // success callback
@@ -62,10 +68,9 @@
                     });
             },
 
-            updateService(event, service, type) {
+            updateServices(event, type) {
                 var checked = event.target.checked;
                 var parents = $(event.target).parents('ul.parent-bl');
-                console.log(parents);
 
                 parents.each(function(index) {
                     var block = $(this);
@@ -109,7 +114,7 @@
                     }
                 });
 
-                //this.toggleServiceFromList(service, checked);
+                this.attachServices();
             }
         }
     }

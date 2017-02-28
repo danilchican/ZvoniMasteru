@@ -10,13 +10,13 @@
             </div>
             <div class="col-md-12" v-if="services.length > 0">
                 <div class="row">
-                    <ul style="padding: 0;list-style: none;">
+                    <ul style="padding: 0;list-style: none;" id="category-list">
                         <li v-for="item in services" class="category">
                             <i v-if="hasChildren(item)" style="float: right;margin-top: 5px;" class="fa fa-plus left-ico spoiler" @click="changeSpoiler($event)" v-bind:data-spoiler-link="item.id" aria-hidden="true"></i>
 
                             <ul class="parent-bl level-2" style="padding: 0;list-style: none;">
                                 <li>
-                                    <input type="checkbox" :value="item.id" class="parent" @click="updateParentService($event, item, 'parent')"> {{ item.name }}
+                                    <input type="checkbox" :value="item.id" class="parent" @click="updateParentService($event, item)"> {{ item.name }}
                                     <ul v-if="hasChildren(item)" :id="getMenuId(item)" style="padding-left:0" class="spoiler-content" v-bind:data-spoiler-link="item.id">
                                         <view-service v-for="child in getChildren(item)" :service="child"></view-service>
                                     </ul>
@@ -158,8 +158,14 @@
             },
 
 
-            toggleServiceFromList(service, checked) {
-                this.$http.post('/account/categories/toggle', {id: service.id, status: checked})
+            attachServices() {
+                var values = [];
+
+                $.each($('#category-list input:checked'), function(){
+                    values.push(Number(this.value));
+                });
+
+                this.$http.post('/account/categories/attach', {ids: values})
                     .then((data) => {
                         // success callback
 
@@ -185,7 +191,7 @@
                     });
             },
 
-            updateParentService(event, service, whom) {
+            updateParentService(event, service) {
                 var checked = event.target.checked;
                 var spoilerId = service.id;
 
@@ -196,12 +202,10 @@
                 } else {
                     checkboxes.prop('checked', false);
                 }
+
+                this.attachServices();
             },
 
-            updateService(event, service) {
-                var checked = event.target.checked;
-                this.toggleServiceFromList(service, checked);
-            }
         }
     }
 
