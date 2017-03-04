@@ -1,4 +1,7 @@
 const elixir = require('laravel-elixir');
+var gulp = require('gulp');
+var uglify = require('gulp-uglify');
+var dest = require('gulp-dest');
 
 require('laravel-elixir-vue-2');
 
@@ -19,4 +22,14 @@ elixir((mix) => {
        .webpack('app.js')
         .webpack('admin.js', 'public/js/admin/admin.js')
         .webpack('account.js', 'public/js/account.js');
+});
+
+
+gulp.task('minify', function() {
+    // Минифицируем и копируем все JavaScript файлы,
+
+    gulp.src(['public/js/account.js'])
+        .pipe(uglify())
+        .pipe(dest('./public/js/:name.min.js'))
+        .pipe(gulp.dest('./public/js'))
 });
