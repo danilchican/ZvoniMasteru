@@ -41,6 +41,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function 
     Route::post('/phones/update', 'Account\PhoneController@updatePhone');
     Route::get('/phones/list', 'Account\PhoneController@getPhones');
     Route::get('/reviews/get', 'Account\ReviewController@getReviews');
+    Route::get('/tariffs/get', 'Account\TariffController@getTariffs');
     Route::delete('/phones/{id}', 'Account\PhoneController@deletePhone');
     Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });
