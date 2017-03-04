@@ -1,6 +1,7 @@
 import Home         from './components/Home.vue'
 import Services     from './components/Services.vue'
 import Reviews      from './components/Reviews.vue'
+import Tariffs      from './components/Tariffs.vue'
 import VueRouter    from 'vue-router'
 import Vue          from 'vue'
 
@@ -11,7 +12,6 @@ Vue.use(VueRouter)
 
 //Define route components
 const Portfolio = { template: '<h3>Portfolio</h3>' }
-const Tariffs = { template: '<h3>Tariffs</h3>' }
 
 export default new VueRouter({
     mode: 'history',
