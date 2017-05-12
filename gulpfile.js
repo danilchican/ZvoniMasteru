@@ -19,13 +19,13 @@ require('laravel-elixir-vue-2');
 elixir((mix) => {
     mix.sass('app.scss')
         .sass('admin-styles.scss', 'public/css/admin')
-       .webpack('app.js')
+        .webpack('app.js')
         .webpack('admin.js', 'public/js/admin/admin.js')
         .webpack('account.js', 'public/js/account.js');
 });
 
 
-gulp.task('minify', function() {
+gulp.task('minify', function () {
     // Минифицируем и копируем все JavaScript файлы,
 
     gulp.src(['public/js/account.js'])
