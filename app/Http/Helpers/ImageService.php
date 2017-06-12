@@ -30,11 +30,11 @@ class ImageService
 
         $path = 'uploads/'.Carbon::now()->year.'/'.Carbon::now()->month;
 
-        if (!File::exists(public_path($path))) {
-            File::makeDirectory(public_path($path), 775, true);
+        if (!file_exists($path)) {
+            mkdir($path, 777, true);
         }
 
-        $path = '/'.$path.'/'.$image_name;
+        $path = $path.'/'.$image_name;
         $image->save($path);
 
         return $path;
