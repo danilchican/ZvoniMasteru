@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>{{ $company->getName() }}<a href="{{ URL::previous() }}" class="btn btn-default">Back</a></h3>
-                <img class="featurette-image img-responsive" id="logo" alt="150x150" width="150" src="{{ $company->getLogo() }}">
+                <img class="featurette-image img-responsive" id="logo" alt="150x150" width="200" src="/{{ $company->getLogo() }}">
 
                 <p>УНП: {{ $company->getUNPNumber() }}</p>
                 <p>Адрес: {{ $company->contacts->getAddress() }}</p>
