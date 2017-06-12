@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Helpers\ImageService;
 use App\Http\Requests\Admin\CreateCategoryRequest;
 use App\Http\Requests\Admin\UpdateCategoryRequest;
 use App\Models\Category;
@@ -57,7 +58,7 @@ class CategoryController extends AdminController
         $category->setParentCategory($request->input('parent'));
 
         if ($thumbnail !== null) {
-            $path = ImageController::saveCategoryThumbnail($thumbnail);
+            $path = ImageService::saveThumbnail($thumbnail);
             $category->setThumbnailPath($path);
         }
 
@@ -119,9 +120,9 @@ class CategoryController extends AdminController
 
         if ($thumbnail !== null) {
             $old_path = $category->getThumbnailPath();
-            ImageController::removeCategoryThumbnail($old_path);
+            ImageService::removeThumbnail($old_path);
 
-            $path = ImageController::saveCategoryThumbnail($thumbnail);
+            $path = ImageService::saveThumbnail($thumbnail);
             $category->setThumbnailPath($path);
         }
 
@@ -145,7 +146,7 @@ class CategoryController extends AdminController
             $category = Category::findOrFail($id);
             $path = $category->getThumbnailPath();
 
-            ImageController::removeCategoryThumbnail($path);
+            ImageService::removeThumbnail($path);
 
             $category->delete();
         } catch (ModelNotFoundException $ex) {
