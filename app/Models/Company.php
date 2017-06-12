@@ -199,4 +199,14 @@ class Company extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    /**
+     * Set new logo for a company.
+     *
+     * @param $logo
+     */
+    public function setLogo($logo)
+    {
+        $this->logo_url = $logo;
+    }
 }

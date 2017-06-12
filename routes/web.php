@@ -30,19 +30,26 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => 'dashboard'], functi
 });
 
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'account'], function () {
+    Route::post('/logo/upload', 'Account\AccountController@uploadLogo');
+
     Route::get('/categories/list', 'Account\CategoryController@getCategories');
     Route::get('/categories/attached', 'Account\CategoryController@getAttachedCategories');
     Route::post('/categories/attach', 'Account\CategoryController@attachCategories');
+
     Route::get('/info', 'Account\AccountController@getAccountInfo');
     Route::post('/info/update', 'Account\AccountController@updateMainInfo');
+
     Route::post('/socials/update', 'Account\AccountController@updateSocials');
     Route::post('/contacts/update', 'Account\AccountController@updateContacts');
+
     Route::post('/phones/store', 'Account\PhoneController@createPhone');
     Route::post('/phones/update', 'Account\PhoneController@updatePhone');
     Route::get('/phones/list', 'Account\PhoneController@getPhones');
+    Route::delete('/phones/{id}', 'Account\PhoneController@deletePhone');
+
     Route::get('/reviews/get', 'Account\ReviewController@getReviews');
     Route::get('/tariffs/get', 'Account\TariffController@getTariffs');
-    Route::delete('/phones/{id}', 'Account\PhoneController@deletePhone');
+
     Route::get('/{settings?}', 'Account\AccountController@index')->name('account.index');
 });
 

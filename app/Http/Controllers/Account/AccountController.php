@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Http\Helpers\ImageService;
 use App\Http\Requests\Account\UpdateContactsRequest;
 use App\Http\Requests\Account\UpdateMainSettingsRequest;
 use App\Http\Requests\Account\UpdateSocialsRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Account\UploadLogoRequest;
 use Illuminate\Support\Facades\Response;
 
 class AccountController extends Controller
@@ -42,6 +44,7 @@ class AccountController extends Controller
             'slug' => $company->getSlug(),
             'unp_number'  => (int)$company->getUNPNumber(),
             'description' => $company->getDescription(),
+            'logo_url' => $company->getLogo(),
         ];
 
         $contactsInfo = [
@@ -124,6 +127,44 @@ class AccountController extends Controller
             'messages' => [
                 'Контактные данные обновлены.'
             ],
+            'success'  => true,
+        ], 200);
+    }
+
+    /**
+     * Upload new logo for a company.
+     *
+     * @param UploadLogoRequest $request
+     * @return mixed
+     */
+    public function uploadLogo(UploadLogoRequest $request)
+    {
+        $company = \Auth::user()->company;
+
+        if($company->hasLogo()) {
+            $oldLogo = $company->getLogo();
+
+            if(!ImageService::removeThumbnail($oldLogo)) {
+                return Response::json([
+                    'errors' => [
+                        'Невозможно удалить предыдущий логотип.'
+                    ],
+                    'success'  => false,
+                ], 422);
+            }
+        }
+
+        $logo = $request->file('logo');
+        $path = ImageService::saveThumbnail($logo, 200);
+
+        $company->setLogo($path);
+        $company->save();
+
+        return Response::json([
+            'messages' => [
+                'Логотип обновлён.'
+            ],
+            'logo_url' => $path,
             'success'  => true,
         ], 200);
     }
