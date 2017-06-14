@@ -18,7 +18,14 @@
             @endif
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                @foreach ($categories as $category)
+                    <div class="list-group" style="margin-bottom: 0;">
+                        <a href="{{ route('category.show', ['category' => $category->getSlug()]) }}" class="list-group-item">{{ $category->getName() }}</a>
+                    </div>
+                @endforeach
+            </div>
+            <div class="col-md-9 col-sm-9">
                 <h3>{{ $company->getName() }}<a href="{{ URL::previous() }}" class="btn btn-default">Back</a></h3>
                 <img class="featurette-image img-responsive" id="logo" alt="150x150" width="200" src="/{{ $company->getLogo() }}">
 
