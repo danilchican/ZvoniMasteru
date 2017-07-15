@@ -5,61 +5,127 @@
 @endsection
 
 @section('content')
-    <div class="container companies">
-        <div class="row">
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-                @foreach ($categories as $category)
-                    <div class="list-group" style="margin-bottom: 0;">
-                        <a href="{{ route('category.show', ['category' => $category->getSlug()]) }}" class="list-group-item">{{ $category->getName() }}</a>
+    <div class="container">
+        <div id="company-cart" class="col-md-12">
+            <!-- Main company info -->
+            <div class="row main-company-info">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div class="row visible-xs">
+                            <h4 class="company-box-title">{{ $company->getName() }}</h4>
+                        </div>
+                        <div class="col-xs-4 col-sm-3 col-md-3 company-leftbar">
+                            <img class="featurette-image img-responsive company-logo" alt="220x220" width="220"
+                                 src="/{{ $company->getLogo() }}">
+                            <div class="company-rating">
+                                <div class="rate-block">
+                                    <div class="company-mark">
+                                        5.00
+                                    </div>
+                                    <div class="reviews">
+                                        <p><img src="/assets/images/company/rate.jpg" alt=""></p>
+                                        <p>Отзывов {{ count($reviews) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-8 col-sm-9 col-md-9">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row hidden-xs">
+                                        <h4 class="company-box-title">{{ $company->getName() }}</h4>
+                                    </div>
+                                    <div class="row hidden-xs">
+                                        <p class="company-box-desc">{{ $company->getDescription() }}</p>
+                                    </div>
+                                    <div class="row hidden-xs">
+                                        <a class="send-company-message">Написать сообщение</a>
+                                    </div>
+                                    <div class="row technical-info">
+                                        <div class="col-md-4 col-sm-4 experience">
+                                            <p>Опыт работы более 3 лет</p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 contract">
+                                            <p>Работа по договору</p>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 unp-number">
+                                            <p>УНП: {{ $company->getUNPNumber() }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row visible-xs">
+                                        <a class="send-company-message">Написать сообщение</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                @endforeach
+                </div>
             </div>
-            <div class="col-md-9 col-sm-9">
-                <h3>{{ $company->getName() }}<a href="{{ URL::previous() }}" class="btn btn-default">Back</a></h3>
-                <img class="featurette-image img-responsive" id="logo" alt="150x150" width="200" src="/{{ $company->getLogo() }}">
 
-                <p>УНП: {{ $company->getUNPNumber() }}</p>
-                <p>Адрес: {{ $company->contacts->getAddress() }}</p>
-                <p>Сайт: @if(!empty($website = $company->contacts->getWebsiteURL())) <a href="{{ $website }}">{{ $website }}</a>
-                    @else Не заполнено @endif </p>
-                @if(count($phones) > 0)
-                    <p>Телефоны:</p>
-                    <ul>
-                        @foreach($phones as $phone)
-                            <li>{{ $phone->getNumber() }}</li>
-                        @endforeach
-                    </ul>
-                @endif
-                <p>Эл. почта компании: @if(!empty($email = $company->contacts->getCompanyEmail())) <a href="mailto:{{ $email }}">{{ $email }}</a>
-                    @else Не заполнено @endif </p>
-
-                <h4>Социальные сети:</h4>
-                <ul>
-                    <li><a href="{{ $groups->getVkontakteURL() }}">Группа Вконтакте</a></li>
-                    <li><a href="{{ $groups->getFacebookURL() }}">Группа Facebook</a></li>
-                    <li><a href="{{ $groups->getOdnoklassnikiURL() }}">Группа Одноклассники</a></li>
-                </ul>
-                <h4>Описание компании:</h4>
-                <p>{{ $company->getDescription() }}</p>
-                <!-- Тут будут отзывы -->
+            <!-- Company description -->
+            <div class="row visible-xs">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <p class="company-box-desc">{{ $company->getDescription() }}</p>
+                    </div>
+                </div>
             </div>
-        </div><!-- /.row -->
-        <!-- Reviews -->
-        <div class="row">
-            @include('companies.reviews.index')
+            <!-- Contacts -->
+            <div class="row company-contacts">
+                <div class="col-md-4 col-sm-4 col-xs-6 company-phones">
+                    <div class="row">
+                        <div class="thumbnail">
+                            <h4 class="contacts-title">Телефоны</h4>
+                            <div class="clear"></div>
+                            @if(count($phones) > 0)
+                                <ul>
+                                    @foreach($phones as $phone)
+                                        <li>{{ $phone->getNumber() }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p style="padding-top: 15px;">Телефонов компании нет</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-6 company-socials">
+                    <div class="thumbnail">
+                        <h4 class="contacts-title">Социальные сети</h4>
+                        <div class="clear"></div>
+                        <ul>
+                            <li class="vkontakte"><a href="{{ $groups->getVkontakteURL() }}">Вконтакте</a></li>
+                            <li class="facebook"><a href="{{ $groups->getFacebookURL() }}">Facebook</a></li>
+                            <li class="odnoklassniki"><a href="{{ $groups->getOdnoklassnikiURL() }}">Одноклассники</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 company-info">
+                    <div class="row">
+                        <div class="thumbnail">
+                            <h4 class="contacts-title">Контакты</h4>
+                            <div class="clear"></div>
+                            <div class="contacts-content">
+                                @if(!empty($website = $company->contacts->getWebsiteURL()))
+                                    <p class="website"><a href="{{ $website }}">{{ $website }}</a></p>
+                                @endif
+                                <p class="email"><span>е-mail:</span> {{ $company->contacts->getCompanyEmail() }}</p>
+                                <p class="address">{{ $company->contacts->getAddress() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div><!-- /.container -->
+
+
+        <div class="col-md-12">
+            <div class="row">
+                @include('companies.reviews.index')
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')

@@ -73,10 +73,10 @@
                 <p class="socials-auth-title">Вход через социальные сети:</p>
                 <ul class="socials-auth-variant">
                     <li>
-                        <a href=""><img src="./assets/images/socials/auth/vk.png" alt=""></a>
+                        <a href=""><img src="/assets/images/socials/auth/vk.png" alt=""></a>
                     </li>
                     <li>
-                        <a href=""><img src="./assets/images/socials/auth/fb.png" alt=""></a>
+                        <a href=""><img src="/assets/images/socials/auth/fb.png" alt=""></a>
                     </li>
                 </ul>
             </div>
@@ -125,10 +125,10 @@
                 <p class="socials-auth-title">Вход через социальные сети:</p>
                 <ul class="socials-auth-variant">
                     <li>
-                        <a href=""><img src="./assets/images/socials/auth/vk.png" alt=""></a>
+                        <a href=""><img src="/assets/images/socials/auth/vk.png" alt=""></a>
                     </li>
                     <li>
-                        <a href=""><img src="./assets/images/socials/auth/fb.png" alt=""></a>
+                        <a href=""><img src="/assets/images/socials/auth/fb.png" alt=""></a>
                     </li>
                 </ul>
             </div>
