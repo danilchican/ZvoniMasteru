@@ -34,6 +34,7 @@ class CategoryController extends HomeController
         }
 
         return view('categories.show')->with([
+            'currentCategory' => $cat,
             'categories' => $categories,
             'companies' => $cat->companies()->published()->paginate(5),
         ]);

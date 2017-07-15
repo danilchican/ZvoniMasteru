@@ -58,4 +58,5 @@ Route::group(['middleware' => 'published'], function () {
     Route::get('/companies/{slug}', 'CompanyController@cart')->name('company.cart');
     Route::post('/reviews/create', 'ReviewController@store')->name('reviews.store');
 });
+
 Route::get('/{category}', 'CategoryController@show')->name('category.show');
