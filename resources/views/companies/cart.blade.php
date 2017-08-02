@@ -38,9 +38,6 @@
                                     <div class="row hidden-xs">
                                         <p class="company-box-desc">{{ $company->getDescription() }}</p>
                                     </div>
-                                    <div class="row hidden-xs">
-                                        <a class="send-company-message">Написать сообщение</a>
-                                    </div>
                                     <div class="row technical-info">
                                         <div class="col-md-4 col-sm-4 experience">
                                             <p>Опыт работы более 3 лет</p>
@@ -51,9 +48,6 @@
                                         <div class="col-md-4 col-sm-4 unp-number">
                                             <p>УНП: {{ $company->getUNPNumber() }}</p>
                                         </div>
-                                    </div>
-                                    <div class="row visible-xs">
-                                        <a class="send-company-message">Написать сообщение</a>
                                     </div>
                                 </div>
                             </div>
@@ -117,17 +111,58 @@
                     </div>
                 </div>
             </div>
+            <!-- Services -->
+            <div class="row company-services">
+                <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+                    <div class="row">
+                        <div class="thumbnail">
+                            <h4 class="services-title">Услуги</h4>
+                            <ul class="services-list">
+                                <div>
+                                    <li>Комплексный ремонт</li>
+                                    <li>Отделка помещения</li>
+                                    <li>Покраска стен</li>
+                                </div>
+                                <div>
+                                    <li>Комплексный ремонт</li>
+                                    <li>Отделка помещения</li>
+                                    <li>Покраска стен</li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Portfolio -->
+            <div class="row company-portfolio">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="thumbnail">
+                            <h4 class="portfolio-title">Примеры работ</h4>
+                            <div class="clear"></div>
+                            <div class="portfolio-content">
+                                <ul>
+                                    <li><img src="/assets/images/company/portfolio-example.jpg" alt=""></li>
+                                    <li><img src="/assets/images/company/portfolio-example.jpg" alt=""></li>
+                                    <li><img src="/assets/images/company/portfolio-example.jpg" alt=""></li>
+                                    <li><img src="/assets/images/company/portfolio-example.jpg" alt=""></li>
+                                    <li><img src="/assets/images/company/portfolio-example.jpg" alt=""></li>
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                            <button class="more">Показать больше</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Reviews -->
+            @include('companies.reviews.index')
         </div>
-
 
         <div class="col-md-12">
             <div class="row">
-                @include('companies.reviews.index')
+
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script src="/js/app.js"></script>
 @endsection

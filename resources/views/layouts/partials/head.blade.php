@@ -44,37 +44,47 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            @if (Auth::guest())
-            <div class="navbar-collapse collapse navbar-right hidden-lg">
-                <ul class="nav navbar-nav">
-                    <li><a href="">FAQ</a></li>
-                    <li><a href="" data-toggle="modal" data-target="#modal-auth">Войти</a></li>
-                    <li><a href="" data-toggle="modal" data-target="#modal-registration">Регистрация</a></li>
-                </ul>
-                <div id="nav-search">
-                    <form action="" method="GET">
-                        <input class="nav-search-input" type="text" name="search" placeholder="Что будете искать?">
-                        <button class="nav-search-submit"></button>
-                    </form>
-                </div>
-            </div><!--/.nav-collapse -->
-            @else
-                    @if(Auth::user()->hasRole('admin'))
-                        <li><a href="{{ route('admin.index') }}">Админ-панель</a></li>
-                    @endif
-                    <li><a href="{{ route('account.index') }}">Личный кабинет</a></li>
-                    <li>
-                        <a href="{{ url('/logout') }}"
-                           onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                            <i class="fa fa-btn fa-sign-out"></i>Выйти
-                        </a>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                              style="display: none;">
-                            {{ csrf_field() }}
+            <div class="navbar-collapse collapse navbar-right {{ !Auth::guest() ? 'account-wrapper' : '' }} hidden-lg">
+                @if (Auth::guest())
+                    <ul class="nav navbar-nav">
+                        <li><a href="">FAQ</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#modal-auth">Войти</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#modal-registration">Регистрация</a></li>
+                    </ul>
+                    <div id="nav-search">
+                        <form action="" method="GET">
+                            <input class="nav-search-input" type="text" name="search" placeholder="Что будете искать?">
+                            <button class="nav-search-submit"></button>
                         </form>
-                    </li>
-            @endif
+                    </div>
+                @else
+                    <ul class="nav navbar-nav account-header">
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="username">{{ Auth::user()->getName() }}</span>
+                                <img class="username-logo" src="/{{ Auth::user()->company->getLogo() }}" alt=""/>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if(Auth::user()->hasRole('admin'))
+                                    <li><a href="{{ route('admin.index') }}">Админ-панель</a></li>
+                                @endif
+                                <li class="account-ico">
+                                    <a href="{{ route('account.index') }}">Личный кабинет</a>
+                                </li>
+                                <li class="logout-ico">
+                                    <a href=""
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Выход</a>
+                                </li>
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST"
+                                      style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </ul>
+                        </li>
+                    </ul>
+                @endif
+            </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </div>
 </div>
